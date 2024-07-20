@@ -74,7 +74,12 @@
 
 
     	submitBtn.addEventListener("click", () => {
-    		window.location = "/";
+    		fetch("http://localhost:3000/add-section", {
+    			method: "post",
+    			headers: {"Content-Type": "application/json"},
+    			body: JSON.stringify({id: "123", skill: skillEditorInput.value})
+    		})
+    		// window.location = "/";
     	})
 
     	redirectBtn.addEventListener("click", () => {

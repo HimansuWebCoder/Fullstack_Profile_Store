@@ -16,9 +16,14 @@ const users = [
 	  	id: "123",
 	  	name: "Prashant",
 	  	passion: "Coding",
-	  	image: ""
+	  	image: "",
+	  	skills: []
 	  }
 ];
+
+// // for now I only add skills separately not connected with any particular users
+
+// const skills = []
 
 app.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
@@ -61,9 +66,13 @@ app.put("/edit-profile", (req, res) => {
 })
 
 app.post("/add-section", (req, res) => {
-	const { skill } = req.body;
-	users.push({ skill });
-	res.json(users);
+	const { id, skill } = req.body;
+	users.forEach((user, i) => {
+		if (user.id === id) {
+			user.skills.push(skill);
+       	    res.json(users);
+		}
+	})
 })
 
 app.delete("/profile", (req, res) => {
