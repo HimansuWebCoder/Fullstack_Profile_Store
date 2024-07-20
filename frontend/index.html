@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Profile-Store-Home</title>
+	<style>
+	    body {
+	    	background-color: hsla(178, 100%, 70%, 0.9);
+	    }
+		#intro {
+			max-width: 400px;
+			height: auto;
+			text-align: center;
+			font-size: 2rem;
+			margin: auto;
+			color: white;
+			background-color: rgba(25, 100, 150, 1);
+			font-family:monospace sans-serif;
+			font-weight: bolder; 
+			padding: 10px;
+			margin-bottom:10px;
+			box-shadow: 1px 2px 50px 10px white;
+			word-wrap: break-word;
+		}
+		#profile-container {
+            max-width: 400px;
+            height: auto;
+            margin: auto;
+            border: 1px solid black;
+            padding: 10px;
+            border-style:dashed;
+            background-color: hsl(190, 90%, 80%, 0.7);
+            overflow: auto;
+		}
+
+		#profile-img-container {
+            max-width: 100%;
+            height: 350px;
+            border:1px solid black;
+		}
+
+		#profile-content-container {
+			border: 1px solid black;
+			margin-top: 5px;
+			text-align: center;
+		}
+
+		.profile-content {
+         font-family:monospace sans-serif; 
+         background-color: rgba(100, 100, 244, 0.9);
+         color:white;
+         font-weight: bolder;
+         font-size: 2rem;
+         padding: 5px;
+		}
+
+		#profile-header {
+         
+		}
+
+		#profile-intro {
+
+		}
+
+		#profile-edit-icon {
+			 display: block;
+			 width: 40px;
+			 height: 40px;
+			 margin: auto;
+             text-align: center;
+             font-size: 2rem;
+             cursor: pointer;
+             font-weight: bold;
+		}
+
+		#add-section {
+		  display: block;
+	      width: 100%;
+		  height: auto;
+		  margin: auto;
+          text-align: center;
+          background-color: rgba(100, 100, 244, 0.9);
+          color:white;
+          border: none;
+          font-weight: bold;
+          font-size: 2rem;
+          cursor: pointer;
+		}
+
+		#profile-image {
+			width: 100%;
+			height: 100%;
+		}
+
+		#edit-icon {
+			width: 100%;
+/*			height: 100%;*/
+		}
+	</style>
+</head>
+<body>
+	<h1 id="intro">PLAY WITH YOUR PROFILE</h1>
+    <div id="profile-container">
+    	<div id="profile-img-container">
+    		<img id="profile-image" src="" alt="image" />
+    	</div>
+    	<div id="profile-content-container">
+    		<h2 class="profile-content" id="profile-header" >Your Name</h2>
+    		<h3 class="profile-content" id="profile-intro" >Your Passion</h3>
+    	</div>
+    	<button id="profile-edit-icon"><img id="edit-icon" src="https://cdn-icons-png.freepik.com/256/738/738880.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid" alt="Edit"/></button>
+    	<button id="add-section">Add Section</button>
+    </div>
+    <script>
+    	const profileContainer = document.querySelector("#profile-container");
+    	const profileImg = document.querySelector("#profile-image");
+    	const profileContentContainer = document.querySelector("#profile-content-container");
+    	const profileHeader = document.querySelector("#profile-header");
+    	const profileIntro = document.querySelector("#profile-intro");
+    	const profileEditBtn = document.querySelector("#profile-edit-icon");
+    	const addSectionBtn = document.querySelector("#add-section");
+
+    	fetch("http://localhost:3000/profile")
+    	.then(res => res.json())
+    	.then((users) => {
+    		users.forEach((user, i) => {
+    			profileHeader.textContent = user.name;
+    			profileIntro.textContent = user.passion;
+                profileImg.src = user.image;
+    			console.log(user);
+    		})
+    	})
+
+        profileEditBtn.addEventListener("click", () => {
+        	window.location = "edit-profile";
+        })
+
+        addSectionBtn.addEventListener("click", () => {
+        	window.location = "add-section";
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Profile-Edit</title>
+	<style>
+		body {
+			background-color: rgb(103, 203, 255);
+		}
+		#profile-edit-container {
+           max-width: 400px;
+           height: auto;
+           margin: auto;
+           padding:10px;
+           border: 1px solid black;
+           border-style: dotted;
+           background-color: hsla(145, 60%, 70%, 0.4);
+		}
+
+		#redirectContainer {
+			    display: flex;
+			    flex-wrap: wrap;
+			    justify-content: flex-start;
+          width: 100%;
+          height: 30px;
+		}
+
+		#redirect-arrow-icon {
+			width: 30px;
+			height: 30px;
+			cursor: pointer;
+		}
+
+		#input-container {
+			     max-width: 95%;
+			     min-height: 70%;
+           margin-top: 5px;
+           border: 1px solid black;
+           padding: 10px;
+		}
+
+		.inputContent {
+          width: 95%;
+          height: 2rem;
+          font-size: 1.5rem;
+          padding: 5px;
+		}
+
+		.label {
+			font-size: 2rem;
+		}
+
+		#saveBtn {
+          margin: right;
+          font-size: 2rem;
+          margin-top: 5px;
+          cursor: pointer;
+		}
+        
+        #redirect-span {
+          cursor: pointer;
+        }
+
+	</style>
+</head>
+<body>
+     <div id="profile-edit-container">
+     	<div id="redirectContainer">
+     		<img id="redirect-arrow-icon" src="https://cdn-icons-png.freepik.com/256/4421/4421793.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid" id="redirect-span">
+     	</div>
+     	<div id="input-container">
+     		<label class="label" for="profile-img">Image</label>
+     	    <input class="inputContent" type="text" id="profile-img" placeholder="Image URL" /><br><br>
+     		<label class="label" for="name">Name</label>
+     		<input class="inputContent" id="name" type="text" name="name" placeholder="Your Name" /><br><br>
+     		<label class="label" for="passion">Passion</label>
+     		<input class="inputContent" id="passion" type="text" name="passion" placeholder="Your Passion" />
+     	</div>
+     	<button id="saveBtn" type="submit">Save</button>
+     </div>
+     <script>
+     	const profileEditContainer = document.querySelector("#profile-edit-container");
+     	const redirectBtn = document.querySelector("#redirect-arrow-icon");
+     	const profileImageEditor = document.querySelector("#profile-img");
+     	const profileNameEditor = document.querySelector("#name");
+     	const profilePassionEditor = document.querySelector("#passion");
+     	const submitBtn = document.querySelector("#saveBtn");
+
+     	redirectBtn.addEventListener("click", () => {
+     		window.location = "/";
+     	})
+
+     	submitBtn.addEventListener("click", () => {
+     		if (profileNameEditor.value !== "" && profilePassionEditor.value !== "" || profileImageEditor.value) {
+     		fetch("http://localhost:3000/edit-profile", {
+     			method: "put",
+     			headers: {"Content-Type": "application/json"},
+     			body: JSON.stringify({id: "123", name: profileNameEditor.value, passion: profilePassionEditor.value, image: profileImageEditor.value})
+     		})
+     		window.location = "/";
+     		}
+     	})
+     </script>
+</body>
+</html>

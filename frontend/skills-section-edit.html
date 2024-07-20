@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Skills-Section-Edit</title>
+	<style>
+		body {
+			background-color: hsla(220, 90%, 80%, 1);
+		}
+
+		#skills-edit-container {
+			max-width: 500px;
+			height: auto;
+			border:1px solid black;
+			margin: auto;
+			padding: 10px;
+			background-color: hsl(153, 50%, 40%, 0.5);
+		}
+
+		#redirect-container {
+             width: 100%;
+             height: 30px;
+             border: 1px solid black;
+		}
+
+		#input-container {
+            max-width: 100%;
+            height: 150px;
+            border: 1px solid black;
+            padding: 10px;
+		}
+
+        .label {
+          font-size: 2rem;
+          color: white;
+          font-weight: bolder;
+        }
+
+        #edit-skills {
+           width: 93%;
+           height: 30px;
+           font-size: 1.5rem;
+        }
+
+        #save-btn {
+         font-size: 1.8rem;
+         cursor: pointer;
+        }
+
+        #del-btn {
+         font-size: 1.8rem;
+         cursor: pointer;
+        }
+
+        #redirect-span {
+            cursor: pointer;
+        }
+	</style>
+</head>
+<body>
+    <div id="skills-edit-container">
+    	<div id="redirect-container">
+    		<span id="redirect-span"><---</span>
+    	</div>
+    	<div id="input-container">
+    		<label class="label" for="edit-skills">Skills</label>
+    		<input type="text" name="skills-edit-input" id="edit-skills" placeholder="Update your Skills" />
+    	</div>
+    	<button id="save-btn">Save</button>
+    	<button id="del-btn">Delete</button>
+    </div>
+    <script>
+    	const skillsEditContainer = document.querySelector("#skills-edit-container");
+    	const redirectSpanBtn = document.querySelector("#redirect-span");
+    	const skillsEditInput = document.querySelector("#edit-skills");
+    	const saveBtn = document.querySelector("#save-btn");
+    	const delBtn = document.querySelector("#del-btn");
+
+    	saveBtn.addEventListener("click", () => {
+    		window.location = "/";
+    	})
+
+    	delBtn.addEventListener("click", () => {
+    		window.location = "/";
+    	})
+
+        redirectSpanBtn.addEventListener("click", () => {
+            window.location = "/";
+        })
+
+        
+    </script>
+</body>
+</html>
