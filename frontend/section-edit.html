@@ -74,11 +74,24 @@
 
 
     	submitBtn.addEventListener("click", () => {
+    		if (skillEditorInput.value !== "") {
     		fetch("http://localhost:3000/add-section", {
     			method: "post",
     			headers: {"Content-Type": "application/json"},
-    			body: JSON.stringify({id: "123", skill: skillEditorInput.value})
+    			body: JSON.stringify({id: "1", name: skillEditorInput.value})
     		})
+    		// .then(res => res.json())
+    		// .then(users => {
+    		// 	users.forEach(skill => {
+    		// 		// skillEditorInput.value = ""
+    		// 		// skillEditorInput.focus()
+    		// 		// console.lgo(skill)
+    		// 		skill.forEach((x) => {
+    		// 			console.log(x.name);
+    		// 		})
+    		// 	})
+    		// })
+    		}
     		// window.location = "/";
     	})
 

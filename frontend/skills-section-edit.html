@@ -20,9 +20,15 @@
 
 		#redirect-container {
              width: 100%;
-             height: 30px;
+             height: 2px;
              border: 1px solid black;
 		}
+
+        #redirect-arrow-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
 
 		#input-container {
             max-width: 100%;
@@ -60,9 +66,9 @@
 </head>
 <body>
     <div id="skills-edit-container">
-    	<div id="redirect-container">
-    		<span id="redirect-span"><---</span>
-    	</div>
+    	<div id="redirectContainer">
+            <img id="redirect-arrow-icon" src="https://cdn-icons-png.freepik.com/256/4421/4421793.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid" id="redirect-span">
+        </div>
     	<div id="input-container">
     		<label class="label" for="edit-skills">Skills</label>
     		<input type="text" name="skills-edit-input" id="edit-skills" placeholder="Update your Skills" />
@@ -72,20 +78,41 @@
     </div>
     <script>
     	const skillsEditContainer = document.querySelector("#skills-edit-container");
-    	const redirectSpanBtn = document.querySelector("#redirect-span");
+    	const redirectBtn = document.querySelector("#redirect-arrow-icon");
     	const skillsEditInput = document.querySelector("#edit-skills");
     	const saveBtn = document.querySelector("#save-btn");
     	const delBtn = document.querySelector("#del-btn");
 
     	saveBtn.addEventListener("click", () => {
-    		window.location = "/";
+            try {
+            fetch("http://localhost:3000/edit-skills-section", {
+                method: "put",
+                headers: {"Content-Type" : "application/json"},
+                body: JSON.stringify({id:"1", name: skillsEditInput.value})
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.error("Error:", err);
+            })
+    		// window.location = "/";
+            } catch (error) {
+                console.error("Caught Error:", error)
+            }
     	})
 
     	delBtn.addEventListener("click", () => {
-    		window.location = "/";
+             fetch("http://localhost:3000/edit-skills-section", {
+                methdo: "delete",
+                headers: {"Content-Type" : "application:json"},
+                body: JSON.stringify({id:"123"})
+             })
+    		// window.location = "/";
     	})
 
-        redirectSpanBtn.addEventListener("click", () => {
+        redirectBtn.addEventListener("click", () => {
             window.location = "/";
         })
 

@@ -72,6 +72,7 @@
              font-size: 2rem;
              cursor: pointer;
              font-weight: bold;
+             cursor: pointer;
 		}
 
 		#add-section {
@@ -96,6 +97,29 @@
 		#edit-icon {
 			width: 100%;
 /*			height: 100%;*/
+		}
+
+		.skills-container {
+			max-width: 100%;
+			height: auto;
+			border: 1px solid black;
+			padding: 10px;
+			font-size: 1.5rem;
+			font-weight: bolder;
+			font-family: sans-serif;
+			background-color: bisque;
+		}
+
+		.skills-intro-style {
+			max-width: 100%;
+			height: auto;
+			padding: 5px;
+			font-size: 1.8rem;
+			font-family: sans-serif;
+			font-weight: bold;
+			background-color: rgba(10, 100, 254, 0.5);
+			color: white;
+			margin-top: 10px;
 		}
 	</style>
 </head>
@@ -128,18 +152,39 @@
     			profileHeader.textContent = user.name;
     			profileIntro.textContent = user.passion;
                 profileImg.src = user.image;
-    			console.log(user);
     		})
     	})
 
     	fetch("http://localhost:3000/profile")
     	.then(res => res.json())
-    	.then(users => {
+    	.then((users, i) => {
+    		const skillDiv = document.createElement("div");
+    		profileContainer.appendChild(skillDiv);
+    		skillDiv.textContent = "Skills";
+    		skillDiv.classList.add("skills-intro-style")
     		 users.forEach((user, i) => {
-    		 	console.log(user.skills);
-    		 	const div = document.createElement("div");
-    		 	profileContainer.appendChild(div);
-    		 	div.textContent = user.skills;
+    		 	user.skills.forEach(skill => {
+    		 	const skillContainer = document.createElement("div");
+    		 	profileContainer.appendChild(skillContainer);
+    		 	skillContainer.textContent = skill.name;
+    		 	console.log(skill);
+    		 	console.log(skill.name);
+    		 	skillContainer.classList.add("skills-container");
+
+    		 	const editSkillBtn = document.createElement("button");
+                skillContainer.appendChild(editSkillBtn);
+                // editSkillBtn.textContent = "";
+                editSkillBtn.style.marginLeft = "10px";
+                editSkillBtn.style.cursor = "pointer";
+
+                const editImgIcon = document.createElement("img");
+                editSkillBtn.append(editImgIcon);
+                editImgIcon.setAttribute("src", "cdn-icons-png.freepik.com/256/738/738880.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid");
+
+                editSkillBtn.addEventListener("click", () => {
+                	window.location = "edit-skills-section";
+                })
+    		 	})
     		 })
     	})
 
