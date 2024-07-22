@@ -78,22 +78,13 @@
     		fetch("http://localhost:3000/add-section", {
     			method: "post",
     			headers: {"Content-Type": "application/json"},
-    			body: JSON.stringify({id: "1", name: skillEditorInput.value})
+    			body: JSON.stringify({name: skillEditorInput.value})
     		})
-    		// .then(res => res.json())
-    		// .then(users => {
-    		// 	users.forEach(skill => {
-    		// 		// skillEditorInput.value = ""
-    		// 		// skillEditorInput.focus()
-    		// 		// console.lgo(skill)
-    		// 		skill.forEach((x) => {
-    		// 			console.log(x.name);
-    		// 		})
-    		// 	})
-    		// })
-    		}
-    		// window.location = "/";
-    	})
+    		.then(res => res.json())
+    		.then(users => {
+    			skillEditorInput.value = ''
+    			skillEditorInput.focus();
+    		})
 
     	redirectBtn.addEventListener("click", () => {
     		window.location = "/";

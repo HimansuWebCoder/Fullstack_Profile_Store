@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const knex = require("knex");
 
-const section = require('./controllers/section');
+// const section = require('./controllers/section');
 
 const db = knex({
   client: 'pg',
@@ -18,9 +18,9 @@ const db = knex({
 
 
 // console.log(postgres.select('*').from('users'));
-db.select('*').from('users').then(data => {
-	console.log(data);
-});
+// db.select('*').from('users').then(data => {
+// 	console.log(data);
+// });
 
 const path = require("path");
 const app = express();
@@ -69,8 +69,19 @@ app.get("/edit-skills-section", (req, res) => {
 // 	})
 // })
 
-app.post('/add-section', (req, res) => {
-	section.handleSection(req, res, db)
+
+// app.post('/add-section', (req, res) => {
+// 	section.handleSection(req, res, db)
+// })
+
+app.post("/add-section", (req, res) => {
+	const { id, name } = req.body;
+	db('users')
+    .returning('*')
+	.insert({id: id, name: name})
+	.then(response => {
+		res.json(response)
+	})
 })
 
 app.get("/users", (req, res) => {
@@ -84,6 +95,34 @@ app.get("/users", (req, res) => {
         });
 });
 
+// app.get("/users/:id", (req, res) => {
+// 	const { id } = req.params;
+// 	db.select('*').from('users').where({
+// 		id: id
+// 	})
+// 	.then(user => {
+// 		console.log(user);
+// 		res.json(user);
+// 	})
+// })
+
+// app.delete("/users", (req, res) => {
+// 	const { id } = req.body;
+// 	db('users')
+// 		.where({ id })
+// 		.del()
+// 		.then(() => res.status(200).send('User deleted successfully'))
+// 		.catch(error => res.status(500).json({ error }));
+// });
+
+// app.delete("/users", (req, res) => {
+// 	const { id } = req.body;
+// 	db('users')
+// 	.where({ id })
+// 	.del()
+// 	// .then(() => res.status(200).send("User deleted successfully"))
+// 	.then(() => res.json("deleted"))
+// });
 
 
 

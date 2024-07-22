@@ -104,10 +104,10 @@
     	})
 
     	delBtn.addEventListener("click", () => {
-             fetch("http://localhost:3000/edit-skills-section", {
-                methdo: "delete",
-                headers: {"Content-Type" : "application:json"},
-                body: JSON.stringify({id:"123"})
+             fetch("http://localhost:3000/users", {
+                method: "delete",
+                headers: {"Content-Type" : "application/json"},
+                body: JSON.stringify({id: "7"})
              })
     		// window.location = "/";
     	})
