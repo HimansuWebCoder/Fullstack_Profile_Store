@@ -75,6 +75,7 @@
     	</div>
     	<button id="save-btn">Save</button>
     	<button id="del-btn">Delete</button>
+        <button class="delete-btn">Delete Specific Skills</button>
     </div>
     <script>
     	const skillsEditContainer = document.querySelector("#skills-edit-container");
@@ -82,6 +83,7 @@
     	const skillsEditInput = document.querySelector("#edit-skills");
     	const saveBtn = document.querySelector("#save-btn");
     	const delBtn = document.querySelector("#del-btn");
+        const deleteBtn = document.querySelector(".delete-btn");
 
     	saveBtn.addEventListener("click", () => {
             try {
@@ -102,15 +104,34 @@
                 console.error("Caught Error:", error)
             }
     	})
+      
+             // deleteBtn.setAttribute("id", 82);
+        // fetch("http://localhost:3000/users")
+        // .then(res => res.json())
+        // .then(users => {
+        //     users.forEach(user => {
+        //         deleteBtn.setAttribute("id", user.id);
+        //     })
+        // })
+        //      deleteBtn.addEventListener("click", (e) => {
+        //          console.log(e.target)
+                
+        //      })
 
+      fetch("http://localhost:3000/users")
+      .then(res => res.json())
+      .then((users, i) => {
     	delBtn.addEventListener("click", () => {
-             fetch("http://localhost:3000/users", {
+            users.forEach(user => {
+             fetch(`http://localhost:3000/users`, {
                 method: "delete",
                 headers: {"Content-Type" : "application/json"},
-                body: JSON.stringify({id: "7"})
+                body: JSON.stringify({id: user.id})
              })
-    		// window.location = "/";
+            })
     	})
+      })
+
 
         redirectBtn.addEventListener("click", () => {
             window.location = "/";

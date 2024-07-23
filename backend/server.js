@@ -95,25 +95,25 @@ app.get("/users", (req, res) => {
         });
 });
 
-// app.get("/users/:id", (req, res) => {
-// 	const { id } = req.params;
-// 	db.select('*').from('users').where({
-// 		id: id
-// 	})
-// 	.then(user => {
-// 		console.log(user);
-// 		res.json(user);
-// 	})
-// })
+app.get("/users/:id", (req, res) => {
+	const { id } = req.params;
+	db.select('*').from('users').where({
+		id: id
+	})
+	.then(user => {
+		console.log(user);
+		res.json(user);
+	})
+})
 
-// app.delete("/users", (req, res) => {
-// 	const { id } = req.body;
-// 	db('users')
-// 		.where({ id })
-// 		.del()
-// 		.then(() => res.status(200).send('User deleted successfully'))
-// 		.catch(error => res.status(500).json({ error }));
-// });
+app.delete("/users", (req, res) => {
+	const { id } = req.body;
+	db('users')
+		.where({ id })
+		.del()
+		.then(() => res.status(200).send('User deleted successfully'))
+		.catch(error => res.status(500).json({ error }));
+});
 
 // app.delete("/users", (req, res) => {
 // 	const { id } = req.body;

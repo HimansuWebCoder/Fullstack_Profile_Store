@@ -218,17 +218,45 @@
 
     		 	const editSkillBtn = document.createElement("button");
                 skillContainer.appendChild(editSkillBtn);
-                // editSkillBtn.textContent = "";
+                editSkillBtn.textContent = "Edit";
                 editSkillBtn.style.marginLeft = "10px";
                 editSkillBtn.style.cursor = "pointer";
+                editSkillBtn.style.width = "40px";
+                editSkillBtn.style.height = "20px";
 
-                const editImgIcon = document.createElement("img");
-                editSkillBtn.append(editImgIcon);
-                editImgIcon.setAttribute("src", "https://cdn-icons-png.freepik.com/256/738/738880.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid");
-                editImgIcon.style.width = "20px";
-                editImgIcon.style.height = "20px";
+                editSkillBtn.setAttribute("id", user.id)
 
-                editSkillBtn.addEventListener("click", () => {
+                const delSkillBtn = document.createElement("button");
+                skillContainer.appendChild(delSkillBtn);
+                delSkillBtn.textContent = "Delete";
+                delSkillBtn.style.marginLeft = "10px";
+                delSkillBtn.style.cursor = "pointer";
+                
+                // delSkillBtn.addEventListener("click", () => {
+                // 		fetch("https://localhost:3000/users", {
+                // 			method: "delete",
+                // 			headers: {"Content-Type": "application/json"},
+                // 			body: JSON.stringify({id: users[i].id})
+                // 		})
+                // 	// console.log(e.target.id === users[i].id)
+                // 	console.log(users[i].id)
+                // })
+
+                delSkillBtn.addEventListener("click", () => {
+                    fetch("http://localhost:3000/users", {
+                        method: "delete",
+                        headers: {"Content-Type" : "application/json"},
+                        body: JSON.stringify({id: user.id})
+                    })
+                     
+                     window.location.reload()
+    	          })
+
+
+                editSkillBtn.addEventListener("click", (e) => {
+
+                	 console.log(e.target);
+                	 
                 	window.location = "edit-skills-section";
                 // })
     		 	})
