@@ -226,12 +226,13 @@
 
                 editSkillBtn.setAttribute("id", user.id)
 
-                const delSkillBtn = document.createElement("button");
-                skillContainer.appendChild(delSkillBtn);
-                delSkillBtn.textContent = "Delete";
-                delSkillBtn.style.marginLeft = "10px";
-                delSkillBtn.style.cursor = "pointer";
-                
+                // const delSkillBtn = document.createElement("button");
+                // skillContainer.appendChild(delSkillBtn);
+                // delSkillBtn.textContent = "Delete";
+                // delSkillBtn.style.marginLeft = "10px";
+                // delSkillBtn.style.cursor = "pointer";
+
+                // for now I hide this because in edit-skill-section there I did that                
                 // delSkillBtn.addEventListener("click", () => {
                 // 		fetch("https://localhost:3000/users", {
                 // 			method: "delete",
@@ -242,27 +243,30 @@
                 // 	console.log(users[i].id)
                 // })
 
-                delSkillBtn.addEventListener("click", () => {
-                    fetch("http://localhost:3000/users", {
-                        method: "delete",
-                        headers: {"Content-Type" : "application/json"},
-                        body: JSON.stringify({id: user.id})
-                    })
+                // delSkillBtn.addEventListener("click", () => {
+                //     fetch("http://localhost:3000/users", {
+                //         method: "delete",
+                //         headers: {"Content-Type" : "application/json"},
+                //         body: JSON.stringify({id: user.id})
+                //     })
                      
-                     window.location.reload()
-    	          })
+                //      window.location.reload()
+    	        //   })
 
 
-                editSkillBtn.addEventListener("click", (e) => {
+                editSkillBtn.addEventListener("click", () => {
 
-                	 console.log(e.target);
+                	 // console.log(e.target);
                 	 
                 	window.location = "edit-skills-section";
                 // })
     		 	})
     		 })
     	})
-
+        // const id = 96
+        // fetch(`http://localhost:3000/users/edit/${id}`)
+        // .then(res => res.json())
+        // .then(data => console.log(data))
 
         profileEditBtn.addEventListener("click", () => {
         	window.location = "edit-profile";

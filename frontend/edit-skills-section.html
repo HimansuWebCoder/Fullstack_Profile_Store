@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Skills-Section-Edit</title>
+	<style>
+		body {
+			background-color: hsla(220, 90%, 80%, 1);
+		}
+
+		#skills-edit-container {
+			max-width: 500px;
+			height: auto;
+			border:1px solid black;
+			margin: auto;
+			padding: 10px;
+			background-color: hsl(153, 50%, 40%, 0.5);
+		}
+
+		#redirect-container {
+             width: 100%;
+             height: 2px;
+             border: 1px solid black;
+		}
+
+        #redirect-arrow-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+		#input-container {
+            max-width: 100%;
+            height: 150px;
+            border: 1px solid black;
+            padding: 10px;
+		}
+
+        .label {
+          font-size: 2rem;
+          color: white;
+          font-weight: bolder;
+        }
+
+        #edit-skills {
+           width: 93%;
+           height: 30px;
+           font-size: 1.5rem;
+        }
+
+        #save-btn {
+         font-size: 1.8rem;
+         cursor: pointer;
+        }
+
+        #del-btn {
+         font-size: 1.8rem;
+         cursor: pointer;
+        }
+
+        #redirect-span {
+            cursor: pointer;
+        }
+
+        .skills-header {
+            color: white;
+            background-color: hsl(220, 90%, 30%);
+            text-align: center;
+        }
+
+        .skills-name {
+            color: white;
+        }
+	</style>
+</head>
+<body>
+    <div id="skills-edit-container">
+    	<div id="redirectContainer">
+            <img id="redirect-arrow-icon" src="https://cdn-icons-png.freepik.com/256/4421/4421793.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid" id="redirect-span">
+        </div>
+    	<!-- <div id="input-container"> -->
+    		<!-- <label class="label" for="edit-skills">Skills</label> -->
+    		<!-- <input type="text" name="skills-edit-input" id="edit-skills" placeholder="Update your Skills" /> -->
+    	<!-- </div> -->
+    	<!-- <button id="save-btn">Save</button> -->
+    	<!-- <button id="del-btn">Delete</button> -->
+        <!-- <button class="delete-btn">Delete Specific Skills</button> -->
+        <h1 class="skills-header">Edit Your Skills</h1>
+    </div>
+    <script>
+    	const skillsEditContainer = document.querySelector("#skills-edit-container");
+    	const redirectBtn = document.querySelector("#redirect-arrow-icon");
+    	// const skillsEditInput = document.querySelector("#edit-skills");
+    	// const saveBtn = document.querySelector("#save-btn");
+    	// const delBtn = document.querySelector("#del-btn");
+        // const deleteBtn = document.querySelector(".delete-btn");
+
+    	// saveBtn.addEventListener("click", () => {
+        //     try {
+        //     fetch("http://localhost:3000/edit-skills-section", {
+        //         method: "put",
+        //         headers: {"Content-Type" : "application/json"},
+        //         body: JSON.stringify({id:"1", name: skillsEditInput.value})
+        //     })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //     })
+        //     .catch(err => {
+        //         console.error("Error:", err);
+        //     })
+    	// 	// window.location = "/";
+        //     } catch (error) {
+        //         console.error("Caught Error:", error)
+        //     }
+    	// })
+      
+             // deleteBtn.setAttribute("id", 82);
+        // fetch("http://localhost:3000/users")
+        // .then(res => res.json())
+        // .then(users => {
+        //     users.forEach(user => {
+        //         deleteBtn.setAttribute("id", user.id);
+        //     })
+        // })
+        //      deleteBtn.addEventListener("click", (e) => {
+        //          console.log(e.target)
+                
+        //      })
+
+      // fetch("http://localhost:3000/users")
+      // .then(res => res.json())
+      // .then((users, i) => {
+    // 	delBtn.addEventListener("click", () => {
+      //       users.forEach(user => {
+      //        fetch(`http://localhost:3000/users`, {
+      //           method: "delete",
+      //           headers: {"Content-Type" : "application/json"},
+      //           body: JSON.stringify({id: user.id})
+      //        })
+      //       })
+    	// })
+      // })
+
+      //   fetch("http://localhost:3000/users")
+      // .then(res => res.json())
+      // .then((users, i) => {
+      //   delBtn.addEventListener("click", () => {
+      //       users.forEach(user => {
+      //        fetch(`http://localhost:3000/users`, {
+      //           method: "delete",
+      //           headers: {"Content-Type" : "application/json"},
+      //           body: JSON.stringify({id: user.id})
+      //        })
+      //       })
+      //   })
+      // })
+
+         fetch("http://localhost:3000/users")
+         .then(res => res.json())
+         .then((users, i) => {
+            // console.log(users[i]); // wrong users is all array inside users database so array now so users[i] = undefined, give this , means 5 same array of object fetch this
+            // (5) [{…}, {…}, {…}, {…}, {…}] like this 5 array of object comes check in console to see this
+
+            users.forEach((user, j) => { 
+                 const delContainer = document.createElement("div");
+                 skillsEditContainer.appendChild(delContainer);
+                 delContainer.style.width = "300px";
+                 delContainer.style.height = "auto";
+                 delContainer.style.border = "1px solid black";
+
+                 const skillName = document.createElement("h3");
+                 delContainer.appendChild(skillName);
+                 skillName.textContent = user.name;
+                 skillName.classList.add("skills-name");
+
+                 const inputContainer = document.createElement("input");
+                 skillsEditContainer.appendChild(inputContainer);
+
+                 const updateBtn = document.createElement("button");
+                 skillsEditContainer.appendChild(updateBtn);
+                 updateBtn.textContent = "Update";
+
+
+                 updateBtn.addEventListener("click", () => {
+                    fetch("http://localhost:3000/users", {
+                        method: "put",
+                        headers: {"Content-Type": "application/json"},
+                        body: JSON.stringify({id: user.id, name: inputContainer.value})
+                    })
+                    window.location.reload()
+                 })
+
+                 const delBtn = document.createElement("button");
+                 skillsEditContainer.appendChild(delBtn); // this is also work no name here to what skill to delete 
+                 delContainer.appendChild(delBtn);
+                 delBtn.textContent = "Delete";
+                // console.log(users[j]) // now user is all fetch object now you can use user.id or users[i] = give all object
+                console.log(user.id) // or use this 
+            delBtn.addEventListener("click", () => {
+                fetch("http://localhost:3000/users", {
+                    method: "delete",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({id : user.id})
+                })
+                window.location.reload()
+            })
+            })
+            
+
+         })
+
+
+
+        // fetch("http://localhost:3000/users/edit/92")
+        // .then(res => res.json())
+        // .then(user => console.log(user)); // this show result of 92 details
+
+        // fetch("http://localhost:3000/users/edit/92", {
+        //     method: "delete",
+        //     headers: {"Content-Type": "application/json"},
+        //     body: JSON.stringify({id: 92})
+        // })
+        
+
+
+
+        redirectBtn.addEventListener("click", () => {
+            window.location = "/";
+        })
+
+        
+    </script>
+</body>
+</html>

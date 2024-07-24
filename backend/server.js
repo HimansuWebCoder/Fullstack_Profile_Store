@@ -37,15 +37,15 @@ app.get("/", (req, res) => {
 })
 
 app.get("/edit-profile", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "frontend", "profile-edit.html"));
+	res.sendFile(path.join(__dirname, "..", "frontend", "edit-profile.html"));
 })
 
 app.get("/add-section", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "frontend", "section-edit.html"));
+	res.sendFile(path.join(__dirname, "..", "frontend", "add-section.html"));
 })
 
 app.get("/edit-skills-section", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "frontend", "skills-section-edit.html"));
+	res.sendFile(path.join(__dirname, "..", "frontend", "edit-skills-section.html"));
 })
 
 // app.get("/", (req, res) => {
@@ -106,6 +106,16 @@ app.get("/users/:id", (req, res) => {
 	})
 })
 
+app.put("/users", (req, res) => {
+	const { id, name } = req.body;
+	db('users')
+	   .where({ id })
+	   .update({name})
+	   .then(user => {
+	   	res.json(user);
+	   })
+})
+
 app.delete("/users", (req, res) => {
 	const { id } = req.body;
 	db('users')
@@ -114,6 +124,18 @@ app.delete("/users", (req, res) => {
 		.then(() => res.status(200).send('User deleted successfully'))
 		.catch(error => res.status(500).json({ error }));
 });
+
+app.get("/users/edit/:id", (req, res) => {
+	const { id } = req.params;
+	db.select("*").from('users').where({
+		id: id
+	})
+	.then(user => {
+		console.log(user);
+		res.json(user)
+	})
+})
+
 
 // app.delete("/users", (req, res) => {
 // 	const { id } = req.body;
