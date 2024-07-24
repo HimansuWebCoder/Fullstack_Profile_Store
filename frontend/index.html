@@ -7,7 +7,8 @@
 	<style>
 	    body {
 	    	background-color: hsla(178, 100%, 70%, 0.9);
-	    }
+	     }
+
 		#intro {
 			max-width: 400px;
 			height: auto;
@@ -23,6 +24,7 @@
 			box-shadow: 1px 2px 50px 10px white;
 			word-wrap: break-word;
 		}
+
 		#profile-container {
             max-width: 400px;
             height: auto;
@@ -47,20 +49,12 @@
 		}
 
 		.profile-content {
-         font-family:monospace sans-serif; 
-         background-color: rgba(100, 100, 244, 0.9);
-         color:white;
-         font-weight: bolder;
-         font-size: 2rem;
-         padding: 5px;
-		}
-
-		#profile-header {
-         
-		}
-
-		#profile-intro {
-
+            font-family:monospace sans-serif; 
+            background-color: rgba(100, 100, 244, 0.9);
+            color:white;
+            font-weight: bolder;
+            font-size: 2rem;
+            padding: 5px;
 		}
 
 		#profile-edit-icon {
@@ -76,17 +70,17 @@
 		}
 
 		#add-section {
-		  display: block;
-	      width: 100%;
-		  height: auto;
-		  margin: auto;
-          text-align: center;
-          background-color: rgba(100, 100, 244, 0.9);
-          color:white;
-          border: none;
-          font-weight: bold;
-          font-size: 2rem;
-          cursor: pointer;
+		     display: block;
+	         width: 100%;
+		     height: auto;
+		     margin: auto;
+             text-align: center;
+             background-color: rgba(100, 100, 244, 0.9);
+             color:white;
+             border: none;
+             font-weight: bold;
+             font-size: 2rem;
+             cursor: pointer;
 		}
 
 		#profile-image {
@@ -96,7 +90,6 @@
 
 		#edit-icon {
 			width: 100%;
-/*			height: 100%;*/
 		}
 
 		.skills-container {
@@ -122,6 +115,13 @@
 			margin-top: 10px;
 		}
 
+		.edit-btns {
+            max-width: 100px;
+            height: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+		}
+
 
      	.loader {
             display: none;
@@ -140,6 +140,7 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
           }
+
 	</style>
 </head>
 <body>
@@ -164,10 +165,9 @@
     	const profileIntro = document.querySelector("#profile-intro");
     	const profileEditBtn = document.querySelector("#profile-edit-icon");
     	const addSectionBtn = document.querySelector("#add-section");
-
     	const loader = document.querySelector(".loader");
 
-    	// byDefault name, passion is there you can edit this according to your name and passin
+    	// By Default name, passion is there you can edit this according to your name and passin
 
 
          function showProfile() {
@@ -192,7 +192,6 @@
                   })
                   .finally(() => {
                     if (isLoaded) {
-                      // console.log("Loaded successfully");
                     	profileContainer.style.display = "block";
                     	loader.style.display = "none"
                     }
@@ -203,145 +202,34 @@
 
          showProfile()
 
-    	// fetch("http://localhost:3000/profile")
-    	// .then(res => res.json())
-    	// .then((users) => {
-    	// 	users.forEach((user, i) => {
-    	// 		profileHeader.textContent = user.name;
-    	// 		profileIntro.textContent = user.passion;
-        //         profileImg.src = user.image;
-    	// 	})
-    	// })
-
-    	// fetch("http://localhost:3000/profile")
-    	// .then(res => res.json())
-    	// .then((users, i) => {
-    	// 	const skillDiv = document.createElement("div");
-    	// 	profileContainer.appendChild(skillDiv);
-    	// 	skillDiv.textContent = "Skills";
-    	// 	skillDiv.classList.add("skills-intro-style")
-    	// 	 users.forEach((user, i) => {
-    	// 	 	user.skills.forEach(skill => {
-    	// 	 	const skillContainer = document.createElement("div");
-    	// 	 	profileContainer.appendChild(skillContainer);
-    	// 	 	skillContainer.textContent = skill.name;
-    	// 	 	console.log(skill);
-    	// 	 	console.log(skill.name);
-    	// 	 	skillContainer.classList.add("skills-container");
-
-    	// 	 	const editSkillBtn = document.createElement("button");
-        //         skillContainer.appendChild(editSkillBtn);
-        //         // editSkillBtn.textContent = "";
-        //         editSkillBtn.style.marginLeft = "10px";
-        //         editSkillBtn.style.cursor = "pointer";
-
-        //         const editImgIcon = document.createElement("img");
-        //         editSkillBtn.append(editImgIcon);
-        //         editImgIcon.setAttribute("src", "cdn-icons-png.freepik.com/256/738/738880.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid");
-
-        //         editSkillBtn.addEventListener("click", () => {
-        //         	window.location = "edit-skills-section";
-        //         })
-    	// 	 	})
-    	// 	 })
-    	// })
-
-    	// fetch("http://localhost:3000/")
-    	// .then(res => res.json())
-    	// .then((users) => {
-    	// 	users.forEach((user, i) => {
-    	// 		profileHeader.textContent = user.name;
-    	// 		profileIntro.textContent = user.passion;
-        //         profileImg.src = user.image;
-    	// 	})
-    	// })
-
-
     	fetch("http://localhost:3000/users")
     	.then(res => res.json())
     	.then((users, i) => {
-    		// console.log(users[0].name);
-    		const skillDiv = document.createElement("div");
-    		profileContainer.appendChild(skillDiv);
-    		skillDiv.textContent = "Skills";
-    		skillDiv.classList.add("skills-intro-style")
-    		 users.forEach((user, i) => {
-    		 	// user.skills.forEach(skill => {
+            // All skills container box    		
+    		    const skillDiv = document.createElement("div");
+    		    profileContainer.appendChild(skillDiv);
+    		    skillDiv.textContent = "Skills";
+    		    skillDiv.classList.add("skills-intro-style")
+
+    		  users.forEach((user, i) => {
+    		 	// One skill container box
     		 	const skillContainer = document.createElement("div");
     		 	profileContainer.appendChild(skillContainer);
     		 	skillContainer.textContent = users[i].name;
-    		 	// console.log(users);
-    		 	// console.log(users[i].name);
     		 	skillContainer.classList.add("skills-container");
-
+                
     		 	const editSkillBtn = document.createElement("button");
                 skillContainer.appendChild(editSkillBtn);
-                editSkillBtn.textContent = "Edit";
-                editSkillBtn.style.marginLeft = "10px";
-                editSkillBtn.style.cursor = "pointer";
-                editSkillBtn.style.width = "40px";
-                editSkillBtn.style.height = "20px";
-
+                editSkillBtn.textContent = "Edit"
+                editSkillBtn.classList.add("edit-skills-btn-style")
                 editSkillBtn.setAttribute("class", "edit-btns")
-                editSkillBtn.setAttribute("id", user.id)
-
-                // console.log(editSkillBtn)
-
-                // const editSkillBtns = document.querySelectorAll(".edit-btns");
-   
-                // editSkillBtns.forEach(btn => {
-                // 	console.log(btn)
-                // 	// console.log(btn.id)
-                // 	btn.addEventListener("click", () => {
-                // 	   if (btn.id == user.id) { // === not working because btn.id in string number but database id users in number
-                // 	   	window.location = `/users/${user.id}`
-                // 	   	// console.log(user.id)
-                // 	   	// console.log("true")
-                // 	   }
-                // 	})
-                // })
-
-                // const delSkillBtn = document.createElement("button");
-                // skillContainer.appendChild(delSkillBtn);
-                // delSkillBtn.textContent = "Delete";
-                // delSkillBtn.style.marginLeft = "10px";
-                // delSkillBtn.style.cursor = "pointer";
-
-                // for now I hide this because in edit-skill-section there I did that                
-                // delSkillBtn.addEventListener("click", () => {
-                // 		fetch("https://localhost:3000/users", {
-                // 			method: "delete",
-                // 			headers: {"Content-Type": "application/json"},
-                // 			body: JSON.stringify({id: users[i].id})
-                // 		})
-                // 	// console.log(e.target.id === users[i].id)
-                // 	console.log(users[i].id)
-                // })
-
-                // delSkillBtn.addEventListener("click", () => {
-                //     fetch("http://localhost:3000/users", {
-                //         method: "delete",
-                //         headers: {"Content-Type" : "application/json"},
-                //         body: JSON.stringify({id: user.id})
-                //     })
-                     
-                //      window.location.reload()
-    	        //   })
-
 
                 editSkillBtn.addEventListener("click", () => {
-
-                	 // console.log(e.target);
                 	 
-                	window.location = "edit-skills-section";
-                // })
-    		 	})
-    		 })
+                window.location = "edit-skills-section";
+              })
     	})
-        // const id = 96
-        // fetch(`http://localhost:3000/users/edit/${id}`)
-        // .then(res => res.json())
-        // .then(data => console.log(data))
+    })
 
         profileEditBtn.addEventListener("click", () => {
         	window.location = "edit-profile";

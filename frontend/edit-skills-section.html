@@ -38,25 +38,25 @@
 		}
 
         .label {
-          font-size: 2rem;
-          color: white;
-          font-weight: bolder;
+            font-size: 2rem;
+            color: white;
+            font-weight: bolder;
         }
 
         #edit-skills {
-           width: 93%;
-           height: 30px;
-           font-size: 1.5rem;
+            width: 93%;
+            height: 30px;
+            font-size: 1.5rem;
         }
 
         #save-btn {
-         font-size: 1.8rem;
-         cursor: pointer;
+            font-size: 1.8rem;
+            cursor: pointer;
         }
 
         #del-btn {
-         font-size: 1.8rem;
-         cursor: pointer;
+            font-size: 1.8rem;
+            cursor: pointer;
         }
 
         #redirect-span {
@@ -74,20 +74,21 @@
         }
 
         .del-container-style {
-                 max-width: 100%;
-                 height: auto;
-                 border: 1px solid black;
-                 margin: auto;
-                 margin-bottom: 10px;
-                 padding: 10px;
-              }
+            max-width: 100%;
+            height: auto;
+            border: 1px solid black;
+            margin: auto;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
 
         .input-container-style {
-                 max-width: 90%;
-                 height:auto;
-                 margin: auto;
-                 display: inline-block;
+            max-width: 90%;
+            height:auto;
+            margin: auto;
+            display: inline-block;
         }
+        
 	</style>
 </head>
 <body>
@@ -95,90 +96,15 @@
     	<div id="redirectContainer">
             <img id="redirect-arrow-icon" src="https://cdn-icons-png.freepik.com/256/4421/4421793.png?ga=GA1.1.1863119960.1721487512&semt=ais_hybrid" id="redirect-span">
         </div>
-    	<!-- <div id="input-container"> -->
-    		<!-- <label class="label" for="edit-skills">Skills</label> -->
-    		<!-- <input type="text" name="skills-edit-input" id="edit-skills" placeholder="Update your Skills" /> -->
-    	<!-- </div> -->
-    	<!-- <button id="save-btn">Save</button> -->
-    	<!-- <button id="del-btn">Delete</button> -->
-        <!-- <button class="delete-btn">Delete Specific Skills</button> -->
         <h1 class="skills-header">Edit Your Skills</h1>
     </div>
     <script>
     	const skillsEditContainer = document.querySelector("#skills-edit-container");
     	const redirectBtn = document.querySelector("#redirect-arrow-icon");
-    	// const skillsEditInput = document.querySelector("#edit-skills");
-    	// const saveBtn = document.querySelector("#save-btn");
-    	// const delBtn = document.querySelector("#del-btn");
-        // const deleteBtn = document.querySelector(".delete-btn");
-
-    	// saveBtn.addEventListener("click", () => {
-        //     try {
-        //     fetch("http://localhost:3000/edit-skills-section", {
-        //         method: "put",
-        //         headers: {"Content-Type" : "application/json"},
-        //         body: JSON.stringify({id:"1", name: skillsEditInput.value})
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //     })
-        //     .catch(err => {
-        //         console.error("Error:", err);
-        //     })
-    	// 	// window.location = "/";
-        //     } catch (error) {
-        //         console.error("Caught Error:", error)
-        //     }
-    	// })
-      
-             // deleteBtn.setAttribute("id", 82);
-        // fetch("http://localhost:3000/users")
-        // .then(res => res.json())
-        // .then(users => {
-        //     users.forEach(user => {
-        //         deleteBtn.setAttribute("id", user.id);
-        //     })
-        // })
-        //      deleteBtn.addEventListener("click", (e) => {
-        //          console.log(e.target)
-                
-        //      })
-
-      // fetch("http://localhost:3000/users")
-      // .then(res => res.json())
-      // .then((users, i) => {
-    // 	delBtn.addEventListener("click", () => {
-      //       users.forEach(user => {
-      //        fetch(`http://localhost:3000/users`, {
-      //           method: "delete",
-      //           headers: {"Content-Type" : "application/json"},
-      //           body: JSON.stringify({id: user.id})
-      //        })
-      //       })
-    	// })
-      // })
-
-      //   fetch("http://localhost:3000/users")
-      // .then(res => res.json())
-      // .then((users, i) => {
-      //   delBtn.addEventListener("click", () => {
-      //       users.forEach(user => {
-      //        fetch(`http://localhost:3000/users`, {
-      //           method: "delete",
-      //           headers: {"Content-Type" : "application/json"},
-      //           body: JSON.stringify({id: user.id})
-      //        })
-      //       })
-      //   })
-      // })
 
          fetch("http://localhost:3000/users")
          .then(res => res.json())
          .then((users, i) => {
-            // console.log(users[i]); // wrong users is all array inside users database so array now so users[i] = undefined, give this , means 5 same array of object fetch this
-            // (5) [{…}, {…}, {…}, {…}, {…}] like this 5 array of object comes check in console to see this
-
             users.forEach((user, j) => { 
                  const delContainer = document.createElement("div");
                  skillsEditContainer.appendChild(delContainer);
@@ -211,97 +137,21 @@
                     }
                  })
 
-                 const delBtn = document.createElement("button");
-                 skillsEditContainer.appendChild(delBtn); // this is also work no name here to what skill to delete 
-                 delContainer.appendChild(delBtn);
-                 delBtn.textContent = "Delete";
-                // console.log(users[j]) // now user is all fetch object now you can use user.id or users[i] = give all object
-                console.log(user.id) // or use this 
-            delBtn.addEventListener("click", () => {
-                fetch("http://localhost:3000/users", {
-                    method: "delete",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify({id : user.id})
+                        const delBtn = document.createElement("button");
+                        delContainer.appendChild(delBtn);
+                        delBtn.textContent = "Delete";
+                    delBtn.addEventListener("click", () => {
+                        fetch("http://localhost:3000/users", {
+                            method: "delete",
+                            headers: {"Content-Type": "application/json"},
+                            body: JSON.stringify({id : user.id})
+                        })
+                        window.location.reload()
+                    })
                 })
-                window.location.reload()
-            })
-            })
             
 
          })
-
-
-          // just experiment wtih delete single delete button 
-          
-          // fetch("http://localhost:3000/users")
-          // .then(res => res.json())
-          // .then(users => {
-          //   const btn = document.createElement("button");
-          //   skillsEditContainer.appendChild(btn);
-          //   btn.textContent = "delete";
-          //   console.log(users)
-            // console.log(users[0]);
-                // btn.setAttribute("id", users[0].id)
-            // users.forEach(user => {
-            //     btn.setAttribute("id", user.id)
-            // })
-             
-             // btn.addEventListener("click", () => {
-             //    users.forEach(user => {
-             //        fetch(`http://localhost:3000/users/${user.id}`, {
-             //            method: "delete",
-             //            headers: {"Content-Type": "application/json"},
-             //            body: JSON.stringify({id : user.id})
-             //        })
-             //        window.location.reload()
-             //    })
-             // })
-
-             // btn.addEventListener("click", () => {
-             //    users.forEach(user => {
-             //        fetch(`http://localhost:3000/users/${user.id}`)
-             //        .then(res => res.json())
-             //        .then(x => {
-             //            console.log(x);
-             //        })
-             //    })
-             // })
-
-
-
-            // create btn with id and the when delete then btn remove also with deletion
-        // fetch("http://localhost:3000/users")
-        // .then(res => res.json())
-        // .then(users => {
-        //         users.forEach(user => {
-        //             fetch(`http://localhost:3000/users/${user.id}`)
-        //             .then(res => res.json())
-        //             .then(x => {
-        //                 x.forEach(y => {
-        //                     console.log(y)
-        //                 })
-        //             })
-        //         })
-        //    })
-                // console.log(btn)
-          // })
-   
-
-
-
-
-        // fetch("http://localhost:3000/users/edit/92")
-        // .then(res => res.json())
-        // .then(user => console.log(user)); // this show result of 92 details
-
-        // fetch("http://localhost:3000/users/edit/92", {
-        //     method: "delete",
-        //     headers: {"Content-Type": "application/json"},
-        //     body: JSON.stringify({id: 92})
-        // })
-        
-
-
 
         redirectBtn.addEventListener("click", () => {
             window.location = "/";
