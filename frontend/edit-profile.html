@@ -94,11 +94,11 @@
      	})
 
      	submitBtn.addEventListener("click", () => {
-     		if (profileNameEditor.value !== "" && profilePassionEditor.value !== "" || profileImageEditor.value) {
+     		if (profileNameEditor.value !== "" && profilePassionEditor.value !== "" ) {
      		fetch("http://localhost:3000/profile", {
      			method: "put",
      			headers: {"Content-Type": "application/json"},
-     			body: JSON.stringify({id: "1", name: profileNameEditor.value, passion: profilePassionEditor.value, imgURL: profileImageEditor.value})
+     			body: JSON.stringify({id: "1", name: profileNameEditor.value, passion: profilePassionEditor.value, image: profileImageEditor.value})
      		})
      		window.location = "/";
      		}
