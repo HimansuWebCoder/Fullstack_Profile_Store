@@ -74,6 +74,7 @@ app.get("/edit-skills-section", (req, res) => {
 // 	section.handleSection(req, res, db)
 // })
 
+// post skills (post)
 app.post("/add-section", (req, res) => {
 	const { id, name } = req.body;
 	db('users')
@@ -84,6 +85,7 @@ app.post("/add-section", (req, res) => {
 	})
 })
 
+// get users (get)
 app.get("/users", (req, res) => {
     db.select('*').from('users')
         .then(users => {
@@ -95,6 +97,7 @@ app.get("/users", (req, res) => {
         });
 });
 
+// get one user (get)
 app.get("/users/:id", (req, res) => {
 	const { id } = req.params;
 	db.select('*').from('users').where({
@@ -106,16 +109,44 @@ app.get("/users/:id", (req, res) => {
 	})
 })
 
-app.put("/users", (req, res) => {
-	const { id, name } = req.body;
-	db('users')
+// get profile (get)
+app.get("/profile", (req, res) => {
+    db.select('*').from('profile')
+        .then(users => {
+            res.json(users);
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
+
+// update profile (put)
+app.put("/profile", (req, res) => {
+	const { id, name, passion, image } = req.body;
+	db('profile')
 	   .where({ id })
-	   .update({name})
+	   .update({ name, passion, image })
 	   .then(user => {
 	   	res.json(user);
 	   })
 })
 
+// update users (put)
+app.put("/users", (req, res) => {
+	const { id, name} = req.body;
+	db('users')
+	   .where({ id })
+	   .update({ name })
+	   .then(user => {
+	   	res.json(user);
+	   })
+})
+
+
+
+
+// delete users (delete)
 app.delete("/users", (req, res) => {
 	const { id } = req.body;
 	db('users')
@@ -125,6 +156,7 @@ app.delete("/users", (req, res) => {
 		.catch(error => res.status(500).json({ error }));
 });
 
+// get one skill for edit
 app.get("/users/edit/:id", (req, res) => {
 	const { id } = req.params;
 	db.select("*").from('users').where({

@@ -95,10 +95,10 @@
 
      	submitBtn.addEventListener("click", () => {
      		if (profileNameEditor.value !== "" && profilePassionEditor.value !== "" || profileImageEditor.value) {
-     		fetch("http://localhost:3000/edit-profile", {
+     		fetch("http://localhost:3000/profile", {
      			method: "put",
      			headers: {"Content-Type": "application/json"},
-     			body: JSON.stringify({id: "123", name: profileNameEditor.value, passion: profilePassionEditor.value, image: profileImageEditor.value})
+     			body: JSON.stringify({id: "1", name: profileNameEditor.value, passion: profilePassionEditor.value, imgURL: profileImageEditor.value})
      		})
      		window.location = "/";
      		}

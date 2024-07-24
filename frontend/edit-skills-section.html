@@ -184,12 +184,14 @@
 
 
                  updateBtn.addEventListener("click", () => {
+                    if (inputContainer.value !== "") {  
                     fetch("http://localhost:3000/users", {
                         method: "put",
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({id: user.id, name: inputContainer.value})
                     })
                     window.location.reload()
+                    }
                  })
 
                  const delBtn = document.createElement("button");
@@ -210,6 +212,64 @@
             
 
          })
+
+
+          // just experiment wtih delete single delete button 
+          
+          // fetch("http://localhost:3000/users")
+          // .then(res => res.json())
+          // .then(users => {
+          //   const btn = document.createElement("button");
+          //   skillsEditContainer.appendChild(btn);
+          //   btn.textContent = "delete";
+          //   console.log(users)
+            // console.log(users[0]);
+                // btn.setAttribute("id", users[0].id)
+            // users.forEach(user => {
+            //     btn.setAttribute("id", user.id)
+            // })
+             
+             // btn.addEventListener("click", () => {
+             //    users.forEach(user => {
+             //        fetch(`http://localhost:3000/users/${user.id}`, {
+             //            method: "delete",
+             //            headers: {"Content-Type": "application/json"},
+             //            body: JSON.stringify({id : user.id})
+             //        })
+             //        window.location.reload()
+             //    })
+             // })
+
+             // btn.addEventListener("click", () => {
+             //    users.forEach(user => {
+             //        fetch(`http://localhost:3000/users/${user.id}`)
+             //        .then(res => res.json())
+             //        .then(x => {
+             //            console.log(x);
+             //        })
+             //    })
+             // })
+
+
+
+            // create btn with id and the when delete then btn remove also with deletion
+        // fetch("http://localhost:3000/users")
+        // .then(res => res.json())
+        // .then(users => {
+        //         users.forEach(user => {
+        //             fetch(`http://localhost:3000/users/${user.id}`)
+        //             .then(res => res.json())
+        //             .then(x => {
+        //                 x.forEach(y => {
+        //                     console.log(y)
+        //                 })
+        //             })
+        //         })
+        //    })
+                // console.log(btn)
+          // })
+   
+
 
 
 

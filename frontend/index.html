@@ -121,10 +121,30 @@
 			color: white;
 			margin-top: 10px;
 		}
+
+
+     	.loader {
+            display: none;
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #3498db;
+            width: 70px;
+            height: 70px;
+            margin: auto;
+            margin-top: 50px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+         }
+
+         @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
 	</style>
 </head>
 <body>
 	<h1 id="intro">PLAY WITH YOUR PROFILE</h1>
+	   <div class="loader"></div>
     <div id="profile-container">
     	<div id="profile-img-container">
     		<img id="profile-image" src="" alt="image" />
@@ -144,6 +164,46 @@
     	const profileIntro = document.querySelector("#profile-intro");
     	const profileEditBtn = document.querySelector("#profile-edit-icon");
     	const addSectionBtn = document.querySelector("#add-section");
+
+    	const loader = document.querySelector(".loader");
+
+    	// byDefault name, passion is there you can edit this according to your name and passin
+
+
+         function showProfile() {
+              // console.log("Loading...");
+         	profileContainer.style.display = "none";
+         	loader.style.display = "block";
+
+              let isLoaded = false;
+
+              setTimeout(() => {
+                fetch("http://localhost:3000/profile")
+                  .then(res => res.json())
+                  .then(users => {
+                    if (users.length) {
+                      users.forEach(user => {
+                        profileHeader.textContent = user.name;
+                        profileIntro.textContent = user.passion;
+                        profileImg.src = user.image;
+                        isLoaded = true; // Data loaded successfully
+                      });
+                    }
+                  })
+                  .finally(() => {
+                    if (isLoaded) {
+                      // console.log("Loaded successfully");
+                    	profileContainer.style.display = "block";
+                    	loader.style.display = "none"
+                    }
+                  });
+              }, 3000);
+            }
+
+showProfile();
+
+
+         showProfile()
 
     	// fetch("http://localhost:3000/profile")
     	// .then(res => res.json())
@@ -224,7 +284,24 @@
                 editSkillBtn.style.width = "40px";
                 editSkillBtn.style.height = "20px";
 
+                editSkillBtn.setAttribute("class", "edit-btns")
                 editSkillBtn.setAttribute("id", user.id)
+
+                // console.log(editSkillBtn)
+
+                // const editSkillBtns = document.querySelectorAll(".edit-btns");
+   
+                // editSkillBtns.forEach(btn => {
+                // 	console.log(btn)
+                // 	// console.log(btn.id)
+                // 	btn.addEventListener("click", () => {
+                // 	   if (btn.id == user.id) { // === not working because btn.id in string number but database id users in number
+                // 	   	window.location = `/users/${user.id}`
+                // 	   	// console.log(user.id)
+                // 	   	// console.log("true")
+                // 	   }
+                // 	})
+                // })
 
                 // const delSkillBtn = document.createElement("button");
                 // skillContainer.appendChild(delSkillBtn);
