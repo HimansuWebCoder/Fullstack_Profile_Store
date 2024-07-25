@@ -4,7 +4,6 @@ const cors = require("cors");
 const knex = require("knex");
 const path = require("path");
 const app = express();
-const port = 3000;
 
 
 const add_section = require('./controllers/section');
@@ -48,15 +47,15 @@ app.get("/edit-skills-section", (req, res) => {
 
 
 // post skills (post)
-app.post("/add-section", (req, res) => { add_section.postSection(req, res, db) });
 app.get("/users", (req, res) => { users.getUsers(req, res, db)});
+app.put("/users", (req, res) => { users.updateUsers(req, res, db)});
 app.get("/users/:id", (req, res) => { users.getUsersId(req, res, db)});
 app.get("/users/edit/:id", (req, res) => { users.getUserSkill(req, res, db)});
-app.put("/users", (req, res) => { users.updateUsers(req, res, db)});
 app.delete("/users", (req, res) => { users.deleteUsers(req, res, db)});
 app.get("/profile", (req, res) => { profile.getProfile(req, res, db)});
 app.put("/profile", (req, res) => { profile.updateProfile(req, res, db)});
+app.post("/add-section", (req, res) => { add_section.postSection(req, res, db) });
 
 app.listen(process.env.PORT || 3000, () => {
-	console.log(`Your website hosted at ${process.env.PORT}`);
+	console.log(`Your website hosted at ${process.env.PORT || 3000}`);
 });
