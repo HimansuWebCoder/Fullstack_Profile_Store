@@ -2,6 +2,14 @@ const express  = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const knex = require("knex");
+const path = require("path");
+const app = express();
+const port = 3000;
+
+
+const add_section = require('./controllers/section');
+const users = require("./controllers/users");
+const profile = require("./controllers/profile");
 
 const db = knex({
   client: 'pg',
@@ -14,11 +22,6 @@ const db = knex({
   },
 });
 
-
-const path = require("path");
-const app = express();
-
-const port = 3000;
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
@@ -43,96 +46,15 @@ app.get("/edit-skills-section", (req, res) => {
 
 
 // post skills (post)
-app.post("/add-section", (req, res) => {
-	const { id, name } = req.body;
-	db('users')
-    .returning('*')
-	.insert({id: id, name: name})
-	.then(response => {
-		res.json(response)
-	})
-})
-
-// get users (get)
-app.get("/users", (req, res) => {
-    db.select('*').from('users')
-        .then(users => {
-            res.json(users);
-        })
-        .catch(error => {
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        });
-});
-
-// get one user (get)
-app.get("/users/:id", (req, res) => {
-	const { id } = req.params;
-	db.select('*').from('users').where({
-		id: id
-	})
-	.then(user => {
-		console.log(user);
-		res.json(user);
-	})
-})
-
-// get profile (get)
-app.get("/profile", (req, res) => {
-    db.select('*').from('profile')
-        .then(users => {
-            res.json(users);
-        })
-        .catch(error => {
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        });
-});
-
-// update profile (put)
-app.put("/profile", (req, res) => {
-	const { id, name, passion, image } = req.body;
-	db('profile')
-	   .where({ id })
-	   .update({ name, passion, image })
-	   .then(user => {
-	   	res.json(user);
-	   })
-})
-
-// update users (put)
-app.put("/users", (req, res) => {
-	const { id, name} = req.body;
-	db('users')
-	   .where({ id })
-	   .update({ name })
-	   .then(user => {
-	   	res.json(user);
-	   })
-})
-
-
-// delete users (delete)
-app.delete("/users", (req, res) => {
-	const { id } = req.body;
-	db('users')
-		.where({ id })
-		.del()
-		.then(() => res.status(200).send('User deleted successfully'))
-		.catch(error => res.status(500).json({ error }));
-});
-
-// get one skill for edit
-app.get("/users/edit/:id", (req, res) => {
-	const { id } = req.params;
-	db.select("*").from('users').where({
-		id: id
-	})
-	.then(user => {
-		console.log(user);
-		res.json(user)
-	})
-})
+app.post("/add-section", (req, res) => { add_section.postSection(req, res, db) });
+app.get("/users", (req, res) => { users.getUsers(req, res, db)});
+app.get("/users/:id", (req, res) => { users.getUsersId(req, res, db)});
+app.get("/users/edit/:id", (req, res) => { users.getUserSkill(req, res, db)});
+app.put("/users", (req, res) => { users.updateUsers(req, res, db)});
+app.delete("/users", (req, res) => { users.deleteUsers(req, res, db)});
+app.get("/profile", (req, res) => { profile.getProfile(req, res, db)});
+app.get("/profile", (req, res) => { profile.getProfile(req, res, db)});
+app.put("/profile", (req, res) => { profile.updateProfile(req, res, db)});
 
 
 app.listen(port, () => {
