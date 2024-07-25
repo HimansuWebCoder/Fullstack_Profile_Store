@@ -14,11 +14,13 @@ const profile = require("./controllers/profile");
 const db = knex({
   client: 'pg',
   connection: {
-    host: '127.0.0.1',
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+    host: process.env.DATABASE_HOST,
     port: 5432,
-    user: 'postgres',
-    password: 'test',
-    database: 'profile-store',
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PW,
+    database: process.env.DATABASE_DB,
   },
 });
 
@@ -55,7 +57,6 @@ app.delete("/users", (req, res) => { users.deleteUsers(req, res, db)});
 app.get("/profile", (req, res) => { profile.getProfile(req, res, db)});
 app.put("/profile", (req, res) => { profile.updateProfile(req, res, db)});
 
-const DATABASE_URL = process.env.DATABASE_URL
-app.listen(3000, () => {
-	console.log(`Your website hosted at ${DATABASE_URL}`);
+app.listen(process.env.PORT || 3000, () => {
+	console.log(`Your website hosted at ${process.env.PORT}`);
 });
