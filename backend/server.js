@@ -53,10 +53,9 @@ app.get("/users/edit/:id", (req, res) => { users.getUserSkill(req, res, db)});
 app.put("/users", (req, res) => { users.updateUsers(req, res, db)});
 app.delete("/users", (req, res) => { users.deleteUsers(req, res, db)});
 app.get("/profile", (req, res) => { profile.getProfile(req, res, db)});
-app.get("/profile", (req, res) => { profile.getProfile(req, res, db)});
 app.put("/profile", (req, res) => { profile.updateProfile(req, res, db)});
 
-
-app.listen(port, () => {
-	console.log(`Your website hosted at ${port}`);
+const DATABASE_URL = process.env.DATABASE_URL
+app.listen(3000, () => {
+	console.log(`Your website hosted at ${DATABASE_URL}`);
 });

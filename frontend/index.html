@@ -178,7 +178,7 @@
               let isLoaded = false;
 
               setTimeout(() => {
-                fetch("http://localhost:3000/profile")
+                fetch("https://fullstack-profile-store-2.onrender.com//profile")
                   .then(res => res.json())
                   .then(users => {
                     if (users.length) {
@@ -202,7 +202,7 @@
 
          showProfile()
 
-    	fetch("http://localhost:3000/users")
+    	fetch("https://fullstack-profile-store-2.onrender.com//users")
     	.then(res => res.json())
     	.then((users, i) => {
             // All skills container box    		

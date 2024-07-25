@@ -102,7 +102,7 @@
     	const skillsEditContainer = document.querySelector("#skills-edit-container");
     	const redirectBtn = document.querySelector("#redirect-arrow-icon");
 
-         fetch("http://localhost:3000/users")
+         fetch("https://fullstack-profile-store-2.onrender.com//users")
          .then(res => res.json())
          .then((users, i) => {
             users.forEach((user, j) => { 
@@ -128,7 +128,7 @@
 
                  updateBtn.addEventListener("click", () => {
                     if (inputContainer.value !== "") {  
-                    fetch("http://localhost:3000/users", {
+                    fetch("https://fullstack-profile-store-2.onrender.com//users", {
                         method: "put",
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({id: user.id, name: inputContainer.value})
@@ -141,7 +141,7 @@
                         delContainer.appendChild(delBtn);
                         delBtn.textContent = "Delete";
                     delBtn.addEventListener("click", () => {
-                        fetch("http://localhost:3000/users", {
+                        fetch("https://fullstack-profile-store-2.onrender.com//users", {
                             method: "delete",
                             headers: {"Content-Type": "application/json"},
                             body: JSON.stringify({id : user.id})
