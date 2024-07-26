@@ -75,7 +75,7 @@
 
     	submitBtn.addEventListener("click", () => {
     		if (skillEditorInput.value !== "") {
-    		fetch("https://fullstack-profile-store-2.onrender.com//add-section", {
+    		fetch("https://fullstack-profile-store-2.onrender.com/add-section", {
     			method: "post",
     			headers: {"Content-Type": "application/json"},
     			body: JSON.stringify({name: skillEditorInput.value})
