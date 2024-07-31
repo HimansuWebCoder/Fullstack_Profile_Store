@@ -28,11 +28,17 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 app.use(cors())
 
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
+app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
 
-app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
-})
+
+// app.get("/", (req, res) => {
+// 	res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
+// })
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
 
 app.get("/edit-profile", (req, res) => {
 	res.sendFile(path.join(__dirname, "..", "frontend", "edit-profile.html"));
