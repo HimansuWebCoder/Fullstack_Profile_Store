@@ -37,6 +37,11 @@ app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
 // 	res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
 // })
 
+app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
+
+app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
+
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
