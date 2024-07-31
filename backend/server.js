@@ -32,6 +32,7 @@ app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
 app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
 
 
+// for outside of the current directory if frontend exist in another dir
 // app.get("/", (req, res) => {
 // 	res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
 // })
@@ -41,15 +42,15 @@ app.get('/', (req, res) => {
 });
 
 app.get("/edit-profile", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "frontend", "edit-profile.html"));
+	res.sendFile(path.join(__dirname, "../frontend/edit-profile.html"));
 })
 
 app.get("/add-section", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "frontend", "add-section.html"));
+	res.sendFile(path.join(__dirname,"../frontend/add-section.html"));
 })
 
 app.get("/edit-skills-section", (req, res) => {
-	res.sendFile(path.join(__dirname, "..", "frontend", "edit-skills-section.html"));
+	res.sendFile(path.join(__dirname, "../frontend/edit-skills-section.html"));
 })
 
 
