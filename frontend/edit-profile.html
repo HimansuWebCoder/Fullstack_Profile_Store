@@ -4,66 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Profile-Edit</title>
-	<style>
-	body {
-	      background-color: rgb(103, 203, 255);
-	}
-		  
-	#profile-edit-container {
-           max-width: 400px;
-           height: auto;
-           margin: auto;
-           padding:10px;
-           border: 1px solid black;
-           border-style: dotted;
-           background-color: hsla(145, 60%, 70%, 0.4);
-	}
-
-	#redirectContainer {
-	      display: flex;
-	      flex-wrap: wrap;
-	      justify-content: flex-start;
-           width: 100%;
-           height: 30px;
-	}
-
-	#redirect-arrow-icon {
-	      width: 30px;
-	      height: 30px;
-	      cursor: pointer;
-	}
-
-	#input-container {
-		max-width: 95%;
-		min-height: 70%;
-          margin-top: 5px;
-          border: 1px solid black;
-          padding: 10px;
-	}
-
-	.inputContent {
-          width: 95%;
-          height: 2rem;
-          font-size: 1.5rem;
-          padding: 5px;
-	}
-
-	.label {
-          font-size: 2rem;
-	  }
-
-	#saveBtn {
-          margin: right;
-          font-size: 2rem;
-          margin-top: 5px;
-          cursor: pointer;
-	}
-        
-    #redirect-span {
-         cursor: pointer;
-    }
-
-	</style>
+	<link rel="stylesheet" type="text/css" href=".styles/edit-profile.css">
 </head>
 <body>
      <div id="profile-edit-container">
@@ -82,28 +23,6 @@
      	</div>
      	<button id="saveBtn" type="submit">Save</button>
      </div>
-     <script>
-     	const profileEditContainer = document.querySelector("#profile-edit-container");
-     	const redirectBtn = document.querySelector("#redirect-arrow-icon");
-     	const profileImageEditor = document.querySelector("#profile-img");
-     	const profileNameEditor = document.querySelector("#name");
-     	const profilePassionEditor = document.querySelector("#passion");
-     	const submitBtn = document.querySelector("#saveBtn");
-
-     	redirectBtn.addEventListener("click", () => {
-     		window.location = "/";
-     	})
-
-     	submitBtn.addEventListener("click", () => {
-     		if (profileNameEditor.value !== "" && profilePassionEditor.value !== "" ) {
-     		fetch("https://fullstack-profile-store-2.onrender.com/profile", {
-     			method: "put",
-     			headers: {"Content-Type": "application/json"},
-     			body: JSON.stringify({id: "1", name: profileNameEditor.value, passion: profilePassionEditor.value, image: profileImageEditor.value})
-     		})
-     		window.location = "/";
-     		}
-     	})
-     </script>
+    <script type="./script/edit-profile.js"></script>
 </body>
 </html>
