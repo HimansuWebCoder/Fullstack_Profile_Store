@@ -6,9 +6,10 @@ const path = require("path");
 const app = express();
 
 
-const add_section = require('./controllers/section');
-const users = require("./controllers/users");
-const profile = require("./controllers/profile");
+const add_section = require('./controllers/section.controllers');
+const users = require("./controllers/users.controllers");
+const profile = require("./controllers/profile.controllers"); 
+
 
 const db = knex({
   client: 'pg',
@@ -32,11 +33,6 @@ app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
 app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
 
 
-// for outside of the current directory if frontend exist in another dir
-// app.get("/", (req, res) => {
-// 	res.sendFile(path.join(__dirname, "..", "frontend", "index.html"));
-// })
-
 app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
 
 app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
@@ -57,6 +53,10 @@ app.get("/add-section", (req, res) => {
 app.get("/edit-skills-section", (req, res) => {
 	res.sendFile(path.join(__dirname, "../frontend/edit-skills-section.html"));
 })
+
+const usersRouter = express.Router();
+
+usersRouter.get('/users', )
 
 
 // post skills (post)
