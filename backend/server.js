@@ -46,9 +46,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/profile-admin.html'));
 });
 
-// app.get('/profile-admin', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/profile-admin.html'));
-// })
+app.get('/profile-admin', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/profile-admin.html'));
+})
 
 app.get("/edit-profile", (req, res) => {
 	res.sendFile(path.join(__dirname, "../frontend/edit-profile.html"));
