@@ -6,9 +6,9 @@ const path = require("path");
 const app = express();
 
 
-const add_section = require('./controllers/section.controllers');
-const users = require("./controllers/users.controllers");
-const profile = require("./controllers/profile.controllers"); 
+const add_section = require('./controllers/section.controller');
+const users = require("./controllers/users.controller");
+const profile = require("./controllers/profile.controller"); 
 
 
 const db = knex({
@@ -62,9 +62,6 @@ app.get("/edit-skills-section", (req, res) => {
 	res.sendFile(path.join(__dirname, "../frontend/edit-skills-section.html"));
 })
 
-const usersRouter = express.Router();
-
-usersRouter.get('/users', )
 
 
 // post skills (post)
