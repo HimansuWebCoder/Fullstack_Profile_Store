@@ -38,9 +38,17 @@ app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
 app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
 
 
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/index.html'));
+// });
+
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/profile-admin.html'));
 });
+
+// app.get('/profile-admin', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/profile-admin.html'));
+// })
 
 app.get("/edit-profile", (req, res) => {
 	res.sendFile(path.join(__dirname, "../frontend/edit-profile.html"));
