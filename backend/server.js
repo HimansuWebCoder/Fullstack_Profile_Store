@@ -1,79 +1,48 @@
 const express  = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const knex = require("knex");
 const path = require("path");
 const app = express();
 
+// Import routes
+const profileRouter = require("./routes/profile.router");
+const usersRouter = require("./routes/users.router");
+const addSectionRouter = require("./routes/add-section.router");
+const indexRouter = require("./routes/index.router");
+const editProfileRouter = require("./routes/edit-profile.router");
+const editSkillsSectionRouter = require("./routes/edit-skills-section.router");
+const profileAdminRouter = require("./routes/profile-admin.router");
+const sectionRouter = require("./routes/section.router");
 
-const add_section = require('./controllers/section.controller');
-const users = require("./controllers/users.controller");
-const profile = require("./controllers/profile.controller"); 
-
-
-const db = knex({
-  client: 'pg',
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false },
-    host: process.env.DATABASE_HOST,
-    port: 5432,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PW,
-    database: process.env.DATABASE_DB,
-  },
-});
-
-
+// Middleware
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 app.use(cors())
 
+// Logging middleware
+app.use((req, res, next) => {
+   const start = Date.now();
+   next();
+   const delta = Date.now() - start; 
+   console.log(`${req.method} ${req.baseUrl} ${req.url} ${delta}ms`);
+}) 
+
+// Static files
 app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
 app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
 
+// Routes
+app.use('/', indexRouter);
+app.use('/profile-admin', profileAdminRouter);
+app.use('/edit-profile', editProfileRouter);
+app.use('/add-section', sectionRouter);
+app.use('/edit-skills-section', editSkillsSectionRouter);
 
-app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
+app.use('/users', usersRouter);
+app.use('/add-section', addSectionRouter);
+app.use('/profile', profileRouter);
 
-app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
-
-
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/index.html'));
-// });
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-
-app.get('/profile-admin', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/profile-admin.html'));
-})
-
-app.get("/edit-profile", (req, res) => {
-	res.sendFile(path.join(__dirname, "../frontend/edit-profile.html"));
-})
-
-app.get("/add-section", (req, res) => {
-	res.sendFile(path.join(__dirname,"../frontend/add-section.html"));
-})
-
-app.get("/edit-skills-section", (req, res) => {
-	res.sendFile(path.join(__dirname, "../frontend/edit-skills-section.html"));
-})
-
-
-
-// post skills (post)
-app.get("/users", (req, res) => { users.getUsers(req, res, db)});
-app.put("/users", (req, res) => { users.updateUsers(req, res, db)});
-app.get("/users/:id", (req, res) => { users.getUsersId(req, res, db)});
-app.get("/users/edit/:id", (req, res) => { users.getUserSkill(req, res, db)});
-app.delete("/users", (req, res) => { users.deleteUsers(req, res, db)});
-app.get("/profile", (req, res) => { profile.getProfile(req, res, db)});
-app.put("/profile", (req, res) => { profile.updateProfile(req, res, db)});
-app.post("/add-section", (req, res) => { add_section.postSection(req, res, db) });
-
+// Start server
 app.listen(process.env.PORT || 3000, () => {
 	console.log(`Your website hosted at ${process.env.PORT || 3000}`);
 });

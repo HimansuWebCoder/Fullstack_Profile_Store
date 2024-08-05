@@ -32,7 +32,9 @@ const skillsEditContainer = document.querySelector("#skills-edit-container");
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({id: user.id, name: inputContainer.value})
                     })
-                    window.location.reload()
+                    setTimeout(() => {
+                        window.location.reload()
+                        }, 2000)
                     }
                  })
 
@@ -45,7 +47,13 @@ const skillsEditContainer = document.querySelector("#skills-edit-container");
                             headers: {"Content-Type": "application/json"},
                             body: JSON.stringify({id : user.id})
                         })
+                        .then(res => res.json())
+                        .then(x => {
+                            console.log(x);
+                        })
+                        setTimeout(() => {
                         window.location.reload()
+                        }, 2000)
                     })
                 })
             
