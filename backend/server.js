@@ -37,7 +37,6 @@ app.use('/profile-admin', profileAdminRouter);
 app.use('/edit-profile', editProfileRouter);
 app.use('/add-section', sectionRouter);
 app.use('/edit-skills-section', editSkillsSectionRouter);
-
 app.use('/users', usersRouter);
 app.use('/add-section', addSectionRouter);
 app.use('/profile', profileRouter);
@@ -46,3 +45,10 @@ app.use('/profile', profileRouter);
 app.listen(process.env.PORT || 3000, () => {
 	console.log(`Your website hosted at ${process.env.PORT || 3000}`);
 });
+
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json());
+const usersRouter = require("./routes/users.router");
+
+app.use('/users', usersRouter);
