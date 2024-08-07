@@ -45,10 +45,3 @@ app.use('/profile', profileRouter);
 app.listen(process.env.PORT || 3000, () => {
 	console.log(`Your website hosted at ${process.env.PORT || 3000}`);
 });
-
-
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json());
-const usersRouter = require("./routes/users.router");
-
-app.use('/users', usersRouter);
