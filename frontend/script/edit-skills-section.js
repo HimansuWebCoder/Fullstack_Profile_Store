@@ -42,7 +42,7 @@ const skillsEditContainer = document.querySelector("#skills-edit-container");
                         delContainer.appendChild(delBtn);
                         delBtn.textContent = "Delete";
                     delBtn.addEventListener("click", () => {
-                        fetch("https://fullstack-profile-store-2.onrender.com/users", {
+                        fetch(`https://fullstack-profile-store-2.onrender.com/users/${user.id}`, {
                             method: "delete",
                             headers: {"Content-Type": "application/json"},
                             body: JSON.stringify({id : user.id})
@@ -50,6 +50,7 @@ const skillsEditContainer = document.querySelector("#skills-edit-container");
                         setTimeout(() => {
                         window.location.reload()
                         }, 1000)
+                        // console.log(user.id)
                     })
                 })
             

@@ -37,14 +37,13 @@ function updateUser(req, res, db) {
 // delete users
 function deleteUser(req, res, db) {
     // const { id } = req.body;
-    const { id } = req.params;
+    const { id } = req.params.id;
     db('users')
         .where({ id })
         .del()
         .then(() => res.status(200).send('User deleted successfully')) 
         .catch(error => res.status(500).json({ error }));
 }
-
 
 // get users skill
  function getUserSkill(req, res, db) {

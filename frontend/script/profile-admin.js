@@ -62,10 +62,12 @@ const profileContainer = document.querySelector("#profile-container");
                 editSkillBtn.classList.add("edit-skills-btn-style")
                 editSkillBtn.setAttribute("class", "edit-btns")
 
+
                 editSkillBtn.addEventListener("click", () => {
                 	 
                 window.location = "edit-skills-section";
               })
+
     	})
     })
 

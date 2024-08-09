@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 app.use('/script', express.static(path.join(__dirname, '../frontend/script')));
 app.use('/styles', express.static(path.join(__dirname, '../frontend/styles')));
 
+
 // Routes
 app.use('/', indexRouter);
 app.use('/profile-admin', profileAdminRouter);
@@ -41,7 +42,10 @@ app.use('/users', usersRouter);
 app.use('/add-section', addSectionRouter);
 app.use('/profile', profileRouter);
 
+
 // Start server
 app.listen(process.env.PORT || 3000, () => {
 	console.log(`Your website hosted at ${process.env.PORT || 3000}`);
 });
+
+  
