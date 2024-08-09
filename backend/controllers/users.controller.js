@@ -37,7 +37,7 @@ function updateUser(req, res, db) {
 // delete users
 function deleteUser(req, res, db) {
     // const { id } = req.body;
-    const { id } = req.params.id;
+    const id = req.params.id;
     db('users')
         .where({ id })
         .del()
