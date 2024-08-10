@@ -38,16 +38,13 @@ function updateUser(req, res, db) {
 
 // delete users
 function deleteUser(req, res, db) {
-<<<<<<< HEAD
     // const { id } = req.params // this works because req.params is an object {id: "123"} like this and destructuring use
     // const { id } = req.params.id // Incorrect,because req.params.id is a string not an object req.params.id = "123"
     // const { id } = Number(req.params.id) // this also works because if you want number id instead of string id
     // const id = Number(req.params.id) // correct 
-    const { id } = req.params;
-=======
-    // const { id } = req.body;
+    // const { id } = req.params;
+    // const { id } = req.body; // this is incorrect because when user set id and send request then this is correct so ..
     const id = req.params.id;
->>>>>>> refs/remotes/origin/main
     db('users')
         .where({ id })
         .del()
