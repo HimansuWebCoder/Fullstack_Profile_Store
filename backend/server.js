@@ -20,12 +20,12 @@ app.use(bodyParser.json());
 app.use(cors())
 
 // Logging middleware
-app.use((req, res, next) => {
-   const start = Date.now();
-   next();
-   const delta = Date.now() - start; 
-   console.log(`${req.method} ${req.baseUrl} ${req.url} ${delta}ms`);
-}) 
+// app.use((req, res, next) => {
+//    const start = Date.now();
+//    next();
+//    const delta = Date.now() - start; 
+//    console.log(`${req.method} ${req.baseUrl} ${req.params} ${req.url} ${delta}ms`);
+// }) 
 
 // Static files
 app.use('/script', express.static(path.join(__dirname, '../frontend/script')));

@@ -24,8 +24,10 @@ function getUsersId(req, res, db) {
 
 // update users
 function updateUser(req, res, db) {
-    const { id, name } = req.body;
+    // const { id, name } = req.body;
     // const { id, name } = req.params;
+    const { id } = req.params;
+    const { name } = req.body;
     db('users')
        .where({ id })
        .update({ name })
@@ -36,8 +38,11 @@ function updateUser(req, res, db) {
 
 // delete users
 function deleteUser(req, res, db) {
-    // const { id } = req.body;
-    const { id } = req.params.id;
+    // const { id } = req.params // this works because req.params is an object {id: "123"} like this and destructuring use
+    // const { id } = req.params.id // Incorrect,because req.params.id is a string not an object req.params.id = "123"
+    // const { id } = Number(req.params.id) // this also works because if you want number id instead of string id
+    // const id = Number(req.params.id) // correct 
+    const { id } = req.params;
     db('users')
         .where({ id })
         .del()

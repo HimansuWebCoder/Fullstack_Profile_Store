@@ -32,30 +32,26 @@ const skillsEditContainer = document.querySelector("#skills-edit-container");
                         headers: {"Content-Type": "application/json"},
                         body: JSON.stringify({id: user.id, name: inputContainer.value})
                     })
-                    setTimeout(() => {
                         window.location.reload()
-                        }, 1000)
                     }
                  })
 
+                        const id = Number
                         const delBtn = document.createElement("button");
                         delContainer.appendChild(delBtn);
                         delBtn.textContent = "Delete";
                     delBtn.addEventListener("click", () => {
+                        console.log(user.id)
                         fetch(`https://fullstack-profile-store-2.onrender.com/users/${user.id}`, {
-                            method: "delete",
-                            headers: {"Content-Type": "application/json"},
-                            body: JSON.stringify({id : user.id})
+                            method: "delete"
                         })
-                        setTimeout(() => {
                         window.location.reload()
-                        }, 1000)
-                        // console.log(user.id)
                     })
                 })
             
 
          })
+
 
         redirectBtn.addEventListener("click", () => {
             window.location = "/";
