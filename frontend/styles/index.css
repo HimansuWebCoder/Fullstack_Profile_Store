@@ -64,15 +64,17 @@
 
 		#add-section {
 		   display: block;
-	     width: 100%;
+	     width: 50%;
 		   height: auto;
 		   margin: auto;
+		   margin-top: 5px;
        text-align: center;
-       background-color: rgba(100, 100, 244, 0.9);
+       border-radius: 5%;
+       background-color: rgba(200, 10, 244, 0.8);
        color:white;
        border: none;
        font-weight: bold;
-       font-size: 2rem;
+       font-size: 1.5rem;
        cursor: pointer;
 		}
 
@@ -132,4 +134,10 @@
 	   @keyframes spin {
 	     0% { transform: rotate(0deg); }
 	     100% { transform: rotate(360deg); }
+	   }
+
+	   #skill_add_button_image {
+	   	width: 40px;
+	   	height:30px;
+	   	margin-top:10px;
 	   }
