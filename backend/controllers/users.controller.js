@@ -22,6 +22,7 @@ function getUsersId(req, res, db) {
     })
 }
 
+
 // update users
 function updateUser(req, res, db) {
     // const { id, name } = req.body;

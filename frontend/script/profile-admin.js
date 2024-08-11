@@ -65,7 +65,10 @@ const profileContainer = document.querySelector("#profile-container");
 
                 editSkillBtn.addEventListener("click", () => {
                 	 
-                window.location = "edit-skills-section";
+                // window.location = "edit-skills-section";
+                  // window.location.href = `users/${user.id}/delete`
+                  // window.location.href = `http://localhost:3000/skill-edit/${user.id}/delete`
+                  window.location.href = `skill-edit/${user.id}/delete`
               })
 
     	})
