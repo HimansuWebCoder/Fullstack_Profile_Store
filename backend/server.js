@@ -14,7 +14,7 @@ const editSkillsSectionRouter = require("./routes/edit-skills-section.router");
 const profileAdminRouter = require("./routes/profile-admin.router");
 const sectionRouter = require("./routes/section.router");
 
-// const skillEditRouter = require("./routes/skill-edit.router");
+const skillEditRouter = require("./routes/skill-edit.router");
 
 
 // Middleware
@@ -42,15 +42,16 @@ app.use('/edit-profile', editProfileRouter);
 app.use('/add-section', sectionRouter);
 app.use('/edit-skills-section', editSkillsSectionRouter);
 
-// app.use('/users', skillEditRouter);
 
 app.use('/users', usersRouter);
 app.use('/add-section', addSectionRouter);
 app.use('/profile', profileRouter);
 
-app.get('/skill-edit/:id/delete', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/skill_edit.html'));
-});
+// app.get('/skill-edit/:id/delete', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../frontend/skill_edit.html'));
+// });
+
+app.use('/skill-edit', skillEditRouter);
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
