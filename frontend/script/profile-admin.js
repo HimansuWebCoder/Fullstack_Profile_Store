@@ -7,7 +7,7 @@ const profileContainer = document.querySelector("#profile-container");
     	const addSectionBtn = document.querySelector("#add-section");
     	const loader = document.querySelector(".loader");
 
-    	// By Default name, passion is there you can edit this according to your name and passin
+    	// By Default name, passion/profession is there you can edit this according to your name and passion/profession
 
 
          function showProfile() {
@@ -56,19 +56,25 @@ const profileContainer = document.querySelector("#profile-container");
     		 	      skillContainer.textContent = users[i].name;
     		 	      skillContainer.classList.add("skills-container");
                 
-    		 	const editSkillBtn = document.createElement("button");
+    		 	      const editSkillBtn = document.createElement("button");
                 skillContainer.appendChild(editSkillBtn);
                 editSkillBtn.textContent = "Edit"
                 editSkillBtn.classList.add("edit-skills-btn-style")
                 editSkillBtn.setAttribute("class", "edit-btns")
 
+                const delSkillBtn = document.createElement("button");
+                skillContainer.appendChild(delSkillBtn);
+                delSkillBtn.textContent = "Delete"
+                delSkillBtn.classList.add("edit-skills-btn-style")
+                delSkillBtn.setAttribute("class", "del-btns")
 
-                editSkillBtn.addEventListener("click", () => {
-                	 
-                // window.location = "edit-skills-section";
-                  // window.location.href = `users/${user.id}/delete`
-                  // window.location.href = `http://localhost:3000/skill-edit/${user.id}/delete`
-                  window.location.href = `skill-edit/${user.id}/delete`
+
+              editSkillBtn.addEventListener("click", () => {
+                  window.location.href = `skill_edit/${user.id}/edit`
+              })
+
+              delSkillBtn.addEventListener("click", () => {
+                  window.location.href = `skill_delete/${user.id}/delete`
               })
 
     	})

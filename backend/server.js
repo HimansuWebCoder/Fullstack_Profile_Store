@@ -14,6 +14,7 @@ const editSkillsSectionRouter = require("./routes/edit-skills-section.router");
 const profileAdminRouter = require("./routes/profile-admin.router");
 const sectionRouter = require("./routes/section.router");
 
+const skillDeleteRouter = require("./routes/skill-delete.router");
 const skillEditRouter = require("./routes/skill-edit.router");
 
 
@@ -51,7 +52,8 @@ app.use('/profile', profileRouter);
 //   res.sendFile(path.join(__dirname, '../frontend/skill_edit.html'));
 // });
 
-app.use('/skill-edit', skillEditRouter);
+app.use('/skill_delete', skillDeleteRouter);
+app.use('/skill_edit', skillEditRouter);
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {

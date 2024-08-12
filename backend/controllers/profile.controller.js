@@ -21,7 +21,9 @@ const updateProfile = (req, res, db) => {
        })
 }
 
+
+
 module.exports = {
-    getProfile: getProfile,
-    updateProfile: updateProfile
+    getProfile,
+    updateProfile,
 }

@@ -7,4 +7,6 @@ const profileRouter = express.Router();
 profileRouter.get("/", (req, res) => { profile.getProfile(req, res, db)});
 profileRouter.put("/", (req, res) => { profile.updateProfile(req, res, db)});
 
+
+
 module.exports = profileRouter;

@@ -16,6 +16,8 @@ const profileEditContainer = document.querySelector("#profile-edit-container");
      			headers: {"Content-Type": "application/json"},
      			body: JSON.stringify({id: "1", name: profileNameEditor.value, passion: profilePassionEditor.value, image: profileImageEditor.value})
      		})
-     		window.location = "/";
+            .then(() => {  
+     		   window.location = "/";
+            })
      		}
      	})
