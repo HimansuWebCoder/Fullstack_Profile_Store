@@ -81,7 +81,7 @@ const profileContainer = document.querySelector("#profile-container");
     })
 
         profileEditBtn.addEventListener("click", () => {
-        	window.location = "edit-profile";
+        	window.location = "imageUpload";
         })
 
         addSectionBtn.addEventListener("click", () => {
