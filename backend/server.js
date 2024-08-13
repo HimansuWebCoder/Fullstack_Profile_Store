@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const db = require("./models/db");
 
 const multer = require('multer');
 // const path = require('path');
@@ -24,7 +25,6 @@ const imageUploadRouter = require("./routes/imageUpload.router");
 const skillDeleteRouter = require("./routes/skill-delete.router");
 const skillEditRouter = require("./routes/skill-edit.router");
 
-const db = require("./models/db");
 
 
 // Middleware
@@ -38,7 +38,8 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.original + '-' + uniqueSuffix)
+    // cb(null, file.originalname + '-' + uniqueSuffix)
+    cb(null, file.originalname)
   }
 })
 
@@ -82,33 +83,54 @@ app.use('/add-section', addSectionRouter);
 app.use('/skill_delete', skillDeleteRouter);
 app.use('/skill_edit', skillEditRouter);
 
-app.post('/profile', upload.single('avatar'), function (req, res, next) {
-   const profileData = {
-    image: `/uploads/${req.file.originalname}`
-  };
-  
-  console.log(req.file);
-  // Assuming you want to update an existing profile, you might have an ID or some identifier
-  // const profileId = req.body.id; // Replace 'id' with the actual identifier you use
 
-  // // Update the profile table with the new image path
-  // db('profile')
-  //   .returning('*') // Returns the inserted row(s)
-  //   .update(profileData)
-  //   .then(newProfile => {
-  //     res.status(201).json({ message: 'Profile created successfully', data: newProfile[0] });
-  //   })
-  //   .catch(err => {
-  //     console.error('Error inserting profile into database:', err);
-  //     res.status(500).json({ error: 'Failed to create profile in database' });
-  //   });
+console.log('Database Password:', process.env.DB_PASSWORD); // Ensure this is a string
+
+
+// let's try using database
+app.post('/profile', upload.single('avatar'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+   console.log('File uploaded:', req.file);
+  console.log('Request body:', req.body);
+  
+  const imagePath = `/uploads/${req.file.filename}`;
+  
+  db('profiles')
+  .insert({ image: imagePath })
+  .onConflict('image') // Replace with your unique column
+  .merge() // Update the existing entry if there's a conflict
+  .returning('image')
+  .then(newProfile => {
+    res.status(200).json({ message: 'Profile updated successfully', image: newProfile[0] });
+  })
+  .catch(err => {
+    console.error('Error upserting profile in database:', err.message);
+    res.status(500).json({ error: 'Failed to upsert profile in database', details: err.message });
+  });
+
 });
 
-// db('profile').select('*')
-//   .then(profiles => console.log(profiles))
-//   .catch(err => console.error('Database connection issue:', err));
 
+// app.get('/profile/:id', (req, res) => {
+//   const profileId = req.params.id;
 
+//   db('profiles')
+//     .where({ id: profileId })
+//     .first() // Fetch only the first matching profile
+//     .then(profile => {
+//       if (!profile) {
+//         return res.status(404).json({ error: 'Profile not found' });
+//       }
+//       res.json(profile); // Send the profile data including the image path
+//     })
+//     .catch(err => {
+//       console.error('Error fetching profile from database:', err);
+//       res.status(500).json({ error: 'Failed to fetch profile from database' });
+//     });
+// });
 
 
 

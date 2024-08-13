@@ -11,9 +11,11 @@
   <input type="file" id="fileInput" />
   <button type="submit">Upload</button>
 </form>
+<img src="">
 
 <script>
     const uploadForm = document.querySelector("#uploadForm");
+    const image = document.querySelector("img");
 
     uploadForm.addEventListener("submit", (e) => {
         e.preventDefault(); // Prevent the default form submission
@@ -31,6 +33,8 @@
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
+      // Display the uploaded image
+      image.src = data.image;
     })
     .catch(error => {
       console.error('Error:', error);
