@@ -3,10 +3,11 @@ const profileContainer = document.querySelector("#profile-container");
     	const profileContentContainer = document.querySelector("#profile-content-container");
     	const profileHeader = document.querySelector("#profile-header");
     	const profileIntro = document.querySelector("#profile-intro");
-    	const profileEditBtn = document.querySelector("#profile-edit-icon");
+    	const profileEditBtn = document.querySelector(".profile-edit-icon");
     	const addSectionBtn = document.querySelector("#add-section");
     	const loader = document.querySelector(".loader");
 
+      const uploadProfilePhoto = document.querySelector("#upload-profile-photo");
     	// By Default name, passion/profession is there you can edit this according to your name and passion/profession
 
 
@@ -24,7 +25,6 @@ const profileContainer = document.querySelector("#profile-container");
                       users.forEach(user => {
                         profileHeader.textContent = user.name;
                         profileIntro.textContent = user.passion;
-                        profileImg.src = user.image;
                         isLoaded = true; // Data loaded successfully
                       });
                     }
@@ -33,6 +33,21 @@ const profileContainer = document.querySelector("#profile-container");
                     if (isLoaded) {
                     	profileContainer.style.display = "block";
                     	loader.style.display = "none"
+                    }
+                  });
+
+                   fetch("https://fullstack-profile-store-2.onrender.com/view")
+                  .then(res => res.json())
+                  .then(users => {
+                        console.log(users[users.length-1].image);
+                        // profileImg.src = users[users.length-1].image;
+                        // profileImg.src = '/' + users[users.length-1].image;
+                        profileImg.src = users[users.length-1].image;
+                  })
+                  .finally(() => {
+                    if (isLoaded) {
+                      profileContainer.style.display = "block";
+                      loader.style.display = "none"
                     }
                   });
             }
@@ -81,7 +96,11 @@ const profileContainer = document.querySelector("#profile-container");
     })
 
         profileEditBtn.addEventListener("click", () => {
-        	window.location = "imageUpload";
+        	window.location = "edit-profile";
+        }) 
+
+        uploadProfilePhoto.addEventListener("click", () => {
+          window.location = "imageUpload";
         })
 
         addSectionBtn.addEventListener("click", () => {

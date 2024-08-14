@@ -15,6 +15,24 @@ const profileContainer = document.querySelector("#profile-container");
 
               let isLoaded = false;
 
+              fetch("https://fullstack-profile-store-2.onrender.com/profile")
+                  .then(res => res.json())
+                  .then(users => {
+                    if (users.length) {
+                      users.forEach(user => {
+                        profileHeader.textContent = user.name;
+                        profileIntro.textContent = user.passion;
+                        isLoaded = true; // Data loaded successfully
+                      });
+                    }
+                  })
+                  .finally(() => {
+                    if (isLoaded) {
+                      profileContainer.style.display = "block";
+                      loader.style.display = "none"
+                    }
+                  });
+
 
                 fetch("https://fullstack-profile-store-2.onrender.com/view")
                   .then(res => res.json())
