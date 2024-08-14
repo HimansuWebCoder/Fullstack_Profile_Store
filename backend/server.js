@@ -121,7 +121,8 @@ app.post('/submit-file', upload.single('avatar'), (req, res) => {
   })
   .catch(error => {
     console.error('Database insert error:', error);
-    res.status(500).send('Failed to store image path in database');
+    // res.status(500).send('Failed to store image path in database');
+    res.status(500).sendFile(path.join(__dirname, '../frontend/index.html'));
   });
 });
 
