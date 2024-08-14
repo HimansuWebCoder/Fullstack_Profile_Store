@@ -15,17 +15,27 @@ const profileContainer = document.querySelector("#profile-container");
 
               let isLoaded = false;
 
-                fetch("https://fullstack-profile-store-2.onrender.com/profile")
+                fetch("https://fullstack-profile-store-2.onrender.com/view")
                   .then(res => res.json())
                   .then(users => {
-                    if (users.length) {
-                      users.forEach(user => {
-                        profileHeader.textContent = user.name;
-                        profileIntro.textContent = user.passion;
-                        profileImg.src = user.image;
-                        isLoaded = true; // Data loaded successfully
-                      });
-                    }
+                        console.log(users[users.length-1].image);
+                        // profileImg.src = users[users.length-1].image;
+                        // profileImg.src = '/' + users[users.length-1].image;
+                        profileImg.src = users[0].image;
+                        console.log(users[users.length-1].image)
+                        console.log(users[users.length-1]); // Logs the last user object
+
+                        // users.forEach((img, i) => {
+                        //   console.log(users[users.length-1].image);
+                        // })
+                    // if (users.length) {
+                    //   users.forEach((user, i) => {
+                    //     // profileHeader.textContent = user.name;
+                    //     // profileIntro.textContent = user.passion;
+                    //     profileImg.src = users[users.length-1].image;
+                    //     isLoaded = true; // Data loaded successfully
+                    //   });
+                    // }
                   })
                   .finally(() => {
                     if (isLoaded) {
@@ -56,3 +66,5 @@ const profileContainer = document.querySelector("#profile-container");
                 
     	})
     })
+
+// fetch('https://fullstack-profile-store-2.onrender.com/view')

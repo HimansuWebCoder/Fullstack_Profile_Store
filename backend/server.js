@@ -42,6 +42,7 @@ const skillEditRouter = require("./routes/skill-edit.router");
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 app.use(cors())
+app.use('/uploads', express.static('uploads'));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -123,17 +124,6 @@ app.post('/submit-file', upload.single('avatar'), (req, res) => {
     res.status(500).send('Failed to store image path in database');
   });
 });
-
-const getProfile = (req, res, db) => {
-    db.select('*').from('profile')
-        .then(users => {
-            res.json(users);
-        })
-        .catch(error => {
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        });
-}
 
 app.get("/view", (req, res) => {
   db.select('*').from('images')
