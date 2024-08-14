@@ -124,6 +124,27 @@ app.post('/submit-file', upload.single('avatar'), (req, res) => {
   });
 });
 
+const getProfile = (req, res, db) => {
+    db.select('*').from('profile')
+        .then(users => {
+            res.json(users);
+        })
+        .catch(error => {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+}
+
+app.get("/view", (req, res) => {
+  db.select('*').from('images')
+   .then(photos => {
+    res.send(photos);
+   })
+   .catch(error => {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+})
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
