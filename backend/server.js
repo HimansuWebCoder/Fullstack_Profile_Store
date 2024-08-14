@@ -84,7 +84,6 @@ app.use('/skill_delete', skillDeleteRouter);
 app.use('/skill_edit', skillEditRouter);
 
 
-console.log('Database Password:', process.env.DB_PASSWORD); // Ensure this is a string
 
 
 // let's try using database
@@ -96,29 +95,15 @@ app.post('/profile', upload.single('avatar'), (req, res) => {
    console.log('File uploaded:', req.file);
   console.log('Request body:', req.body);
   
-  const imagePath = `/uploads/${req.file.filename}`;
+  // const imagePath = `/uploads/${req.file.filename}`;
+  const images = {
+    image: `uploads/${req.file.filename}`
+  }
 
+  db('images')
+  .returning('*')
+  .insert(images)
 });
-
-
-// app.get('/profile/:id', (req, res) => {
-//   const profileId = req.params.id;
-
-//   db('profiles')
-//     .where({ id: profileId })
-//     .first() // Fetch only the first matching profile
-//     .then(profile => {
-//       if (!profile) {
-//         return res.status(404).json({ error: 'Profile not found' });
-//       }
-//       res.json(profile); // Send the profile data including the image path
-//     })
-//     .catch(err => {
-//       console.error('Error fetching profile from database:', err);
-//       res.status(500).json({ error: 'Failed to fetch profile from database' });
-//     });
-// });
-
 
 
 // Start server
