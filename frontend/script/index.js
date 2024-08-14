@@ -10,8 +10,8 @@ const profileContainer = document.querySelector("#profile-container");
 
          function showProfile() {
               // console.log("Loading...");
-         	// profileContainer.style.display = "none";
-         	// loader.style.display = "block";
+         	profileContainer.style.display = "none";
+         	loader.style.display = "block";
 
               let isLoaded = false;
 
