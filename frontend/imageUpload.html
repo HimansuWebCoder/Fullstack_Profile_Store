@@ -6,42 +6,10 @@
     <title>File Upload</title>
 </head>
 <body>
-    <h1>Upload your profile image</h1>
-  <form id="uploadForm">
-  <input type="file" id="fileInput" />
+    <h1>Upload Your Avatar</h1>
+    <form action="/submit-file" method="post" enctype="multipart/form-data">
+  <input type="file" name="avatar" />
   <button type="submit">Upload</button>
 </form>
-<img src="">
-
-<script>
-    const uploadForm = document.querySelector("#uploadForm");
-    const image = document.querySelector("img");
-
-    uploadForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // Prevent the default form submission
-
-  const formData = new FormData();
-  const fileInput = document.getElementById('fileInput');
-
-  if (fileInput.files.length > 0) {
-    formData.append('avatar', fileInput.files[0]);
-
-    fetch('/profile', {
-      method: 'POST',
-      body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Success:', data);
-      // Display the uploaded image
-      image.src = data.image;
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }
-})
-</script>
-
 </body>
 </html>

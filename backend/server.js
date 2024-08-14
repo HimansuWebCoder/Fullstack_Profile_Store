@@ -87,10 +87,10 @@ app.use('/skill_edit', skillEditRouter);
 
 
 // let's try using database
-app.post('/profile', upload.single('avatar'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: 'No file uploaded' });
-  }
+app.post('/submit-file', upload.single('avatar'), (req, res) => {
+  // if (!req.file) {
+  //   return res.status(400).json({ error: 'No file uploaded' });
+  // }
 
    console.log('File uploaded:', req.file);
   console.log('Request body:', req.body);
@@ -103,6 +103,14 @@ app.post('/profile', upload.single('avatar'), (req, res) => {
   db('images')
   .returning('*')
   .insert(images)
+  .then(data => {
+    console.log('Inserted data:', data);
+    res.status(200).send('Image path stored in database');
+  })
+  .catch(error => {
+    console.error('Database insert error:', error);
+    res.status(500).send('Failed to store image path in database');
+  });
 });
 
 
