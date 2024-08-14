@@ -15,13 +15,14 @@ const profileContainer = document.querySelector("#profile-container");
 
               let isLoaded = false;
 
+
                 fetch("https://fullstack-profile-store-2.onrender.com/view")
                   .then(res => res.json())
                   .then(users => {
                         console.log(users[users.length-1].image);
                         // profileImg.src = users[users.length-1].image;
                         // profileImg.src = '/' + users[users.length-1].image;
-                        profileImg.src = users[0].image;
+                        profileImg.src = users[users.length-1].image;
                         console.log(users[users.length-1].image)
                         console.log(users[users.length-1]); // Logs the last user object
 
