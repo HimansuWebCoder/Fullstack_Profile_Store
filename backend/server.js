@@ -97,19 +97,6 @@ app.post('/profile', upload.single('avatar'), (req, res) => {
   console.log('Request body:', req.body);
   
   const imagePath = `/uploads/${req.file.filename}`;
-  
-  db('profiles')
-  .insert({ image: imagePath })
-  .onConflict('image') // Replace with your unique column
-  .merge() // Update the existing entry if there's a conflict
-  .returning('image')
-  .then(newProfile => {
-    res.status(200).json({ message: 'Profile updated successfully', image: newProfile[0] });
-  })
-  .catch(err => {
-    console.error('Error upserting profile in database:', err.message);
-    res.status(500).json({ error: 'Failed to upsert profile in database', details: err.message });
-  });
 
 });
 
