@@ -4,22 +4,9 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 const db = require("./models/db");
+const upload = require("./config/multerConfig");
 
-const multer = require('multer');
-// const path = require('path');
-
-// const fs = require('fs');
-// const uploadsDir = path.join(__dirname, './uploads/');
-
-// if (!fs.existsSync(uploadsDir)) {
-//   fs.mkdirSync(uploadsDir, { recursive: true });
-//   console.log('Uploads directory created:', uploadsDir);
-// } else {
-//   console.log('Uploads directory exists:', uploadsDir);
-// }
-
-
-
+// const multer = require('multer');
 
 // Import routes
 const profileRouter = require("./routes/profile.router");
@@ -30,6 +17,7 @@ const editProfileRouter = require("./routes/edit-profile.router");
 const editSkillsSectionRouter = require("./routes/edit-skills-section.router");
 const profileAdminRouter = require("./routes/profile-admin.router");
 const sectionRouter = require("./routes/section.router");
+const uploadRouter = require("./routes/upload.router");
 
 const imageUploadRouter = require("./routes/imageUpload.router");
 
@@ -43,21 +31,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 app.use(cors())
 app.use('/uploads', express.static('uploads'));
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, './uploads/'))
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    // cb(null, file.originalname + '-' + uniqueSuffix)
-    cb(null, file.originalname)
-  }
-})
-
-const upload = multer({ storage: storage })
-
-module.exports = upload;
 
 // Logging middleware
 // app.use((req, res, next) => {
@@ -84,58 +57,16 @@ app.use('/edit-skills-section', editSkillsSectionRouter);
 
 app.use('/imageUpload', imageUploadRouter);
 
-
 app.use('/users', usersRouter);
 app.use('/add-section', addSectionRouter);
-
-// app.get('/skill-edit/:id/delete', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/skill_edit.html'));
-// });
 
 app.use('/skill_delete', skillDeleteRouter);
 app.use('/skill_edit', skillEditRouter);
 
 
-
-
 // let's try using database
-app.post('/submit-file', upload.single('avatar'), (req, res) => {
-  // if (!req.file) {
-  //   return res.status(400).json({ error: 'No file uploaded' });
-  // }
-
-   console.log('File uploaded:', req.file);
-  console.log('Request body:', req.body);
-  
-  // const imagePath = `/uploads/${req.file.filename}`;
-  const images = {
-    image: `uploads/${req.file.filename}`
-  }
-
-  db('images')
-  .returning('*')
-  .insert(images)
-  .then(data => {
-    console.log('Inserted data:', data);
-    // res.status(200).send('Image path stored in database');
-    res.status(500).sendFile(path.join(__dirname, '../frontend/index.html'));
-  })
-  .catch(error => {
-    console.error('Database insert error:', error);
-    res.status(500).send('Failed to store image path in database');
-  });
-});
-
-app.get("/view", (req, res) => {
-  db.select('*').from('images')
-   .then(photos => {
-    res.send(photos);
-   })
-   .catch(error => {
-            console.error(error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        });
-})
+app.use('/submit-file', upload.single('avatar'), uploadRouter);
+app.use("/", uploadRouter)
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
