@@ -2,10 +2,20 @@
 
 const cloudinary = require('cloudinary').v2;
 
-// Return "https" URLs by setting secure: true
+// Configure Cloudinary with your credentials
 cloudinary.config({
-  secure: true
+  cloud_name: 'dtiasevyl', // Replace with your Cloudinary cloud name
+  api_key: '411418114532979',       // Replace with your Cloudinary API key
+  api_secret: 'Y4GRLW3VVy2_RwrO9TV5YMfHKFI', // Replace with your Cloudinary API secret
+  secure: true                    // Use HTTPS URLs
 });
+
+// cloudinary.config({
+//   cloud_name: 'your_cloud_name', // Replace with your Cloudinary cloud name
+//   api_key: 'your_api_key',       // Replace with your Cloudinary API key
+//   api_secret: 'your_api_secret', // Replace with your Cloudinary API secret
+//   secure: true                    // Use HTTPS URLs
+// });
 
 // Log the configuration
 console.log(cloudinary.config());
