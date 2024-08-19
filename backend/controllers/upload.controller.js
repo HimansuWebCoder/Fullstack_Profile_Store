@@ -47,9 +47,19 @@
 const path = require("path");
 const cloudinary = require('cloudinary').v2;
 
+// cloudinary.config({
+//   secure: true,
+// });
+
 cloudinary.config({
-  secure: true,
+  cloud_name: 'dtiasevyl', // Replace with your Cloudinary cloud name
+  api_key: '411418114532979',       // Replace with your Cloudinary API key
+  api_secret: 'Y4GRLW3VVy2_RwrO9TV5YMfHKFI', // Replace with your Cloudinary API secret
+  secure: true                    // Use HTTPS URLs
 });
+
+// Log the configuration
+console.log(cloudinary.config());
 
 async function uploadPost(req, res, db) {
   try {
