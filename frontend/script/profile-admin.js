@@ -1,4 +1,4 @@
-const profileContainer = document.querySelector("#profile-container");
+      const profileContainer = document.querySelector("#profile-container");
     	const profileImg = document.querySelector("#profile-image");
     	const profileContentContainer = document.querySelector("#profile-content-container");
     	const profileHeader = document.querySelector("#profile-header");
