@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const db = require("./config/db");
+// const db = require("./config/db");
 const upload = require("./config/multerConfig");
 
 // const multer = require('multer');

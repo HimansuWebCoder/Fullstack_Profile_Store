@@ -5,7 +5,7 @@ const {
 } = require("../models/profile.model");
 
 // get user profile
-const getProfile = (req, res, db) => {
+const getProfile = (req, res) => {
     getUserProfileModel()
         .then((users) => {
             res.json(users);
@@ -17,7 +17,7 @@ const getProfile = (req, res, db) => {
 };
 
 // update user profile
-const updateProfile = (req, res, db) => {
+const updateProfile = (req, res) => {
     const { id, name, passion, image } = req.body;
     updateUserProfileModel().then((user) => {
         res.json(user);

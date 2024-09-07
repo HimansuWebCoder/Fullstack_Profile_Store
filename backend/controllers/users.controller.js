@@ -7,7 +7,7 @@ const {
 } = require("../models/users.model");
 
 // get users
-function getUsers(req, res, db) {
+function getUsers(req, res) {
     getUsersModel()
         .then((users) => {
             res.status(200).json(users);
@@ -19,7 +19,7 @@ function getUsers(req, res, db) {
 }
 
 // get users id
-function getUsersId(req, res, db) {
+function getUsersId(req, res) {
     const { id } = req.params;
     getUsersIdModel().then((user) => {
         res.status(200).json(user);
@@ -27,7 +27,7 @@ function getUsersId(req, res, db) {
 }
 
 // update users
-function updateUser(req, res, db) {
+function updateUser(req, res) {
     const { id } = req.params;
     const { name } = req.body;
     updateUsersModel().then((user) => {
@@ -36,7 +36,7 @@ function updateUser(req, res, db) {
 }
 
 // delete users
-function deleteUser(req, res, db) {
+function deleteUser(req, res) {
     // const { id } = req.params // this works because req.params is an object {id: "123"} like this and destructuring use
     // const { id } = req.params.id // Incorrect,because req.params.id is a string not an object req.params.id = "123"
     // const { id } = Number(req.params.id) // this also works because if you want number id instead of string id
@@ -50,7 +50,7 @@ function deleteUser(req, res, db) {
 }
 
 // get users skill
-function getUserSkill(req, res, db) {
+function getUserSkill(req, res) {
     const { id } = req.params;
     getUsersSkills().then((user) => {
         res.status(200).json(user);

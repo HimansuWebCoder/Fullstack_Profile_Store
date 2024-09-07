@@ -62,7 +62,7 @@ cloudinary.config({
 // Log the configuration
 console.log(cloudinary.config());
 
-async function uploadPost(req, res, db) {
+async function uploadPost(req, res) {
   try {
     // If no file is uploaded, return an error
     if (!req.file) {
