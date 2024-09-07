@@ -23,5 +23,5 @@ submitBtn.addEventListener("click", () => {
 });
 
 redirectBtn.addEventListener("click", () => {
-        window.location = "/";
+        window.location = "/profile-admin";
 });
