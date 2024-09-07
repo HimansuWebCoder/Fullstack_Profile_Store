@@ -30,7 +30,7 @@ function getUsersId(req, res) {
 function updateUser(req, res) {
     const { id } = req.params;
     const { name } = req.body;
-    updateUsersModel().then((user) => {
+    updateUsersModel(id, name).then((user) => {
         res.status(201).json(user);
     });
 }

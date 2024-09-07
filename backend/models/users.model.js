@@ -4,7 +4,7 @@ const getUsersModel = () => {
 	return db.select("*").from("users");
 };
 
-const updateUsersModel = () => {
+const updateUsersModel = (id, name) => {
 	return db("users").where({ id }).update({ name });
 };
 
