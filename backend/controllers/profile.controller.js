@@ -19,7 +19,7 @@ const getProfile = (req, res) => {
 // update user profile
 const updateProfile = (req, res) => {
     const { id, name, passion, image } = req.body;
-    updateUserProfileModel().then((user) => {
+    updateUserProfileModel(id, name, passion).then((user) => {
         res.json(user);
     });
 };

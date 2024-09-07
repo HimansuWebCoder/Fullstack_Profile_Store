@@ -8,19 +8,19 @@ const updateUsersModel = (id, name) => {
 	return db("users").where({ id }).update({ name });
 };
 
-const deleteUsersModel = () => {
+const deleteUsersModel = (id) => {
 	return db("users").where({ id }).del();
 };
 
-const getUsersIdModel = () => {
+const getUsersIdModel = (id) => {
 	return db.select("*").from("users").where({ id: id });
 };
 
-const getUsersSkills = () => {
+const getUsersSkills = (id) => {
 	return db.select("*").from("users").where({ id: id });
 };
 
-const postUserSectionModel = () => {
+const postUserSectionModel = (id, name) => {
 	return db("users").returning("*").insert({ id: id, name: name });
 };
 

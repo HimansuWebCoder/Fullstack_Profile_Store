@@ -21,7 +21,7 @@ function getUsers(req, res) {
 // get users id
 function getUsersId(req, res) {
     const { id } = req.params;
-    getUsersIdModel().then((user) => {
+    getUsersIdModel(id).then((user) => {
         res.status(200).json(user);
     });
 }
@@ -44,7 +44,7 @@ function deleteUser(req, res) {
     // const { id } = req.params;
     // const { id } = req.body; // this is incorrect because when user set id and send request then this is correct so ..
     const id = req.params.id;
-    deleteUsersModel()
+    deleteUsersModel(id)
         .then(() => res.status(200).send("User deleted successfully"))
         .catch((error) => res.status(500).json({ error }));
 }
@@ -52,7 +52,7 @@ function deleteUser(req, res) {
 // get users skill
 function getUserSkill(req, res) {
     const { id } = req.params;
-    getUsersSkills().then((user) => {
+    getUsersSkills(id).then((user) => {
         res.status(200).json(user);
     });
 }
