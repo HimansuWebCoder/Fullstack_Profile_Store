@@ -1,14 +1,14 @@
 const db = require("../config/db");
 
-const getUserProfile = () => {
+const getUserProfileModel = () => {
 	return db.select("*").from("profile");
 };
 
-const updateUserProfile = () => {
+const updateUserProfileModel = () => {
 	return db("profile").where({ id }).update({ name, passion, image });
 };
 
 module.exports = {
-	getUserProfile,
-	updateUserProfile,
+	getUserProfileModel,
+	updateUserProfileModel,
 };
