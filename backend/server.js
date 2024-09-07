@@ -9,20 +9,21 @@ const upload = require("./config/multerConfig");
 // const multer = require('multer');
 
 // Import routes
+// Backend API Routes
 const profileRouter = require("./routes/profile.router");
 const usersRouter = require("./routes/users.router");
 const addSectionRouter = require("./routes/add-section.router");
-const indexRouter = require("./routes/index.router");
-const editProfileRouter = require("./routes/edit-profile.router");
-const editSkillsSectionRouter = require("./routes/edit-skills-section.router");
-const profileAdminRouter = require("./routes/profile-admin.router");
-const sectionRouter = require("./routes/section.router");
 const uploadRouter = require("./routes/upload.router");
 
-const imageUploadRouter = require("./routes/imageUpload.router");
-
-const skillDeleteRouter = require("./routes/skill-delete.router");
-const skillEditRouter = require("./routes/skill-edit.router");
+// Frontend send files routes
+const indexRouter = require("./routes/frontend-pages/index.router");
+const editProfileRouter = require("./routes/frontend-pages/edit-profile.router");
+const editSkillsSectionRouter = require("./routes/frontend-pages/edit-skills-section.router");
+const profileAdminRouter = require("./routes/frontend-pages/profile-admin.router");
+const sectionRouter = require("./routes/frontend-pages/section.router");
+const imageUploadRouter = require("./routes/frontend-pages/imageUpload.router");
+const skillDeleteRouter = require("./routes/frontend-pages/skill-delete.router");
+const skillEditRouter = require("./routes/frontend-pages/skill-edit.router");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
