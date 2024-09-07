@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-const uploadImageModel = () => {
+const uploadImageModel = (images) => {
 	return db("images").returning("*").insert(images);
 };
 

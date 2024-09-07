@@ -85,7 +85,7 @@ async function uploadPost(req, res) {
     console.log(images.image);
 
     // Insert the image URL into the database
-    uploadImageModel()
+    uploadImageModel(images)
       .then((data) => {
         console.log("Inserted data:", data);
         res
