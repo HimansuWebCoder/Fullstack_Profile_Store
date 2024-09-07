@@ -8,7 +8,7 @@ body {
 		#a6c1ee,
 		#89f7fe
 	);
-	margin: 0;
+	margin: 20px;
 	background-size: cover;
 	background-attachment: fixed;
 }
@@ -39,7 +39,6 @@ body {
 	border-radius: 10px;
 	backdrop-filter: blur(10px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
-	/*	border: 2px solid rgba(255, 255, 255, 0.2);*/
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	overflow: auto;
