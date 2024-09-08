@@ -208,9 +208,8 @@ body {
 
 #profile-image {
 	width: 100%;
-	height: auto;
+	height: 400px;
 	border-radius: 5%;
-	object-fit: contain;
 }
 
 #profile-img-container {
@@ -219,5 +218,4 @@ body {
 	border: 1px solid black;
 	border-radius: 5%;
 	padding: 5px;
-	object-fit: contain;
 }
