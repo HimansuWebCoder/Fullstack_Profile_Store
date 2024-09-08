@@ -66,8 +66,22 @@ app.use("/submit-file", upload.single("avatar"), uploadRouter);
 app.use("/", uploadRouter);
 
 app.post("/signin", signin.handleSignin(db, bcrypt));
+// app.post("/register", (req, res) => {
+// 	register.handleRegister(req, res, db, bcrypt);
+// });
+
 app.post("/register", (req, res) => {
-	register.handleRegister(req, res, db, bcrypt);
+	const { name, email, password } = req.body;
+	db("profile")
+		.returning("*")
+		.insert({
+			email: email,
+			name: name,
+		})
+		.then((user) => {
+			res.json(user[0]);
+		})
+		.catch((err) => res.status(400).json("unable to register"));
 });
 
 // Start server
