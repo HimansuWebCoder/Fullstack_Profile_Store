@@ -16,7 +16,7 @@ const getUsersIdModel = (id) => {
 	return db.select("*").from("users").where({ id: id });
 };
 
-const getUsersSkills = (id) => {
+const getUserSkillsModel = (id) => {
 	return db.select("*").from("users").where({ id: id });
 };
 
@@ -29,6 +29,6 @@ module.exports = {
 	updateUsersModel,
 	deleteUsersModel,
 	getUsersIdModel,
-	getUsersSkills,
+	getUserSkillsModel,
 	postUserSectionModel,
 };

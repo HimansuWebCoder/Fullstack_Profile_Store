@@ -3,19 +3,15 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-// const db = require("./config/db");
 const upload = require("./config/multerConfig");
 
-// const multer = require('multer');
-
-// Import routes
 // Backend API Routes
 const profileRouter = require("./routes/profile.router");
 const usersRouter = require("./routes/users.router");
 const addSectionRouter = require("./routes/add-section.router");
 const uploadRouter = require("./routes/upload.router");
 
-// Frontend send files routes
+// Frontend sending files routes
 const indexRouter = require("./routes/frontend-pages/index.router");
 const editProfileRouter = require("./routes/frontend-pages/edit-profile.router");
 const editSkillsSectionRouter = require("./routes/frontend-pages/edit-skills-section.router");
@@ -60,7 +56,6 @@ app.use("/add-section", addSectionRouter);
 app.use("/skill_delete", skillDeleteRouter);
 app.use("/skill_edit", skillEditRouter);
 
-// let's try using database
 app.use("/submit-file", upload.single("avatar"), uploadRouter);
 app.use("/", uploadRouter);
 

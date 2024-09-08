@@ -3,11 +3,11 @@ const {
     updateUsersModel,
     deleteUsersModel,
     getUsersIdModel,
-    getUsersSkills,
+    getUserSkillsModel,
 } = require("../models/users.model");
 
-// get users
-function getUsers(req, res) {
+// get userSkills
+function getUserSkills(req, res) {
     getUsersModel()
         .then((users) => {
             res.status(200).json(users);
@@ -18,16 +18,16 @@ function getUsers(req, res) {
         });
 }
 
-// get users id
-function getUsersId(req, res) {
+// get usersSkill Id
+function getUserSkillId(req, res) {
     const { id } = req.params;
     getUsersIdModel(id).then((user) => {
         res.status(200).json(user);
     });
 }
 
-// update users
-function updateUser(req, res) {
+// update userSkill
+function updateUserSkill(req, res) {
     const { id } = req.params;
     const { name } = req.body;
     updateUsersModel(id, name).then((user) => {
@@ -35,32 +35,26 @@ function updateUser(req, res) {
     });
 }
 
-// delete users
-function deleteUser(req, res) {
-    // const { id } = req.params // this works because req.params is an object {id: "123"} like this and destructuring use
-    // const { id } = req.params.id // Incorrect,because req.params.id is a string not an object req.params.id = "123"
-    // const { id } = Number(req.params.id) // this also works because if you want number id instead of string id
-    // const id = Number(req.params.id) // correct
-    // const { id } = req.params;
-    // const { id } = req.body; // this is incorrect because when user set id and send request then this is correct so ..
+// delete userSkill
+function deleteUserSkill(req, res) {
     const id = req.params.id;
     deleteUsersModel(id)
         .then(() => res.status(200).send("User deleted successfully"))
         .catch((error) => res.status(500).json({ error }));
 }
 
-// get users skill
+// get user skill
 function getUserSkill(req, res) {
     const { id } = req.params;
-    getUsersSkills(id).then((user) => {
+    getUserSkillsModel(id).then((user) => {
         res.status(200).json(user);
     });
 }
 
 module.exports = {
-    getUsers,
-    getUsersId,
-    updateUser,
-    deleteUser,
+    getUserSkills,
+    getUserSkillId,
+    updateUserSkill,
+    deleteUserSkill,
     getUserSkill,
 };
