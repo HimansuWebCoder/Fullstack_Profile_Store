@@ -44,12 +44,6 @@ body {
 	overflow: auto;
 }
 
-#profile-img-container {
-	max-width: 100%;
-	height: 350px;
-	border: 1px solid black;
-}
-
 #profile-content-container {
 	border: 1px solid black;
 	margin-top: 5px;
@@ -91,11 +85,6 @@ body {
 	font-weight: bold;
 	font-size: 1.5rem;
 	cursor: pointer;
-}
-
-#profile-image {
-	width: 100%;
-	height: 100%;
 }
 
 #edit-icon {
@@ -203,11 +192,34 @@ body {
 }
 
 #upload-profile-photo {
+	/*max-width: 40%;
+	height: auto;
+	background-color: transparent;
+	position: absolute;
+	margin: auto;
+	z-index: 100;*/
+	position: absolute;
+	top: 50px;
+	left: 30%;
+	transform: translateY(-50%);
 	max-width: 40%;
 	height: auto;
 	background-color: transparent;
-	/*	position: relative;*/
-	/*	top: 10px;*/
-	margin: auto;
 	z-index: 100;
+}
+
+#profile-image {
+	/*	max-width: 90%;
+	height: 25%;
+	position: absolute;*/
+	width: 100%;
+	height: auto;
+}
+
+#profile-img-container {
+	/*max-width: 100%;
+	height: 350px;
+	border: 1px solid black;*/
+	position: relative;
+	max-width: 100%;
 }
