@@ -3,7 +3,12 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
+const db = require("./models/db");
 const upload = require("./config/multerConfig");
+const bcrypt = require("bcrypt-nodejs");
+
+const register = require("./controllers/login/register");
+const signin = require("./controllers/login/signin");
 
 // Backend API Routes
 const profileRouter = require("./routes/profile.router");
@@ -20,6 +25,7 @@ const sectionRouter = require("./routes/frontend-pages/section.router");
 const imageUploadRouter = require("./routes/frontend-pages/imageUpload.router");
 const skillDeleteRouter = require("./routes/frontend-pages/skill-delete.router");
 const skillEditRouter = require("./routes/frontend-pages/skill-edit.router");
+const loginRouter = require("./routes/frontend-pages/login.router");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -40,24 +46,29 @@ app.use("/script", express.static(path.join(__dirname, "../frontend/script")));
 app.use("/styles", express.static(path.join(__dirname, "../frontend/styles")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Routes
-app.use("/profile", profileRouter);
+// Frontend Serve Routes
 app.use("/", indexRouter);
 app.use("/profile-admin", profileAdminRouter);
 app.use("/edit-profile", editProfileRouter);
 app.use("/add-section", sectionRouter);
 app.use("/edit-skills-section", editSkillsSectionRouter);
-
 app.use("/imageUpload", imageUploadRouter);
+app.use("/skill_delete", skillDeleteRouter);
+app.use("/skill_edit", skillEditRouter);
+app.use("/login", loginRouter);
 
+// Backend API Routes
+app.use("/profile", profileRouter);
 app.use("/users", usersRouter);
 app.use("/add-section", addSectionRouter);
 
-app.use("/skill_delete", skillDeleteRouter);
-app.use("/skill_edit", skillEditRouter);
-
 app.use("/submit-file", upload.single("avatar"), uploadRouter);
 app.use("/", uploadRouter);
+
+app.post("/signin", signin.handleSignin(db, bcrypt));
+app.post("/register", (req, res) => {
+	register.handleRegister(req, res, db, bcrypt);
+});
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
