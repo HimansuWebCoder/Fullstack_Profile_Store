@@ -1,10 +1,10 @@
 const express = require("express");
-const add_section = require("../controllers/section.controller");
+const { postSkillSection } = require("../controllers/section.controller");
 const db = require("../config/db");
 const addSectionRouter = express.Router();
 
 addSectionRouter.post("/", (req, res) => {
-	add_section.postSection(req, res, db);
+	postSkillSection(req, res, db);
 });
 
 module.exports = addSectionRouter;
