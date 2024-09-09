@@ -6,7 +6,6 @@ skillDeleteRouter.get("/:id/delete", (req, res) => {
 	res.sendFile(
 		path.join(__dirname, "..", "..", "..", "frontend", "skill_delete.html"),
 	);
-	console.log(req.params);
 });
 
 module.exports = skillDeleteRouter;

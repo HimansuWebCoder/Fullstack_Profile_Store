@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>User Login</title>
+		<style>
+			.register-container {
+				max-width: 400px;
+				height: 400px;
+				margin: auto;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				border: 1px solid black;
+				padding: 10px;
+				text-align: center;
+				box-shadow: 1px 4px 10px 2px grey;
+			}
+
+			.input {
+				padding: 10px;
+				font-size: 1em;
+				font-style: italic;
+			}
+
+			#register-btn {
+				width: 80px;
+				height: auto;
+				padding: 10px;
+				font-size: 1em;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="register-container">
+			<h1>Register</h1>
+			Name:
+			<input
+				class="input-name input"
+				type="text"
+				name=""
+				placeholder="Place Your Name"
+			/><br /><br />
+			Email:
+			<input
+				class="input-email input"
+				type="text"
+				name=""
+				placeholder="Place Your Email"
+			/><br /><br />
+			Password:
+			<input
+				class="input-password input"
+				type="Password"
+				placeholder="Place Your Password"
+				name=""
+			/><br />
+			<button type="submit" id="register-btn">Register</button>
+		</div>
+		<script>
+			const nameInput = document.querySelector(".input-name");
+			const emailInput = document.querySelector(".input-email");
+			const passwordInput = document.querySelector(".input-password");
+			const registerBtn = document.querySelector("#register-btn");
+
+			registerBtn.addEventListener("click", () => {
+				fetch(
+					"https://fullstack-profile-store-2.onrender.com/register",
+					{
+						method: "post",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							name: nameInput.value,
+							email: emailInput.value,
+							password: passwordInput.value,
+						}),
+					},
+				);
+			});
+		</script>
+	</body>
+</html>

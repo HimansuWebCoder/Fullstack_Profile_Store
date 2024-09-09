@@ -14,7 +14,7 @@ cloudinary.config({
 });
 
 // Log the configuration
-console.log(cloudinary.config());
+// console.log(cloudinary.config());
 
 async function uploadPost(req, res) {
   try {
@@ -22,9 +22,6 @@ async function uploadPost(req, res) {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
-
-    console.log("File uploaded:", req.file);
-    console.log("Request body:", req.body);
 
     // Upload the image to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path, {
@@ -36,7 +33,6 @@ async function uploadPost(req, res) {
     const images = {
       image: result.secure_url, // Store the Cloudinary URL
     };
-    console.log(images.image);
 
     // Insert the image URL into the database
     uploadImageModel(images)

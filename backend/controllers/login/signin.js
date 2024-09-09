@@ -1,5 +1,8 @@
+const db = require("../../models/db");
+
 const handleSignin = (db, bcrypt) => (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   if (!email || !password) {
     return res.status(400).json("incorrect form submission");
   }
@@ -11,10 +14,10 @@ const handleSignin = (db, bcrypt) => (req, res) => {
       if (isValid) {
         return db
           .select("*")
-          .from("users")
+          .from("profile")
           .where("email", "=", email)
-          .then((user) => {
-            res.json(user[0]);
+          .then((profile) => {
+            res.json(profile[0]);
           })
           .catch((err) => res.status(400).json("unable to get user"));
       } else {
@@ -25,5 +28,5 @@ const handleSignin = (db, bcrypt) => (req, res) => {
 };
 
 module.exports = {
-  handleSignin: handleSignin,
+  handleSignin,
 };

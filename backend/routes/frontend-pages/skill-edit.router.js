@@ -6,7 +6,6 @@ skillEditRouter.get("/:id/edit", (req, res) => {
 	res.sendFile(
 		path.join(__dirname, "..", "..", "..", "frontend", "skill_edit.html"),
 	);
-	console.log(req.params);
 });
 
 module.exports = skillEditRouter;

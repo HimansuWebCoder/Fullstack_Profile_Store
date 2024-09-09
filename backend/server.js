@@ -25,6 +25,7 @@ const sectionRouter = require("./routes/frontend-pages/section.router");
 const imageUploadRouter = require("./routes/frontend-pages/imageUpload.router");
 const skillDeleteRouter = require("./routes/frontend-pages/skill-delete.router");
 const skillEditRouter = require("./routes/frontend-pages/skill-edit.router");
+const registerRouter = require("./routes/frontend-pages/register.router");
 const loginRouter = require("./routes/frontend-pages/login.router");
 
 // Middleware
@@ -55,6 +56,7 @@ app.use("/edit-skills-section", editSkillsSectionRouter);
 app.use("/imageUpload", imageUploadRouter);
 app.use("/skill_delete", skillDeleteRouter);
 app.use("/skill_edit", skillEditRouter);
+app.use("/register-profile", registerRouter);
 app.use("/login", loginRouter);
 
 // Backend API Routes
@@ -66,22 +68,9 @@ app.use("/submit-file", upload.single("avatar"), uploadRouter);
 app.use("/", uploadRouter);
 
 app.post("/signin", signin.handleSignin(db, bcrypt));
-// app.post("/register", (req, res) => {
-// 	register.handleRegister(req, res, db, bcrypt);
-// });
-
 app.post("/register", (req, res) => {
-	const { name, email, password } = req.body;
-	db("profile")
-		.returning("*")
-		.insert({
-			email: email,
-			name: name,
-		})
-		.then((user) => {
-			res.json(user[0]);
-		})
-		.catch((err) => res.status(400).json("unable to register"));
+	console.log("Request body:", req.body);
+	register.handleRegister(req, res, db, bcrypt);
 });
 
 // Start server

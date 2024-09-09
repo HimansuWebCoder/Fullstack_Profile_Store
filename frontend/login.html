@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>User Login</title>
 		<style>
-			.register-container {
+			.login-container {
 				max-width: 400px;
 				height: 400px;
 				margin: auto;
@@ -24,7 +24,7 @@
 			    font-style: italic;
 			}
 
-			#register-btn {
+			#login-btn {
 				width: 80px;
 				height: auto;
 				padding: 10px;
@@ -34,25 +34,35 @@
 		</style>
 	</head>
 	<body>
-		<div class="register-container">
-			<h1>Register</h1>
-			Name: <input class="input-name input" type="text" name="" placeholder="Place Your Name" /><br /><br />
+		<div class="login-container">
+			<h1>Login</h1>
 			Email: <input class="input-email input" type="text" name="" placeholder="Place Your Email" /><br /><br />
 			Password: <input class="input-password input" type="Password" placeholder="Place Your Password" name="" /><br />
-			<button type="submit" id="register-btn">Register</button>
+			<button type="submit" id="login-btn">Login</button>
 		</div>
 		<script>
-			const name = document.querySelector(".input-name");
-			const email = document.querySelector(".input-email");
-			const password = document.querySelector(".input-password");
-			const registerBtn = document.querySelector("#register-btn");
+			const emailInput = document.querySelector(".input-email");
+			const passwordInput = document.querySelector(".input-password");
+			const loginBtn = document.querySelector("#login-btn");
             
-            registerBtn.addEventListener("click", () => {
-            	fetch("https://fullstack-profile-store-2.onrender.com/register", {
+            loginBtn.addEventListener("click", () => {
+            	fetch("https://fullstack-profile-store-2.onrender.com/signin", {
             		method: "post",
             		headers: {"Content-Type": "application/json"},
-            		body: JSON.stringify({name: name, email: email, password: password})
+            		body: JSON.stringify({email: emailInput.value, password: passwordInput.value})
             	})
+            	.then(response => response.json())
+				  .then(data => {
+				    console.log(data);  // Output the response for debugging
+				    if (data === 'incorrect form submission') {
+				      console.error('Incorrect form submission.');
+				    } else if (data === 'wrong credentials') {
+				      console.error('Wrong credentials.');
+				    } else {
+				      console.log('Login successful:', data);
+				    }
+				  })
+				  .catch(err => console.error('Error:', err));
             })
 
 		</script>
