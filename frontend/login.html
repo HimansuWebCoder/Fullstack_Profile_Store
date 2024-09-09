@@ -62,7 +62,10 @@
 				      console.log('Login successful:', data);
 				    }
 				  })
-				  .catch(err => console.error('Error:', err));
+				  .catch(err => console.error('Error:', err))
+				  .then(() => {
+				  	window.location = "/profile-admin"
+				  })
             })
 
 		</script>
