@@ -5,7 +5,7 @@ const uploadImageModel = (images) => {
 };
 
 const viewImageModel = () => {
-	returndb.select("*").from("images");
+	return db.select("*").from("images");
 };
 
 module.exports = {
