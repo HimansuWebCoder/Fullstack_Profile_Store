@@ -1,6 +1,6 @@
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
-const { uploadImageModel } = require("../models/images.model");
+const { uploadImageModel, viewImageModel } = require("../models/images.model");
 
 // cloudinary.config({
 //   secure: true,
@@ -55,8 +55,7 @@ async function uploadPost(req, res) {
 }
 
 function viewImgPost(req, res, db) {
-  db.select("*")
-    .from("images")
+  viewImageModel()
     .then((photos) => {
       res.send(photos);
     })
