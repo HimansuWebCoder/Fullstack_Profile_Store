@@ -35,7 +35,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
             // res.redirect("/profile-admin");
             // Redirect after setting session
             if (!res.headersSent) {
-              res.redirect("/profile-admin");
+              res.json({ success: true, redirectTo: "/profile-admin" });
             } else {
               console.error("Headers already sent, cannot redirect.");
             }
