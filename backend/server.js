@@ -38,9 +38,10 @@ app.use("/uploads", express.static("uploads"));
 // Setting up session middleware
 app.use(
 	session({
-		secret: "Himansu@9861",
+		secret: "Himansu@9861", // Change this to a secure key
 		resave: false,
 		saveUninitialized: true,
+		cookie: { secure: false }, // Set to true if using HTTPS
 	}),
 );
 

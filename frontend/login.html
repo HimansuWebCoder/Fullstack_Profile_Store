@@ -63,10 +63,17 @@
 				    }
 				  })
 				  .catch(err => console.error('Error:', err))
-				  .then(() => {
-				  	window.location = "/profile-admin"
-				  })
+				  // .then(() => {
+				  // 	window.location = "/profile-admin"
+				  // })
             })
+
+            fetch("https://fullstack-profile-store-2.onrender.com/profile")
+    .then((res) => res.json())
+    .then((users) => {
+        console.log(users);
+        // console.log(users.profile.profile);
+    })
 
 		</script>
 	</body>

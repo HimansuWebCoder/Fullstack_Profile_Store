@@ -1,4 +1,6 @@
 const upload = require("../config/multerConfig");
+const path = require("path");
+
 const {
     getUserProfileModel,
     updateUserProfileModel,
@@ -16,6 +18,15 @@ const getProfile = (req, res) => {
         .then((users) => {
             if (users.length > 0) {
                 res.json(users[0]);
+                res.sendFile(
+                    path.join(
+                        __dirname,
+                        "..",
+                        "..",
+                        "frontend",
+                        "profile-admin.html",
+                    ),
+                );
             } else {
                 res.status(404).json("Profile not found");
             }
