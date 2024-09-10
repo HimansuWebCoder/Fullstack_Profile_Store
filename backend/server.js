@@ -30,7 +30,7 @@ const registerRouter = require("./routes/frontend-pages/register.router");
 const loginRouter = require("./routes/frontend-pages/login.router");
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
@@ -83,6 +83,21 @@ app.post("/register", (req, res) => {
 	console.log("Request body:", req.body);
 	register.handleRegister(req, res, db, bcrypt);
 });
+
+app.get('/debug-session', (req, res) => {
+    if (req.session.userId) {
+        console.log('Session ID:', req.sessionID);
+        console.log('Session Data:', req.session);
+        res.json({
+            message: 'Session is active',
+            sessionID: req.sessionID,
+            sessionData: req.session,
+        });
+    } else {
+        res.status(401).send('No active session');
+    }
+});
+
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
