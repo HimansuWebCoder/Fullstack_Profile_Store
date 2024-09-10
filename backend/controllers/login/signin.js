@@ -6,7 +6,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
   if (!email || !password) {
     return res.status(400).json("incorrect form submission");
   }
-  db.select("email", "hash")
+  db.select("id", "email", "hash")
     .from("login")
     .where("email", "=", email)
     .then((data) => {
@@ -26,12 +26,12 @@ const handleSignin = (db, bcrypt) => (req, res) => {
               email: profile[0].email,
             };
             // res.json(profile[0]);
-            // res.json({
-            //   message: "Login successfully",
-            //   profile: profile[0],
-            // });
+            res.json({
+              message: "Login successfully",
+              profile: profile[0],
+            });
             console.log("Session data set:", req.session);
-            res.redirect("/profile-admin");
+            // res.redirect("/profile-admin");
           })
           .catch((err) => res.status(400).json("unable to get user"));
       } else {
