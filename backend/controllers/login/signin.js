@@ -11,7 +11,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
     .where("email", "=", email)
     .then((data) => {
       console.log("Login data:", data); // Debugging statement
-      console.log("User ID:", data[0].id); 
+      console.log("User ID:", data[0].id);
       const isValid = bcrypt.compareSync(password, data[0].hash);
       if (isValid) {
         return db
@@ -27,12 +27,12 @@ const handleSignin = (db, bcrypt) => (req, res) => {
               email: profile[0].email,
             };
             // res.json(profile[0]);
-            res.json({
-              message: "Login successfully",
-              profile: profile[0],
-            });
+            // res.json({
+            //   message: "Login successfully",
+            //   profile: profile[0],
+            // });
             console.log("Session data set:", req.session);
-            // res.redirect("/profile-admin");
+            res.redirect("/profile-admin");
           })
           .catch((err) => res.status(400).json("unable to get user"));
       } else {
