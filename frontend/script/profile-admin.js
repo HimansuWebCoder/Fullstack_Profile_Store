@@ -14,8 +14,8 @@ const uploadProfilePhoto = document.querySelector("#upload-profile-photo");
 
 function showProfile() {
   // console.log("Loading...");
-  profileContainer.style.display = "none";
-  loader.style.display = "block";
+  // profileContainer.style.display = "none";
+  // loader.style.display = "block";
 
   let isLoaded = false;
 
