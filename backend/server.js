@@ -6,6 +6,7 @@ const app = express();
 const db = require("./models/db");
 const upload = require("./config/multerConfig");
 const bcrypt = require("bcrypt-nodejs");
+const session = require("express-session");
 
 const register = require("./controllers/login/register");
 const signin = require("./controllers/login/signin");
@@ -33,6 +34,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/uploads", express.static("uploads"));
+
+// Setting up session middleware
+app.use(
+	session({
+		secret: "Himansu@9861",
+		resave: false,
+		saveUninitialized: true,
+	}),
+);
 
 // Logging middleware
 // app.use((req, res, next) => {
