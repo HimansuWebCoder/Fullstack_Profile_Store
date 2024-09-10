@@ -18,12 +18,17 @@ const handleSignin = (db, bcrypt) => (req, res) => {
           .where("email", "=", email)
           .then((profile) => {
             // Store the user's profile in the session
+            req.session.userId = data[0].id;
             req.session.user = {
               name: profile[0].name,
               passion: profile[0].passion,
               email: profile[0].email,
             };
-            res.json(profile[0]);
+            // res.json(profile[0]);
+            res.json({
+              message: "Login successfully",
+              profile: profile[0],
+            });
           })
           .catch((err) => res.status(400).json("unable to get user"));
       } else {

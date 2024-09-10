@@ -1,7 +1,7 @@
 const db = require("../config/db");
 
-const getUserProfileModel = () => {
-	return db.select("*").from("profile");
+const getUserProfileModel = (userEmail) => {
+	return db.select("*").from("profile").where("email", "=", userEmail);
 };
 
 const updateUserProfileModel = (id, name, passion) => {

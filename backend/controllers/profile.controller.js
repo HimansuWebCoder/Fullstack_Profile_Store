@@ -12,7 +12,7 @@ const getProfile = (req, res) => {
 
     const userEmail = req.session.user.email;
 
-    getUserProfileModel()
+    getUserProfileModel(userEmail)
         .then((users) => {
             if (users.length > 0) {
                 res.json(users[0]);
