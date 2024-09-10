@@ -32,14 +32,33 @@ const handleSignin = (db, bcrypt) => (req, res) => {
             //   profile: profile[0],
             // });
             console.log("Session data set:", req.session);
-            res.redirect("/profile-admin");
+            // res.redirect("/profile-admin");
+            // Redirect after setting session
+            if (!res.headersSent) {
+              res.redirect("/profile-admin");
+            } else {
+              console.error("Headers already sent, cannot redirect.");
+            }
           })
-          .catch((err) => res.status(400).json("unable to get user"));
+          .catch((err) => {
+            console.error("Error fetching profile:", err);
+            if (!res.headersSent) {
+              res.status(400).json("unable to get user");
+            }
+          });
       } else {
-        res.status(400).json("wrong credentials");
+        if (!res.headersSent) {
+          res.status(400).json("wrong credentials");
+        }
       }
     })
-    .catch((err) => res.status(400).json("wrong credentials"));
+    .catch((err) => {
+      console.error("Error querying login table:", err);
+      // Respond with error and prevent further responses
+      if (!res.headersSent) {
+        res.status(400).json("error querying login table");
+      }
+    });
 };
 
 module.exports = {
