@@ -101,7 +101,8 @@ app.get("/debug-session", (req, res) => {
 		console.log("Session Data:", req.session);
 		res.json({
 			message: "Session is active",
-			sessionID: req.sessionID,
+			// sessionID: req.sessionID,
+			sessionID: req.session.userId,
 			sessionData: req.session,
 		});
 	} else {
