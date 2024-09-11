@@ -53,12 +53,6 @@ submitBtn.addEventListener("click", () => {
     }
 });
 
-submitBtn.addEventListener("click", () => {
-    if (profileNameEditor.value !== "" || profilePassionEditor.value !== "") {
-        fetch();
-    }
-});
-
 // .then(() => {
 //                         window.location = "/profile-admin";
 //                     });
