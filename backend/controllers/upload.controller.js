@@ -42,8 +42,10 @@ async function uploadPost(req, res) {
         .into("images")
         .returning("image")
         .then((img) => {
+          const email = "Rinku@gmail.com";
           return trx("profile").returning("*").insert({
             image: img[0].image,
+            email: email,
           });
         })
         .then((profileImg) => {
