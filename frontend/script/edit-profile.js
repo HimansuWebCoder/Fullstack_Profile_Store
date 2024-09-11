@@ -62,14 +62,12 @@ submitBtn.addEventListener("click", () => {
             body: JSON.stringify({
                 name: profileNameEditor.value,
                 passion: profilePassionEditor.value,
+                // No need to send 'id', it is managed on the server-side
             }),
         })
-            .then((response) => {
-                console.log("Response Status:", response.status); // Log status
-                return response.json(); // Try to parse JSON
-            })
+            .then((response) => response.json())
             .then((data) => {
-                console.log("Server Response:", data); // Check the response
+                console.log("Response data:", data);
                 // window.location = "/profile-admin"; // Redirect on success
             })
             .catch((err) => console.error("Error:", err));

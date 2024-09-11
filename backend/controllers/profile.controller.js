@@ -55,12 +55,16 @@ const updateProfile = (req, res) => {
 
     updateUserProfileModel(userId, name, passion)
         .then((updatedProfile) => {
-            console.log("Updated Profile:", updatedProfile[0]);
-            res.json(updatedProfile[0]);
+            if (updatedProfile.length > 0) {
+                console.log("Updated Profile:", updatedProfile[0]);
+                res.json(updatedProfile[0]);
+            } else {
+                res.status(404).json({ error: "Profile not found" });
+            }
         })
         .catch((err) => {
             console.log("Error Updating Profile:", err);
-            res.status(400).json("unable to update profile");
+            res.status(400).json({ error: "unable to update profile" });
         });
 };
 
