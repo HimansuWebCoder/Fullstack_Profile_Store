@@ -31,11 +31,28 @@
 				font-size: 1em;
 				margin: auto;
 			}
+
+			#register-intro-content {
+				max-width: 500px;
+				height: auto;
+				margin: auto;
+				text-align: center;
+				background: rgba(120, 100, 120, 0.8);
+				color: white;
+				text-shadow: 1px 3px black;
+				padding-bottom: 1px;
+				padding-top: 1px;
+				margin-bottom: 10px;
+			}
 		</style>
 	</head>
 	<body>
+		<div id="register-intro-content">
+			<h1>Welcome to Profile-Store</h1>
+			<h2>Register or Login to play with your profile</h2>
+		</div>
 		<div class="register-container">
-			<h1>Register</h1>
+			<h1>Register or <a href="/login">Login</a></h1>
 			Name:
 			<input
 				class="input-name input"
@@ -66,31 +83,36 @@
 			const registerBtn = document.querySelector("#register-btn");
 
 			registerBtn.addEventListener("click", () => {
-			    fetch("https://fullstack-profile-store-2.onrender.com/register", {
-			        method: "post",
-			        headers: { "Content-Type": "application/json" },
-			        body: JSON.stringify({
-			            name: nameInput.value,
-			            email: emailInput.value,
-			            password: passwordInput.value,
-			        })
-			    })
-			    .then(response => {
-			        if (response.ok) {
-			            // Redirect to profile-admin on successful registration
-			            window.location = "/profile-admin";
-			            console.log(response);
-			        } else {
-			            // Handle errors if the registration was not successful
-			            console.error("Registration failed");
-			        }
-			    })
-			    .catch(error => {
-			        // Handle network errors
-			        console.error("There was a problem with the fetch operation:", error);
-			    });
+				fetch(
+					"https://fullstack-profile-store-2.onrender.com/register",
+					{
+						method: "post",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							name: nameInput.value,
+							email: emailInput.value,
+							password: passwordInput.value,
+						}),
+					},
+				)
+					.then((response) => {
+						if (response.ok) {
+							// Redirect to profile-admin on successful registration
+							window.location = "/profile-feed";
+							console.log(response);
+						} else {
+							// Handle errors if the registration was not successful
+							console.error("Registration failed");
+						}
+					})
+					.catch((error) => {
+						// Handle network errors
+						console.error(
+							"There was a problem with the fetch operation:",
+							error,
+						);
+					});
 			});
-
 		</script>
 	</body>
 </html>

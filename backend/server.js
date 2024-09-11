@@ -59,7 +59,9 @@ app.use("/styles", express.static(path.join(__dirname, "../frontend/styles")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Frontend Serve Routes
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
+app.use("/profile-feed", indexRouter);
+app.use("/", registerRouter);
 app.use("/profile-admin", profileAdminRouter);
 app.use("/edit-profile", editProfileRouter);
 app.use("/add-section", sectionRouter);
@@ -84,22 +86,23 @@ app.post("/register", (req, res) => {
 	register.handleRegister(req, res, db, bcrypt);
 });
 
-app.get('/debug-session', (req, res) => {
-    if (req.session.userId) {
-        console.log('Session ID:', req.sessionID);
-        console.log('Session Data:', req.session);
-        res.json({
-            message: 'Session is active',
-            sessionID: req.sessionID,
-            sessionData: req.session,
-        });
-    } else {
-        res.status(401).send('No active session');
-    }
+app.get("/debug-session", (req, res) => {
+	if (req.session.userId) {
+		console.log("Session ID:", req.sessionID);
+		console.log("Session Data:", req.session);
+		res.json({
+			message: "Session is active",
+			sessionID: req.sessionID,
+			sessionData: req.session,
+		});
+	} else {
+		res.status(401).send("No active session");
+	}
 });
-
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
-	console.log(`Your website hosted at ${process.env.PORT || 3000}`);
+	console.log(
+		`Your website hosted at http://localhost:${process.env.PORT || 3000}`,
+	);
 });

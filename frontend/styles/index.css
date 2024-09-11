@@ -219,3 +219,26 @@ body {
 	border-radius: 5%;
 	padding: 5px;
 }
+
+#login-link-container {
+	width: 200px;
+	height: auto;
+	margin: auto;
+	background: blue;
+	padding: 10px;
+	text-align: center;
+	border-radius: 5%;
+	margin-bottom: 5px;
+	color: white;
+}
+
+#login-link-container > a {
+	color: white;
+	font-size: 2em;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#login-link:active {
+	color: red;
+}
