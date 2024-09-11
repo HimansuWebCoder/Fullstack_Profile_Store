@@ -28,30 +28,29 @@ function showProfile() {
       profileHeader.textContent = users.name;
       profileIntro.textContent = users.passion;
       profileImg.src = users.image;
-    })
-    // .finally(() => {
-    //   if (isLoaded) {
-    //     profileContainer.style.display = "block";
-    //     loader.style.display = "none";
-    //   }
-    // });
+    });
+  // .finally(() => {
+  //   if (isLoaded) {
+  //     profileContainer.style.display = "block";
+  //     loader.style.display = "none";
+  //   }
+  // });
 
-
-//   fetch("https://fullstack-profile-store-2.onrender.com/view")
-//     .then((res) => res.json())
-//     .then((users) => {
-//       console.log(users[users.length - 1].image);
-//       // profileImg.src = users[users.length-1].image;
-//       // profileImg.src = '/' + users[users.length-1].image;
-//       profileImg.src = users[users.length - 1].image;
-//     })
-//     .finally(() => {
-//       if (isLoaded) {
-//         profileContainer.style.display = "block";
-//         loader.style.display = "none";
-//       }
-//     });
-// }
+  //   fetch("https://fullstack-profile-store-2.onrender.com/view")
+  //     .then((res) => res.json())
+  //     .then((users) => {
+  //       console.log(users[users.length - 1].image);
+  //       // profileImg.src = users[users.length-1].image;
+  //       // profileImg.src = '/' + users[users.length-1].image;
+  //       profileImg.src = users[users.length - 1].image;
+  //     })
+  //     .finally(() => {
+  //       if (isLoaded) {
+  //         profileContainer.style.display = "block";
+  //         loader.style.display = "none";
+  //       }
+  //     });
+}
 
 showProfile();
 
