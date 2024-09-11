@@ -54,26 +54,6 @@ redirectBtn.addEventListener("click", () => {
 //     }
 // });
 
-// submitBtn.addEventListener("click", () => {
-//     if (profileNameEditor.value !== "" && profilePassionEditor.value !== "") {
-//         fetch("https://fullstack-profile-store-2.onrender.com/profile", {
-//             method: "PUT",
-//             headers: { "Content-Type": "application/json" },
-//             body: JSON.stringify({
-//                 name: profileNameEditor.value,
-//                 passion: profilePassionEditor.value,
-//                 // No need to send 'id', it will be used on the server-side
-//             }),
-//         })
-//             .then((response) => response.json())
-//             .then((data) => {
-//                 console.log(data); // Check the response
-//                 // window.location = "/profile-admin"; // Redirect on success
-//             })
-//             .catch((err) => console.error("Error:", err));
-//     }
-// });
-
 submitBtn.addEventListener("click", () => {
     if (profileNameEditor.value !== "" && profilePassionEditor.value !== "") {
         fetch("https://fullstack-profile-store-2.onrender.com/profile", {
@@ -82,29 +62,16 @@ submitBtn.addEventListener("click", () => {
             body: JSON.stringify({
                 name: profileNameEditor.value,
                 passion: profilePassionEditor.value,
-                // No need to send 'id', it will be used on the server-side
             }),
         })
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.text(); // Use text() to handle non-JSON responses
+                console.log("Response Status:", response.status); // Log status
+                return response.json(); // Try to parse JSON
             })
             .then((data) => {
-                try {
-                    const jsonData = JSON.parse(data); // Try parsing the response as JSON
-                    console.log(jsonData); // Check the response
-                    // window.location = "/profile-admin"; // Redirect on success
-                } catch (e) {
-                    console.error("Error parsing JSON:", e);
-                    console.log("Response data:", data); // Log raw response
-                }
+                console.log("Server Response:", data); // Check the response
+                // window.location = "/profile-admin"; // Redirect on success
             })
             .catch((err) => console.error("Error:", err));
     }
 });
-
-// .then(() => {
-//                         window.location = "/profile-admin";
-//                     });
