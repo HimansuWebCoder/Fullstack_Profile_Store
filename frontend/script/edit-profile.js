@@ -24,33 +24,53 @@ redirectBtn.addEventListener("click", () => {
 //     }
 // });
 
+// submitBtn.addEventListener("click", () => {
+//     if (profileNameEditor.value !== "" && profilePassionEditor.value !== "") {
+//         // Fetch session data to get the user ID
+//         fetch("https://fullstack-profile-store-2.onrender.com/debug-session")
+//             .then((response) => response.json())
+//             .then((sessionData) => {
+//                 console.log(sessionData.sessionID);
+//                 if (sessionData.sessionID) {
+//                     // Use the user ID from session data
+//                     fetch(
+//                         "https://fullstack-profile-store-2.onrender.com/profile",
+//                         {
+//                             method: "put",
+//                             headers: { "Content-Type": "application/json" },
+//                             credentials: "include",
+//                             body: JSON.stringify({
+//                                 id: sessionData.sessionID, // Use sessionID or adjust as needed
+//                                 name: profileNameEditor.value,
+//                                 passion: profilePassionEditor.value,
+//                             }),
+//                         },
+//                     );
+//                 } else {
+//                     console.error("Failed to fetch session ID");
+//                 }
+//             })
+//             .catch((error) => console.error("Error:", error));
+//     }
+// });
+
 submitBtn.addEventListener("click", () => {
     if (profileNameEditor.value !== "" && profilePassionEditor.value !== "") {
-        // Fetch session data to get the user ID
-        fetch("https://fullstack-profile-store-2.onrender.com/debug-session")
+        fetch("https://fullstack-profile-store-2.onrender.com/profile", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: profileNameEditor.value,
+                passion: profilePassionEditor.value,
+                // No need to send 'id', it will be used on the server-side
+            }),
+        })
             .then((response) => response.json())
-            .then((sessionData) => {
-                console.log(sessionData.sessionID);
-                if (sessionData.sessionID) {
-                    // Use the user ID from session data
-                    fetch(
-                        "https://fullstack-profile-store-2.onrender.com/profile",
-                        {
-                            method: "put",
-                            headers: { "Content-Type": "application/json" },
-                            credentials: "include",
-                            body: JSON.stringify({
-                                id: sessionData.sessionID, // Use sessionID or adjust as needed
-                                name: profileNameEditor.value,
-                                passion: profilePassionEditor.value,
-                            }),
-                        },
-                    );
-                } else {
-                    console.error("Failed to fetch session ID");
-                }
+            .then((data) => {
+                console.log(data); // Check the response
+                window.location = "/profile-admin"; // Redirect on success
             })
-            .catch((error) => console.error("Error:", error));
+            .catch((err) => console.error("Error:", err));
     }
 });
 
