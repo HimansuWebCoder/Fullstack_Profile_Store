@@ -60,9 +60,9 @@ submitBtn.addEventListener("click", () => {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+                // No need to send 'id', it is managed on the server-side
                 name: profileNameEditor.value,
                 passion: profilePassionEditor.value,
-                // No need to send 'id', it is managed on the server-side
             }),
         })
             .then((response) => response.json())
