@@ -33,7 +33,8 @@ async function uploadPost(req, res) {
       image: result.secure_url, // Store the Cloudinary URL
     };
 
-    const email = "Rinku@gmail.com"; // In real-world, get this from session or req.user after login
+    // const email = "Rinku@gmail.com"; // In real-world, get this from session or req.user after login
+    const email = req.session.user ? req.session.user.email : null;
 
     // Start a database transaction
     db.transaction(async (trx) => {
