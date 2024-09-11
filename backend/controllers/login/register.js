@@ -27,7 +27,10 @@ const handleRegister = (req, res, db, bcrypt) => {
           .limit(1); // Limit to 1 image
       })
       .then((images) => {
-        const imageId = images[0]?.id;
+        if (!images || images.length === 0) {
+          throw new Error("Image not found");
+        }
+        const imageId = images[0].id;
         return trx("profile").returning("*").insert({
           email: loginEmail[0].email,
           name: name,
