@@ -25,6 +25,7 @@ function showProfile() {
       console.log(users);
       profileHeader.textContent = users.name;
       profileIntro.textContent = users.passion;
+      profileImg.textContent = users.image;
     })
     .finally(() => {
       if (isLoaded) {
@@ -33,21 +34,22 @@ function showProfile() {
       }
     });
 
-  fetch("https://fullstack-profile-store-2.onrender.com/view")
-    .then((res) => res.json())
-    .then((users) => {
-      console.log(users[users.length - 1].image);
-      // profileImg.src = users[users.length-1].image;
-      // profileImg.src = '/' + users[users.length-1].image;
-      profileImg.src = users[users.length - 1].image;
-    })
-    .finally(() => {
-      if (isLoaded) {
-        profileContainer.style.display = "block";
-        loader.style.display = "none";
-      }
-    });
-}
+
+//   fetch("https://fullstack-profile-store-2.onrender.com/view")
+//     .then((res) => res.json())
+//     .then((users) => {
+//       console.log(users[users.length - 1].image);
+//       // profileImg.src = users[users.length-1].image;
+//       // profileImg.src = '/' + users[users.length-1].image;
+//       profileImg.src = users[users.length - 1].image;
+//     })
+//     .finally(() => {
+//       if (isLoaded) {
+//         profileContainer.style.display = "block";
+//         loader.style.display = "none";
+//       }
+//     });
+// }
 
 showProfile();
 
