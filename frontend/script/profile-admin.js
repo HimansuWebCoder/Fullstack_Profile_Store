@@ -23,6 +23,8 @@ function showProfile() {
     .then((res) => res.json())
     .then((users) => {
       console.log(users);
+      console.log(users);
+      console.log(users.image);
       profileHeader.textContent = users.name;
       profileIntro.textContent = users.passion;
       profileImg.textContent = users.image;
