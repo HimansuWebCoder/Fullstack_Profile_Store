@@ -50,7 +50,7 @@ function showProfile() {
   //         loader.style.display = "none";
   //       }
   //     });
-// }
+}
 
 showProfile();
 
