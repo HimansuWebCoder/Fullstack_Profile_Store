@@ -44,6 +44,8 @@ const updateProfile = (req, res) => {
     }
 
     const userId = req.session.userId;
+    console.log(userId);
+
     const { name, passion } = req.body;
     if (!name || !passion) {
         return res.status(400).json("incorrect form submission");
@@ -52,6 +54,7 @@ const updateProfile = (req, res) => {
     updateUserProfileModel(userId, name, passion)
         .then((updatedProfile) => {
             res.json(updatedProfile[0]);
+            console.log(updatedProfile[0]);
         })
         .catch((err) => {
             console.log("Error Updating Profile:", err);
