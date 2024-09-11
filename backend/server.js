@@ -32,7 +32,16 @@ const loginRouter = require("./routes/frontend-pages/login.router");
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
+app.use(
+	cors({
+		origin: [
+			"http://localhost:3000",
+			"https://fullstack-profile-store-2.onrender.com/",
+		],
+	}),
+);
+
 app.use("/uploads", express.static("uploads"));
 
 // Setting up session middleware

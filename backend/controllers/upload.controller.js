@@ -1,6 +1,7 @@
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const { uploadImageModel, viewImageModel } = require("../models/images.model");
+const db = require("../models/db");
 
 // cloudinary.config({
 //   secure: true,
@@ -18,41 +19,120 @@ cloudinary.config({
 
 async function uploadPost(req, res) {
   try {
-    // If no file is uploaded, return an error
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    // Upload the image to Cloudinary
+    // Upload image to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path, {
       use_filename: true,
       unique_filename: false,
       overwrite: true,
     });
-    // Save the Cloudinary URL to the database
+
     const images = {
       image: result.secure_url, // Store the Cloudinary URL
     };
 
-    // Insert the image URL into the database
-    uploadImageModel(images)
-      .then((data) => {
-        console.log("Inserted data:", data);
-        res
-          .status(200)
-          .sendFile(
-            path.join(__dirname, "..", "..", "frontend", "profile-admin.html"),
-          );
-      })
-      .catch((error) => {
-        console.error("Database insert error:", error);
-        res.status(500).send("Failed to store image path in the database");
-      });
+    db.transaction((trx) => {
+      trx
+        .insert({
+          image: images.image, // Use images.image (Cloudinary URL)
+        })
+        .into("images")
+        .returning("image")
+        .then((img) => {
+          return trx("profile").returning("*").insert({
+            image: img[0].image,
+          });
+        })
+        .then((profileImg) => {
+          res
+            .status(200)
+            .sendFile(
+              path.join(
+                __dirname,
+                "..",
+                "..",
+                "frontend",
+                "profile-admin.html",
+              ),
+            );
+        })
+        .catch((err) => {
+          console.error("Database insert error:", err); // Fixed the error variable
+          res.status(500).send("Failed to store image path in the database");
+        });
+    });
   } catch (error) {
-    console.error("Error uploading image to Cloudinary:", error);
-    res.status(500).json({ error: "Failed to upload image to Cloudinary" });
+    console.error("Upload error:", error);
+    res.status(500).send("Failed to upload image");
   }
 }
+
+// async function uploadPost(req, res) {
+//   try {
+//     // If no file is uploaded, return an error
+//     if (!req.file) {
+//       return res.status(400).json({ error: "No file uploaded" });
+//     }
+
+//     // Upload the image to Cloudinary
+//     const result = await cloudinary.uploader.upload(req.file.path, {
+//       use_filename: true,
+//       unique_filename: false,
+//       overwrite: true,
+//     });
+//     // Save the Cloudinary URL to the database
+//     const images = {
+//       image: result.secure_url, // Store the Cloudinary URL
+//     };
+
+//     db.transaction((trx) => {
+//       trx.insert({
+//          image: images,
+//       })
+//       .into("images")
+//       .returning("image")
+//       .then((img) => {
+//         return trx("profile")
+//           .returning("*")
+//           .insert({
+//             image: img[0].image,
+//           })
+//           .then((profileImg) => {
+//             res.status(200).sendFile(path.join(__dirname, "..", "..", "frontend", "profile-admin.html")),
+//           })
+//       })
+//       .catch(error => {
+//         console.error("Database insert error:", error);
+//         res.status(500).send("Failed to store image path in the database");
+//       })
+//     })
+
+// Insert the image URL into the database
+// const uploadImageModel = (images) => {
+//   return db("images").returning("*").insert(images);
+// };
+
+//     uploadImageModel(images)
+//       .then((data) => {
+//         console.log("Inserted data:", data);
+//         res
+//           .status(200)
+//           .sendFile(
+//             path.join(__dirname, "..", "..", "frontend", "profile-admin.html"),
+//           );
+//       })
+//       .catch((error) => {
+//         console.error("Database insert error:", error);
+//         res.status(500).send("Failed to store image path in the database");
+//       });
+//   } catch (error) {
+//     console.error("Error uploading image to Cloudinary:", error);
+//     res.status(500).json({ error: "Failed to upload image to Cloudinary" });
+//   }
+// }
 
 function viewImgPost(req, res, db) {
   viewImageModel()
