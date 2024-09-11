@@ -37,15 +37,14 @@ submitBtn.addEventListener("click", () => {
                         {
                             method: "put",
                             headers: { "Content-Type": "application/json" },
+                            credentials: "include",
                             body: JSON.stringify({
                                 id: sessionData.sessionID, // Use sessionID or adjust as needed
                                 name: profileNameEditor.value,
                                 passion: profilePassionEditor.value,
                             }),
                         },
-                    ).then(() => {
-                        window.location = "/profile-admin";
-                    });
+                    );
                 } else {
                     console.error("Failed to fetch session ID");
                 }
@@ -53,3 +52,7 @@ submitBtn.addEventListener("click", () => {
             .catch((error) => console.error("Error:", error));
     }
 });
+
+// .then(() => {
+//                         window.location = "/profile-admin";
+//                     });
