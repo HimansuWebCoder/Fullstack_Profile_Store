@@ -22,6 +22,7 @@ function showProfile() {
       console.log(users);
       profileHeader.textContent = users.name;
       profileIntro.textContent = users.passion;
+      profileImg.src = users.image;
     })
     .finally(() => {
       if (isLoaded) {
@@ -30,34 +31,34 @@ function showProfile() {
       }
     });
 
-  fetch("https://fullstack-profile-store-2.onrender.com/view")
-    .then((res) => res.json())
-    .then((users) => {
-      // console.log(users[users.length - 1].image);
-      // profileImg.src = users[users.length-1].image;
-      // profileImg.src = '/' + users[users.length-1].image;
-      profileImg.src = users[users.length - 1].image;
-      console.log(users[users.length - 1].image);
-      console.log(users[users.length - 1]); // Logs the last user object
+  // fetch("https://fullstack-profile-store-2.onrender.com/view")
+  //   .then((res) => res.json())
+  //   .then((users) => {
+  //     // console.log(users[users.length - 1].image);
+  //     // profileImg.src = users[users.length-1].image;
+  //     // profileImg.src = '/' + users[users.length-1].image;
+  //     profileImg.src = users[users.length - 1].image;
+  //     console.log(users[users.length - 1].image);
+  //     console.log(users[users.length - 1]); // Logs the last user object
 
-      // users.forEach((img, i) => {
-      //   console.log(users[users.length-1].image);
-      // })
-      // if (users.length) {
-      //   users.forEach((user, i) => {
-      //     // profileHeader.textContent = user.name;
-      //     // profileIntro.textContent = user.passion;
-      //     profileImg.src = users[users.length-1].image;
-      //     isLoaded = true; // Data loaded successfully
-      //   });
-      // }
-    })
-    .finally(() => {
-      if (isLoaded) {
-        profileContainer.style.display = "block";
-        loader.style.display = "none";
-      }
-    });
+  //     // users.forEach((img, i) => {
+  //     //   console.log(users[users.length-1].image);
+  //     // })
+  //     // if (users.length) {
+  //     //   users.forEach((user, i) => {
+  //     //     // profileHeader.textContent = user.name;
+  //     //     // profileIntro.textContent = user.passion;
+  //     //     profileImg.src = users[users.length-1].image;
+  //     //     isLoaded = true; // Data loaded successfully
+  //     //   });
+  //     // }
+  //   })
+  //   .finally(() => {
+  //     if (isLoaded) {
+  //       profileContainer.style.display = "block";
+  //       loader.style.display = "none";
+  //     }
+  //   });
 }
 
 showProfile();

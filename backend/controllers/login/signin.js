@@ -25,6 +25,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
               name: profile[0].name,
               passion: profile[0].passion,
               email: profile[0].email,
+              image: profile[0].image,
             };
             // res.json(profile[0]);
             // res.json({
