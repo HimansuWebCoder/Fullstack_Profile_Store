@@ -21,7 +21,7 @@ const handleRegister = (req, res, db, bcrypt) => {
         return trx
         .select('id') // Assuming you need to select the image ID
         .from('images')
-        .where(image: image)
+        .where({image: image})
         .limit(1); // Limit to 1 image
         })
          .then((images) => {
