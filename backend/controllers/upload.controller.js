@@ -16,7 +16,6 @@ cloudinary.config({
 
 // Log the configuration
 // console.log(cloudinary.config());
-
 async function uploadPost(req, res) {
   try {
     if (!req.file) {
@@ -34,43 +33,97 @@ async function uploadPost(req, res) {
       image: result.secure_url, // Store the Cloudinary URL
     };
 
-    db.transaction((trx) => {
-      trx
-        .insert({
-          image: images.image, // Use images.image (Cloudinary URL)
-        })
-        .into("images")
-        .returning("image")
-        .then((img) => {
-          const email = "Rinku@gmail.com";
-          return trx("profile").returning("*").insert({
-            image: img[0].image,
-            email: email,
-          });
-        })
-        .then((profileImg) => {
-          res
-            .status(200)
-            .sendFile(
-              path.join(
-                __dirname,
-                "..",
-                "..",
-                "frontend",
-                "profile-admin.html",
-              ),
-            );
-        })
-        .catch((err) => {
-          console.error("Database insert error:", err); // Fixed the error variable
-          res.status(500).send("Failed to store image path in the database");
+    const email = "Rinku@gmail.com"; // In real-world, get this from session or req.user after login
+
+    // Start a database transaction
+    db.transaction(async (trx) => {
+      try {
+        // Check if the email exists (since this is for a logged-in user, it should)
+        const existingProfile = await trx("profile")
+          .where({ email: email })
+          .first();
+
+        if (!existingProfile) {
+          return res.status(404).json({ error: "Profile not found" });
+        }
+
+        // Update the image for the logged-in user
+        await trx("profile").where({ email: email }).update({
+          image: images.image, // Update the image field with Cloudinary URL
         });
+
+        console.log("Profile image updated for email:", email);
+
+        res
+          .status(200)
+          .sendFile(
+            path.join(__dirname, "..", "..", "frontend", "profile-admin.html"),
+          );
+      } catch (err) {
+        console.error("Database update error:", err);
+        res.status(500).send("Failed to update image in the database");
+      }
     });
   } catch (error) {
     console.error("Upload error:", error);
     res.status(500).send("Failed to upload image");
   }
 }
+
+// async function uploadPost(req, res) {
+//   try {
+//     if (!req.file) {
+//       return res.status(400).json({ error: "No file uploaded" });
+//     }
+
+//     // Upload image to Cloudinary
+//     const result = await cloudinary.uploader.upload(req.file.path, {
+//       use_filename: true,
+//       unique_filename: false,
+//       overwrite: true,
+//     });
+
+//     const images = {
+//       image: result.secure_url, // Store the Cloudinary URL
+//     };
+
+//     db.transaction((trx) => {
+//       trx
+//         .insert({
+//           image: images.image, // Use images.image (Cloudinary URL)
+//         })
+//         .into("images")
+//         .returning("image")
+//         .then((img) => {
+//           const email = "Rinku@gmail.com";
+//           return trx("profile").returning("*").insert({
+//             image: img[0].image,
+//             email: email,
+//           });
+//         })
+//         .then((profileImg) => {
+//           res
+//             .status(200)
+//             .sendFile(
+//               path.join(
+//                 __dirname,
+//                 "..",
+//                 "..",
+//                 "frontend",
+//                 "profile-admin.html",
+//               ),
+//             );
+//         })
+//         .catch((err) => {
+//           console.error("Database insert error:", err); // Fixed the error variable
+//           res.status(500).send("Failed to store image path in the database");
+//         });
+//     });
+//   } catch (error) {
+//     console.error("Upload error:", error);
+//     res.status(500).send("Failed to upload image");
+//   }
+// }
 
 // async function uploadPost(req, res) {
 //   try {
