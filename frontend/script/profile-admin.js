@@ -50,7 +50,7 @@ function showProfile() {
   //         loader.style.display = "none";
   //       }
   //     });
-}
+// }
 
 showProfile();
 
@@ -93,13 +93,13 @@ fetch("https://fullstack-profile-store-2.onrender.com/users")
   });
 
 profileEditBtn.addEventListener("click", () => {
-  window.location = "edit-profile";
+  window.location = "/edit-profile";
 });
 
 uploadProfilePhoto.addEventListener("click", () => {
-  window.location = "imageUpload";
+  window.location = "/imageUpload";
 });
 
 addSectionBtn.addEventListener("click", () => {
-  window.location = "add-section";
+  window.location = "/add-section";
 });
