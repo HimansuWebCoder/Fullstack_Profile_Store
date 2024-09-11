@@ -29,12 +29,12 @@ function showProfile() {
       profileIntro.textContent = users.passion;
       profileImg.src = users.image;
     })
-    .finally(() => {
-      if (isLoaded) {
-        profileContainer.style.display = "block";
-        loader.style.display = "none";
-      }
-    });
+    // .finally(() => {
+    //   if (isLoaded) {
+    //     profileContainer.style.display = "block";
+    //     loader.style.display = "none";
+    //   }
+    // });
 
 
 //   fetch("https://fullstack-profile-store-2.onrender.com/view")
