@@ -27,7 +27,7 @@ redirectBtn.addEventListener("click", () => {
 submitBtn.addEventListener("click", () => {
     if (profileNameEditor.value !== "" && profilePassionEditor.value !== "") {
         // Fetch session data to get the user ID
-        fetch("/debug-session")
+        fetch("https://fullstack-profile-store-2.onrender.com/debug-session")
             .then((response) => response.json())
             .then((sessionData) => {
                 if (sessionData.sessionID) {
@@ -50,6 +50,12 @@ submitBtn.addEventListener("click", () => {
                 }
             })
             .catch((error) => console.error("Error:", error));
+    }
+});
+
+submitBtn.addEventListener("click", () => {
+    if (profileNameEditor.value !== "" || profilePassionEditor.value !== "") {
+        fetch();
     }
 });
 
