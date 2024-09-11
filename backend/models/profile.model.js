@@ -5,7 +5,7 @@ const getUserProfileModel = (userEmail) => {
 };
 
 const updateUserProfileModel = (id, name, passion) => {
-	return db("profile").where({ id }).update({ name, passion });
+	return db("profile").where({ id }).update({ name, passion }).returning("*");
 };
 
 module.exports = {

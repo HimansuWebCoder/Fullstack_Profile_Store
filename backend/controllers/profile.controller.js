@@ -40,9 +40,17 @@ const getProfile = (req, res) => {
 // update user profile
 const updateProfile = (req, res) => {
     const { id, name, passion, image } = req.body;
-    updateUserProfileModel(id, name, passion).then((user) => {
-        res.json(user);
-    });
+    if (!id || !name || !passion) {
+        return res.status(400).json("incorrect form submission");
+    }
+    updateUserProfileModel(id, name, passion)
+        .then((updatedProfile) => {
+            res.json(updatedProfile[0]);
+        })
+        .catch((err) => {
+            console.log("Error Updating Profile:", err);
+            res.status(400).json("unable to update profile");
+        });
 };
 
 module.exports = {

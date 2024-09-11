@@ -14,7 +14,7 @@ submitBtn.addEventListener("click", () => {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: "1",
+                id: req.session.user.id,
                 name: profileNameEditor.value,
                 passion: profilePassionEditor.value,
             }),
