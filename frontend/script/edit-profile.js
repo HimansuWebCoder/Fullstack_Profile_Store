@@ -30,6 +30,7 @@ submitBtn.addEventListener("click", () => {
         fetch("https://fullstack-profile-store-2.onrender.com/debug-session")
             .then((response) => response.json())
             .then((sessionData) => {
+                console.log(sessionData.sessionID);
                 if (sessionData.sessionID) {
                     // Use the user ID from session data
                     fetch(

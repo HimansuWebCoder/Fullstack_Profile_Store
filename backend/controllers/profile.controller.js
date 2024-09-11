@@ -39,11 +39,17 @@ const getProfile = (req, res) => {
 
 // update user profile
 const updateProfile = (req, res) => {
+    if (!req.session.userId) {
+        return res.status(401).json("Unauthorized");
+    }
+
     const { id, name, passion, image } = req.body;
     if (!id || !name || !passion) {
         return res.status(400).json("incorrect form submission");
     }
-    updateUserProfileModel(id, name, passion)
+
+    const userId = req.session.userId;
+    updateUserProfileModel(userId, name, passion)
         .then((updatedProfile) => {
             res.json(updatedProfile[0]);
         })
