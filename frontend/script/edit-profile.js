@@ -68,7 +68,7 @@ submitBtn.addEventListener("click", () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data); // Check the response
-                window.location = "/profile-admin"; // Redirect on success
+                // window.location = "/profile-admin"; // Redirect on success
             })
             .catch((err) => console.error("Error:", err));
     }
