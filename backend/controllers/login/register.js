@@ -3,6 +3,8 @@ const db = require("../../models/db");
 const handleRegister = (req, res, db, bcrypt) => {
   const { email, name, password } = req.body;
   const passion = "Web Development";
+  const image =
+    "https://res.cloudinary.com/dtiasevyl/image/upload/v1725802853/IMG_20240814_191245.jpg";
   console.log(req.body);
   if (!email || !name || !password) {
     return res.status(400).json("incorrect form submission");
