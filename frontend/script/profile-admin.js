@@ -27,7 +27,7 @@ function showProfile() {
       console.log(users.image);
       profileHeader.textContent = users.name;
       profileIntro.textContent = users.passion;
-      profileImg.textContent = users.image;
+      profileImg.src = users.image;
     })
     .finally(() => {
       if (isLoaded) {
