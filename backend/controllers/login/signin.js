@@ -62,6 +62,8 @@ const handleSignin = (db, bcrypt) => (req, res) => {
     });
 };
 
+handleSignin();
+
 module.exports = {
   handleSignin,
 };

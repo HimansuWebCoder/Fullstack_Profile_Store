@@ -110,6 +110,23 @@ app.get("/debug-session", (req, res) => {
 	}
 });
 
+app.get("/profile/:userId/skills", async (req, res) => {
+	const { userId } = req.params;
+	try {
+		const userExists = await db("profile").where({ id: userId }).first();
+		if (!userExists) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		const skills = await db("skills")
+			.where({ profile_id: userId })
+			.select("*");
+		res.status(200).json(skills);
+	} catch (err) {
+		res.status(500).send(err.message);
+	}
+});
+
 // Start server
 app.listen(process.env.PORT || 3000, () => {
 	console.log(
