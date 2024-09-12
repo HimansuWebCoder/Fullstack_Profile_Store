@@ -25,6 +25,30 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
       .then((res) => res.json())
       .then((skills) => {
         console.log(skills);
+        const skillDiv = document.createElement("div");
+        profileContainer.appendChild(skillDiv);
+        skillDiv.textContent = "Skills";
+        skillDiv.classList.add("skills-intro-style");
+
+        skills.map((skill) => {
+          console.log(skill);
+          const skillContainer = document.createElement("div");
+          profileContainer.appendChild(skillContainer);
+          skillContainer.textContent = skill.skill;
+          skillContainer.classList.add("skills-container");
+
+          const editSkillBtn = document.createElement("button");
+          skillContainer.appendChild(editSkillBtn);
+          editSkillBtn.textContent = "Edit";
+          editSkillBtn.classList.add("edit-skills-btn-style");
+          editSkillBtn.classList.add("edit-btns");
+
+          const delSkillBtn = document.createElement("button");
+          skillContainer.appendChild(delSkillBtn);
+          delSkillBtn.textContent = "Delete";
+          delSkillBtn.classList.add("edit-skills-btn-style");
+          delSkillBtn.classList.add("del-btns");
+        });
       });
   });
 
@@ -45,23 +69,7 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
 //           skillDiv.classList.add("skills-intro-style");
 
 //           skills.map(skill => {
-//               console.log(skill);
-//               const skillContainer = document.createElement("div");
-//                 profileContainer.appendChild(skillContainer);
-//                 skillContainer.textContent = skill.skill;
-//                 skillContainer.classList.add("skills-container");
-
-//                 const editSkillBtn = document.createElement("button");
-//                 skillContainer.appendChild(editSkillBtn);
-//                 editSkillBtn.textContent = "Edit";
-//                 editSkillBtn.classList.add("edit-skills-btn-style");
-//                 editSkillBtn.classList.add("edit-btns");
-
-//                 const delSkillBtn = document.createElement("button");
-//                 skillContainer.appendChild(delSkillBtn);
-//                 delSkillBtn.textContent = "Delete";
-//                 delSkillBtn.classList.add("edit-skills-btn-style");
-//                 delSkillBtn.classList.add("del-btns");
+//
 
 //                 delSkillBtn.addEventListener("click", () => {
 //                   fetch(`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills/${skill.id}`, {
