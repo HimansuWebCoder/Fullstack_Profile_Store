@@ -10,6 +10,54 @@ const addSectionBtn = document.querySelector("#add-section");
 const loader = document.querySelector(".loader");
 
 const uploadProfilePhoto = document.querySelector("#upload-profile-photo");
+
+fetch("https://fullstack-profile-store-2.onrender.com/profile")
+  .then((profile) => {
+    console.log(profile); // Log user data
+    profileHeader.textContent = profile.name;
+    profileIntro.textContent = profile.passion;
+    profileImg.src = profile.image;
+
+    // Fetch user skills
+    fetch(`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills`)
+     .then(res => res.json())
+     .then(skills => {
+        const skillDiv = document.createElement("div");
+          profileContainer.appendChild(skillDiv);
+          skillDiv.textContent = "Skills";
+          skillDiv.classList.add("skills-intro-style");
+
+          skills.map(skill => {
+              console.log(skill);
+              const skillContainer = document.createElement("div");
+                profileContainer.appendChild(skillContainer);
+                skillContainer.textContent = skill.skill;
+                skillContainer.classList.add("skills-container");
+
+                const editSkillBtn = document.createElement("button");
+                skillContainer.appendChild(editSkillBtn);
+                editSkillBtn.textContent = "Edit";
+                editSkillBtn.classList.add("edit-skills-btn-style");
+                editSkillBtn.classList.add("edit-btns");
+
+                const delSkillBtn = document.createElement("button");
+                skillContainer.appendChild(delSkillBtn);
+                delSkillBtn.textContent = "Delete";
+                delSkillBtn.classList.add("edit-skills-btn-style");
+                delSkillBtn.classList.add("del-btns");
+
+                delSkillBtn.addEventListener("click", () => {
+                  fetch(`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills/${skill.id}`, {
+                    method: "delete"
+                  })
+                })
+          })
+     }) 
+
+
+
+
+
 // By Default name, passion/profession is there you can edit this according to your name and passion/profession
 
 // function showProfile() {
@@ -19,66 +67,66 @@ const uploadProfilePhoto = document.querySelector("#upload-profile-photo");
 
 // let isLoaded = false;
 // Fetch user profile
-fetch("https://fullstack-profile-store-2.onrender.com/profile")
-  .then((res) => {
-    if (!res.ok) throw new Error("Network response was not ok");
-    return res.json();
-  })
-  .then((users) => {
-    console.log(users); // Log user data
-    profileHeader.textContent = users.name;
-    profileIntro.textContent = users.passion;
-    profileImg.src = users.image;
+// fetch("https://fullstack-profile-store-2.onrender.com/profile")
+//   .then((res) => {
+//     if (!res.ok) throw new Error("Network response was not ok");
+//     return res.json();
+//   })
+//   .then((users) => {
+//     console.log(users); // Log user data
+//     profileHeader.textContent = users.name;
+//     profileIntro.textContent = users.passion;
+//     profileImg.src = users.image;
 
-    // Fetch user skills
-    return fetch(
-      `https://fullstack-profile-store-2.onrender.com/profile/${users.id}/skills`,
-    ).then((skills) => {
-      const skillDiv = document.createElement("div");
-      profileContainer.appendChild(skillDiv);
-      skillDiv.textContent = "Skills";
-      skillDiv.classList.add("skills-intro-style");
-      skills.forEach((skill) => {
-        console.log(skill);
-        const skillContainer = document.createElement("div");
-        profileContainer.appendChild(skillContainer);
-        skillContainer.textContent = skill.skill;
-        skillContainer.classList.add("skills-container");
+//     // Fetch user skills
+//     return fetch(
+//       `https://fullstack-profile-store-2.onrender.com/profile/${users.id}/skills`,
+//     ).then((skills) => {
+//       const skillDiv = document.createElement("div");
+//       profileContainer.appendChild(skillDiv);
+//       skillDiv.textContent = "Skills";
+//       skillDiv.classList.add("skills-intro-style");
+//       skills.forEach((skill) => {
+//         console.log(skill);
+//         const skillContainer = document.createElement("div");
+//         profileContainer.appendChild(skillContainer);
+//         skillContainer.textContent = skill.skill;
+//         skillContainer.classList.add("skills-container");
 
-        const editSkillBtn = document.createElement("button");
-        skillContainer.appendChild(editSkillBtn);
-        editSkillBtn.textContent = "Edit";
-        editSkillBtn.classList.add("edit-skills-btn-style");
-        editSkillBtn.classList.add("edit-btns");
+//         const editSkillBtn = document.createElement("button");
+//         skillContainer.appendChild(editSkillBtn);
+//         editSkillBtn.textContent = "Edit";
+//         editSkillBtn.classList.add("edit-skills-btn-style");
+//         editSkillBtn.classList.add("edit-btns");
 
-        const delSkillBtn = document.createElement("button");
-        skillContainer.appendChild(delSkillBtn);
-        delSkillBtn.textContent = "Delete";
-        delSkillBtn.classList.add("edit-skills-btn-style");
-        delSkillBtn.classList.add("del-btns");
+//         const delSkillBtn = document.createElement("button");
+//         skillContainer.appendChild(delSkillBtn);
+//         delSkillBtn.textContent = "Delete";
+//         delSkillBtn.classList.add("edit-skills-btn-style");
+//         delSkillBtn.classList.add("del-btns");
 
-        // editSkillBtn.addEventListener("click", () => {
-        //   window.location.href = `skill_edit/${user.id}/edit`;
-        // });
+//         // editSkillBtn.addEventListener("click", () => {
+//         //   window.location.href = `skill_edit/${user.id}/edit`;
+//         // });
 
-        delSkillBtn.addEventListener("click", () => {
-          fetch(
-            `https://fullstack-profile-store-2.onrender.com/profile/${users.id}/skills/${skill.id}`,
-            {
-              method: "delete",
-            },
-          );
-        });
-      });
-    });
-  })
-  .then((res) => {
-    if (!res.ok) throw new Error("Network response was not ok");
-    return res.json();
-  })
-  .catch((error) => {
-    console.error("There was a problem with the fetch operation:", error);
-  });
+//         delSkillBtn.addEventListener("click", () => {
+//           fetch(
+//             `https://fullstack-profile-store-2.onrender.com/profile/${users.id}/skills/${skill.id}`,
+//             {
+//               method: "delete",
+//             },
+//           );
+//         });
+//       });
+//     });
+//   })
+//   .then((res) => {
+//     if (!res.ok) throw new Error("Network response was not ok");
+//     return res.json();
+//   })
+//   .catch((error) => {
+//     console.error("There was a problem with the fetch operation:", error);
+//   });
 // .finally(() => {
 //   if (isLoaded) {
 //     profileContainer.style.display = "block";
