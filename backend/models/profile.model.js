@@ -7,7 +7,7 @@ const getUserProfileModel = (userEmail) => {
 const updateUserProfileModel = (email, name, passion) => {
 	console.log(
 		"Updating profile with ID",
-		profileId,
+		email,
 		"Name:",
 		name,
 		"Passion:",
