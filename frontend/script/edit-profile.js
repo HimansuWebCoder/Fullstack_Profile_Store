@@ -54,9 +54,10 @@ redirectBtn.addEventListener("click", () => {
 //     }
 // });
 
+const id = 31;
 submitBtn.addEventListener("click", () => {
     if (profileNameEditor.value !== "" && profilePassionEditor.value !== "") {
-        fetch("https://fullstack-profile-store-2.onrender.com/profile/31", {
+        fetch(`https://fullstack-profile-store-2.onrender.com/profile/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

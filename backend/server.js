@@ -163,6 +163,53 @@ app.delete("/profile/:profileId/skills/:skillId", async (req, res) => {
 	}
 });
 
+// app.put("/profile/:id", (req, res) => {
+// 	 if (!req.session.profileId) {
+//         return res.status(401).json("Unauthorized");
+//     }
+
+//     const userProfileId = req.session.profileId;
+//     console.log("User ID:", userProfileId);
+
+//     const { name, passion } = req.body;
+//     console.log("Request Body:", { name, passion });
+
+//     if (!name || !passion) {
+//         return res.status(400).json("incorrect form submission");
+//     }
+
+// })
+
+// app.put((req, res) => {
+//     if (!req.session.profileId) {
+//         return res.status(401).json("Unauthorized");
+//     }
+
+//     const userProfileId = req.session.profileId;
+//     console.log("User ID:", userProfileId);
+
+//     const { name, passion } = req.body;
+//     console.log("Request Body:", { name, passion });
+
+//     if (!name || !passion) {
+//         return res.status(400).json("incorrect form submission");
+//     }
+
+//     updateUserProfileModel(userProfileId, name, passion)
+//         .then((updatedProfile) => {
+//             if (updatedProfile.length > 0) {
+//                 console.log("Updated Profile:", updatedProfile[0]);
+//                 res.json(updatedProfile[0]);
+//             } else {
+//                 res.status(404).json({ error: "Profile not found" });
+//             }
+//         })
+//         .catch((err) => {
+//             console.log("Error Updating Profile:", err);
+//             res.status(400).json({ error: "unable to update profile" });
+//         });
+// };
+
 // Start server
 app.listen(process.env.PORT || 3000, () => {
 	console.log(

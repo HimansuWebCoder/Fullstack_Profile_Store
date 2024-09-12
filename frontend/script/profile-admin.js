@@ -242,9 +242,9 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
 //     });
 //   });
 
-profileEditBtn.addEventListener("click", () => {
-  window.location = "/edit-profile";
-});
+// profileEditBtn.addEventListener("click", () => {
+//   window.location = "/edit-profile";
+// });
 
 uploadProfilePhoto.addEventListener("click", () => {
   window.location = "/imageUpload";
