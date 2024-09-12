@@ -98,7 +98,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/debug-session", (req, res) => {
-	if (req.session.userId) {
+	if (req.session.profileId) {
 		console.log("Session ID:", req.sessionID);
 		console.log("Session Data:", req.session);
 		res.json({
