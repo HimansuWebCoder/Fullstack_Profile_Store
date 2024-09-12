@@ -56,7 +56,7 @@ redirectBtn.addEventListener("click", () => {
 
 submitBtn.addEventListener("click", () => {
     if (profileNameEditor.value !== "" && profilePassionEditor.value !== "") {
-        fetch("https://fullstack-profile-store-2.onrender.com/profile", {
+        fetch("https://fullstack-profile-store-2.onrender.com/profile/31", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
