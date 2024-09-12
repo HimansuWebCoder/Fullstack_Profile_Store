@@ -1,6 +1,6 @@
 const postSkillsModel = (profileId, skill) => {
     return db("skills")
-        .insert({ profile_id: profileId, skill })
+        .insert({ profile_id: profileId, skill: skill })
         .returning("*")
         .then((result) => {
             console.log(result);

@@ -90,7 +90,6 @@ app.use("/login", loginRouter);
 app.use("/profile", profileRouter);
 app.use("/users", usersRouter);
 app.use("/add-section", addSectionRouter);
-app.use("/debug-session", debugSessionRouter);
 
 app.use("/submit-file", upload.single("avatar"), uploadRouter);
 app.use("/", uploadRouter);
@@ -100,6 +99,26 @@ app.post("/register", (req, res) => {
 	console.log("Request body:", req.body);
 	register.handleRegister(req, res, db, bcrypt);
 });
+
+app.get("/debug-session", debugSessionRouter);
+
+// app.post("/profile/:profileId/skills", async (req, res) => {
+// 	const { profileId } = req.params;
+// 	const { skill } = req.body;
+// 	try {
+// 		const userExists = await db("profile").where({ id: profileId }).first();
+// 		if (!userExists) {
+// 			return res.status(404).json({ error: "User not found" });
+// 		}
+
+// 		const [newSkill] = await db("skills")
+// 			.insert({ profile_id: profileId, skill })
+// 			.returning("*");
+// 		res.status(201).json(newSkill);
+// 	} catch (err) {
+// 		res.status(500).send(err.message);
+// 	}
+// });
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
