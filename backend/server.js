@@ -16,6 +16,7 @@ const profileRouter = require("./routes/profile.router");
 const usersRouter = require("./routes/users.router");
 const addSectionRouter = require("./routes/add-section.router");
 const uploadRouter = require("./routes/upload.router");
+const debugSessionRouter = require("./routes/debug-session.router");
 
 // Frontend sending files routes
 const indexRouter = require("./routes/frontend-pages/index.router");
@@ -57,12 +58,14 @@ app.use(
 );
 
 // Logging middleware
-// app.use((req, res, next) => {
-//    const start = Date.now();
-//    next();
-//    const delta = Date.now() - start;
-//    console.log(`${req.method} ${req.baseUrl} ${req.params} ${req.url} ${delta}ms`);
-// })
+app.use((req, res, next) => {
+	const start = Date.now();
+	next();
+	const delta = Date.now() - start;
+	console.log(
+		`${req.method} ${req.baseUrl} ${req.params} ${req.url} ${delta}ms`,
+	);
+});
 
 // Static files
 app.use("/script", express.static(path.join(__dirname, "../frontend/script")));
@@ -97,20 +100,7 @@ app.post("/register", (req, res) => {
 	register.handleRegister(req, res, db, bcrypt);
 });
 
-app.get("/debug-session", (req, res) => {
-	if (req.session.profileId) {
-		console.log("Session ID:", req.sessionID);
-		console.log("Session Data:", req.session);
-		res.json({
-			message: "Session is active",
-			// sessionID: req.sessionID,
-			sessionID: req.session.userId,
-			sessionData: req.session,
-		});
-	} else {
-		res.status(401).send("No active session");
-	}
-});
+app.get("/debug-session", debugSessionRouter);
 
 app.post("/profile/:profileId/skills", async (req, res) => {
 	const { profileId } = req.params;

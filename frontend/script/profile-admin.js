@@ -37,11 +37,11 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
             body: JSON.stringify({
               name: editNameInput.value,
               passion: editPassionInput.value,
-            }).then(() => {
-              window.location.reload();
             }),
           },
-        );
+        ).then(() => {
+          window.location.reload();
+        });
       });
     });
 
@@ -65,7 +65,7 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
 
           const editSkillBtn = document.createElement("button");
           skillContainer.appendChild(editSkillBtn);
-          editSkillBtn.textContent = "Edit";
+          // editSkillBtn.textContent = "Edit";
           editSkillBtn.classList.add("edit-skills-btn-style");
           editSkillBtn.classList.add("edit-btns");
 
