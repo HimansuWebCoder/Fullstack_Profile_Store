@@ -98,7 +98,7 @@ const postProfileSkills = async (req, res) => {
     const { profileId } = req.params;
     const { skill } = req.body;
     try {
-        const userExists = await db("profile").where({ id: profileId }).first();
+        const userExists = await postProfileSkillsModel(profileId);
         if (!userExists) {
             return res.status(404).json({ error: "User not found" });
         }
