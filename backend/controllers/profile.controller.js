@@ -17,7 +17,7 @@ const getProfile = (req, res) => {
     getUserProfileModel(userEmail)
         .then((users) => {
             if (users.length > 0) {
-                // res.json(users[0]);
+                res.json(users[0]);
                 res.sendFile(
                     path.join(
                         __dirname,
