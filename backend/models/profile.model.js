@@ -16,7 +16,15 @@ const updateUserProfileModel = (profileId, name, passion) => {
 	return db("profile")
 		.where({ id: profileId })
 		.update({ name, passion })
-		.returning("*");
+		.returning("*")
+		.then((result) => {
+			console.log("Update result:", result);
+			return result;
+		})
+		.catch((err) => {
+			console.error("Database query error:", err);
+			throw err;
+		});
 };
 
 module.exports = {
