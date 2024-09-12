@@ -40,12 +40,12 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
     return res.json();
   })
   .then((skills) => {
+    const skillDiv = document.createElement("div");
+    profileContainer.appendChild(skillDiv);
+    skillDiv.textContent = "Skills";
+    skillDiv.classList.add("skills-intro-style");
     skills.forEach((skill) => {
-      const skillDiv = document.createElement("div");
-      profileContainer.appendChild(skillDiv);
-      skillDiv.textContent = "Skills";
-      skillDiv.classList.add("skills-intro-style");
-
+      console.log(skill);
       const skillContainer = document.createElement("div");
       profileContainer.appendChild(skillContainer);
       skillContainer.textContent = skill.skill;
@@ -62,6 +62,19 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
       delSkillBtn.textContent = "Delete";
       delSkillBtn.classList.add("edit-skills-btn-style");
       delSkillBtn.classList.add("del-btns");
+
+      // editSkillBtn.addEventListener("click", () => {
+      //   window.location.href = `skill_edit/${user.id}/edit`;
+      // });
+
+      delSkillBtn.addEventListener("click", () => {
+        fetch(
+          `https://fullstack-profile-store-2.onrender.com/profile/${user.id}/skills/${skill.id}`,
+          {
+            method: "delete",
+          },
+        );
+      });
     });
   })
   .catch((error) => {

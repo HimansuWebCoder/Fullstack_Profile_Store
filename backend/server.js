@@ -129,6 +129,22 @@ app.get("/profile/:userId/skills", async (req, res) => {
 	}
 });
 
+app.delete("/profile/:userId/skills/:skillId", async (req, res) => {
+	const { userId, skillId } = req.params;
+	try {
+		const [deletedSkill] = await db("skills")
+			.where({ id: skillId, profile_id: userId })
+			.del()
+			.returning("*");
+		if (!deletedSkill) {
+			return res.status(404).send("Skill not found");
+		}
+		res.status(200).json({ message: "Skill deleted" });
+	} catch (err) {
+		res.status(500).send(err.message);
+	}
+});
+
 // Start server
 app.listen(process.env.PORT || 3000, () => {
 	console.log(
