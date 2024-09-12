@@ -30,7 +30,7 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
         fetch(
           `https://fullstack-profile-store-2.onrender.com/profile/${profile.id}`,
           {
-            method: "post",
+            method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               passion: editPassionInput.value,
