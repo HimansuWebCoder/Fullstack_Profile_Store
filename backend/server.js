@@ -166,53 +166,37 @@ app.delete("/profile/:profileId/skills/:skillId", async (req, res) => {
 });
 
 // app.put("/profile/:id", (req, res) => {
-// 	 if (!req.session.profileId) {
-//         return res.status(401).json("Unauthorized");
-//     }
+// 	if (!req.session.profileId) {
+// 		return res.status(401).json("Unauthorized");
+// 	}
 
-//     const userProfileId = req.session.profileId;
-//     console.log("User ID:", userProfileId);
+// 	const profileId = req.params.id; // Extract profileId from request parameters
+// 	console.log(profileId);
+// 	const { name, passion } = req.body;
 
-//     const { name, passion } = req.body;
-//     console.log("Request Body:", { name, passion });
+// 	if (!name && !passion) {
+// 		return res
+// 			.status(400)
+// 			.json("At least one field (name or passion) is required");
+// 	}
 
-//     if (!name || !passion) {
-//         return res.status(400).json("incorrect form submission");
-//     }
+// 	if (req.session.profileId !== parseInt(profileId, 10)) {
+// 		return res.status(403).json("Forbidden");
+// 	}
 
-// })
-app.put("/profile/:id", (req, res) => {
-	if (!req.session.profileId) {
-		return res.status(401).json("Unauthorized");
-	}
-
-	const profileId = req.params.id; // Extract profileId from request parameters
-	console.log(profileId);
-	const { name, passion } = req.body;
-
-	if (!name && !passion) {
-		return res
-			.status(400)
-			.json("At least one field (name or passion) is required");
-	}
-
-	if (req.session.profileId !== parseInt(profileId, 10)) {
-		return res.status(403).json("Forbidden");
-	}
-
-	updateUserProfileModel(profileId, name, passion)
-		.then((updatedProfile) => {
-			if (updatedProfile.length > 0) {
-				res.json(updatedProfile[0]);
-			} else {
-				res.status(404).json({ error: "Profile not found" });
-			}
-		})
-		.catch((err) => {
-			console.log("Error Updating Profile:", err);
-			res.status(500).json({ error: "Unable to update profile" });
-		});
-});
+// 	updateUserProfileModel(profileId, name, passion)
+// 		.then((updatedProfile) => {
+// 			if (updatedProfile.length > 0) {
+// 				res.json(updatedProfile[0]);
+// 			} else {
+// 				res.status(404).json({ error: "Profile not found" });
+// 			}
+// 		})
+// 		.catch((err) => {
+// 			console.log("Error Updating Profile:", err);
+// 			res.status(500).json({ error: "Unable to update profile" });
+// 		});
+// });
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {
