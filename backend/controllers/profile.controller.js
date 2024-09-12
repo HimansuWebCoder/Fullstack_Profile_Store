@@ -46,6 +46,9 @@ const updateProfile = (req, res) => {
     const userProfileId = req.session.profileId;
     console.log("User ID:", userProfileId);
 
+    const userEmail = req.session.user.email;
+    console.log(userEmail);
+
     const { name, passion } = req.body;
     console.log("Request Body:", { name, passion });
     console.log(req.session.profileId);
@@ -54,20 +57,32 @@ const updateProfile = (req, res) => {
         return res.status(400).json("incorrect form submission");
     }
 
-    updateUserProfileModel(userProfileId, name, passion)
+//     updateUserProfileModel(userProfileId, name, passion)
+//         .then((updatedProfile) => {
+//             // if (updatedProfile.length > 0) {
+//             //     console.log("Updated Profile:", updatedProfile[0]);
+//             //     res.json(updatedProfile[0]);
+//             // } else {
+//             //     res.status(404).json({ error: "Profile not found" });
+//             // }
+
+//         })
+//         .catch((err) => {
+//             console.log("Error Updating Profile:", err);
+//             res.status(400).json({ error: "unable to update profile" });
+//         });
+// };
+
+    updateUserProfileModel(userEmail, name, passion)
         .then((updatedProfile) => {
-            if (updatedProfile.length > 0) {
-                console.log("Updated Profile:", updatedProfile[0]);
-                res.json(updatedProfile[0]);
-            } else {
-                res.status(404).json({ error: "Profile not found" });
-            }
+          console.log("Update successful:", updatedProfile);
+          res.json(updatedProfile[0]);
         })
         .catch((err) => {
-            console.log("Error Updating Profile:", err);
-            res.status(400).json({ error: "unable to update profile" });
-        });
-};
+         console.error("Error in updateUserProfileModel:", err);
+         res.status(400).json({ error: "unable to update profile" });
+      });
+
 
 module.exports = {
     getProfile,

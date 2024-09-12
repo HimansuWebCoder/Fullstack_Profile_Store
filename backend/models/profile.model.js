@@ -4,7 +4,7 @@ const getUserProfileModel = (userEmail) => {
 	return db.select("*").from("profile").where("email", "=", userEmail);
 };
 
-const updateUserProfileModel = (profileId, name, passion) => {
+const updateUserProfileModel = (email, name, passion) => {
 	console.log(
 		"Updating profile with ID",
 		profileId,
@@ -14,7 +14,7 @@ const updateUserProfileModel = (profileId, name, passion) => {
 		passion,
 	);
 	return db("profile")
-		.where({ id: profileId })
+		.where({ email: email })
 		.update({ name, passion })
 		.returning("*")
 		.then((result) => {
