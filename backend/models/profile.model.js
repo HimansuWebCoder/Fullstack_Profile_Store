@@ -36,20 +36,31 @@ const updateUserProfileModel = (email, name, passion) => {
 // 		});
 // };
 
-const postProfileSkillsModel = (profileId) => {
-	return db("profile")
-		.where({ id: profileId })
-		.first()
-		.then((result) => {
-			if (result) {
-				console.log(result);
-			} else {
-				console.log(`No profile found with id ${profileId}`);
-			}
-		})
-		.catch((error) => {
-			console.error("Error querying the database:", error);
-		});
+// const postProfileSkillsModel = (profileId) => {
+// 	return db("profile")
+// 		.where({ id: profileId })
+// 		.first()
+// 		.then((result) => {
+// 			if (result) {
+// 				console.log(result);
+// 			} else {
+// 				console.log(`No profile found with id ${profileId}`);
+// 			}
+// 		})
+// 		.catch((error) => {
+// 			console.error("Error querying the database:", error);
+// 		});
+// };
+
+const postProfileSkillsModel = async (profileId) => {
+	try {
+		const result = await db("profile").where({ id: profileId }).first();
+		console.log("Result from postProfileSkillsModel:", result);
+		return result; // Ensure this is returning the correct value
+	} catch (error) {
+		console.error("Error in postProfileSkillsModel:", error);
+		throw error; // Ensure errors are propagated
+	}
 };
 
 const getProfileSkillsModel = (profileId) => {
