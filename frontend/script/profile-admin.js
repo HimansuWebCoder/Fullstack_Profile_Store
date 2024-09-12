@@ -19,6 +19,27 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
     profileIntro.textContent = profile.passion;
     profileImg.src = profile.image;
 
+    profileEditBtn.addEventListener("click", () => {
+      const editPassionInput = document.createElement("input");
+      const updateBtn = document.createElement("button");
+      profileContentContainer.appendChild(editInput);
+      profileContentContainer.appendChild(updateBtn);
+      updateBtn.textContent = "update";
+
+      updateBtn.addEventListener("click", () => {
+        fetch(
+          `https://fullstack-profile-store-2.onrender.com/profile/${profile.id}`,
+          {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              passion: editPassionInput.value,
+            }),
+          },
+        );
+      });
+    });
+
     fetch(
       `https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills`,
     )
