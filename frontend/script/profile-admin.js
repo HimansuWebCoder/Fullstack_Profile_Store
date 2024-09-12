@@ -23,8 +23,8 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
       const editPassionInput = document.createElement("input");
       const editNameInput = document.createElement("input");
       const updateBtn = document.createElement("button");
-      profileContentContainer.appendChild(editPassionInput);
       profileContentContainer.appendChild(editNameInput);
+      profileContentContainer.appendChild(editPassionInput);
       profileContentContainer.appendChild(updateBtn);
       updateBtn.textContent = "update";
 
