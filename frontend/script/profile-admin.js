@@ -69,7 +69,7 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
 
       delSkillBtn.addEventListener("click", () => {
         fetch(
-          `https://fullstack-profile-store-2.onrender.com/profile/${user.id}/skills/${skill.id}`,
+          `https://fullstack-profile-store-2.onrender.com/profile/${users.id}/skills/${skill.id}`,
           {
             method: "delete",
           },
