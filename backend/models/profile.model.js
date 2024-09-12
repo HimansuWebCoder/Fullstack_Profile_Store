@@ -27,14 +27,14 @@ const updateUserProfileModel = (email, name, passion) => {
 		});
 };
 
-const postProfileSkillsModel = (profileId) => {
-	return db("profile")
-		.where({ id: profileId })
-		.first()
-		.then((result) => {
-			console.log(result);
-		});
-};
+// const postProfileSkillsModel = (profileId) => {
+// 	return db("profile")
+// 		.where({ id: profileId })
+// 		.first()
+// 		.then((result) => {
+// 			console.log(result);
+// 		});
+// };
 
 const getProfileSkillsModel = (profileId) => {
 	return db("profile").where({ id: profileId }).first();
@@ -43,6 +43,7 @@ const getProfileSkillsModel = (profileId) => {
 module.exports = {
 	getUserProfileModel,
 	updateUserProfileModel,
-	postProfileSkillsModel,
 	getProfileSkillsModel,
 };
+
+// postProfileSkillsModel,

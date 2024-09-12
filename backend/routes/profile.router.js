@@ -2,10 +2,10 @@ const express = require("express");
 const {
 	getProfile,
 	updateProfile,
-	postProfileSkills,
 	getProfileSkills,
 	deleteProfileSkills,
 } = require("../controllers/profile.controller");
+// postProfileSkills,
 const db = require("../config/db");
 const profileRouter = express.Router();
 
@@ -22,9 +22,9 @@ profileRouter.get("/:profileId/skills", (req, res) => {
 	getProfileSkills(req, res, db);
 });
 
-profileRouter.post("/:profileId/skills", (req, res) => {
-	postProfileSkills(req, res, db);
-});
+// profileRouter.post("/:profileId/skills", (req, res) => {
+// 	postProfileSkills(req, res, db);
+// });
 
 profileRouter.delete("/:profileId/skills/:skillId", (req, res) => {
 	deleteProfileSkills(req, res, db);

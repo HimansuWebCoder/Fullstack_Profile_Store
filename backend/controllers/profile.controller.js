@@ -76,22 +76,22 @@ const updateProfile = (req, res) => {
         });
 };
 
-const postProfileSkills = async (req, res) => {
-    const { profileId } = req.params;
-    const { skill } = req.body;
-    try {
-        const userExists = await postProfileSkillsModel(profileId);
-        if (!userExists) {
-            return res.status(404).json({ error: "User not found" });
-        }
+// const postProfileSkills = async (req, res) => {
+//     const { profileId } = req.params;
+//     const { skill } = req.body;
+//     try {
+//         const userExists = await postProfileSkillsModel(profileId);
+//         if (!userExists) {
+//             return res.status(404).json({ error: "User not found" });
+//         }
 
-        const [newSkill] = await postSkillsModel(profileId, skill);
-        console.log(newSkill);
-        res.status(201).json(newSkill);
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-};
+//         const [newSkill] = await postSkillsModel(profileId, skill);
+//         console.log(newSkill);
+//         res.status(201).json(newSkill);
+//     } catch (err) {
+//         res.status(500).send(err.message);
+//     }
+// };
 
 const getProfileSkills = async (req, res) => {
     const { profileId } = req.params;
@@ -126,7 +126,8 @@ const deleteProfileSkills = async (req, res) => {
 module.exports = {
     getProfile,
     updateProfile,
-    postProfileSkills,
     getProfileSkills,
     deleteProfileSkills,
 };
+
+// postProfileSkills,
