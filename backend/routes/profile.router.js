@@ -6,7 +6,8 @@ const profileRouter = express.Router();
 profileRouter.get("/", (req, res) => {
 	profile.getProfile(req, res, db);
 });
-profileRouter.put("/", (req, res) => {
+
+profileRouter.put("/:id", (req, res) => {
 	console.log("Session:", req.session);
 	profile.updateProfile(req, res, db);
 });
