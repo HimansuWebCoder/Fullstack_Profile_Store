@@ -4,7 +4,15 @@ const path = require("path");
 const {
     getUserProfileModel,
     updateUserProfileModel,
+    postProfileSkillsModel,
+    getProfileSkillsModel,
 } = require("../models/profile.model");
+
+const {
+    postSkillsModel,
+    getSkillsModel,
+    deleteSkillsModel,
+} = require("../models/skills.model");
 
 // get user profile
 const getProfile = (req, res) => {
@@ -68,7 +76,56 @@ const updateProfile = (req, res) => {
         });
 };
 
+const postProfileSkills = async (req, res) => {
+    const { profileId } = req.params;
+    const { skill } = req.body;
+    try {
+        const userExists = await postProfileSkillsModel(profileId);
+        if (!userExists) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const [newSkill] = await postSkillsModel(profileId, skill);
+        res.status(201).json(newSkill);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
+
+const getProfileSkills = async (req, res) => {
+    const { profileId } = req.params;
+    console.log(profileId);
+    try {
+        const userExists = await getProfileSkillsModel(profileId);
+        console.log(userExists);
+        if (!userExists) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const skills = await getSkillsModel(profileId);
+        res.status(200).json(skills);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
+
+const deleteProfileSkills = async (req, res) => {
+    const { profileId, skillId } = req.params;
+    try {
+        const [deletedSkill] = await deleteSkillsModel(skillId, profileId);
+        if (!deletedSkill) {
+            return res.status(404).send("Skill not found");
+        }
+        res.status(200).json({ message: "Skill deleted" });
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
+
 module.exports = {
     getProfile,
     updateProfile,
+    postProfileSkills,
+    getProfileSkills,
+    deleteProfileSkills,
 };

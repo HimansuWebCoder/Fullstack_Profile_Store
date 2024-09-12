@@ -17,6 +17,7 @@ const usersRouter = require("./routes/users.router");
 const addSectionRouter = require("./routes/add-section.router");
 const uploadRouter = require("./routes/upload.router");
 const debugSessionRouter = require("./routes/debug-session.router");
+const { profileSkillsRouter } = require("./routes/profile-skills.router");
 
 // Frontend sending files routes
 const indexRouter = require("./routes/frontend-pages/index.router");
@@ -90,6 +91,7 @@ app.use("/login", loginRouter);
 app.use("/profile", profileRouter);
 app.use("/users", usersRouter);
 app.use("/add-section", addSectionRouter);
+app.use("/debug-session", debugSessionRouter);
 
 app.use("/submit-file", upload.single("avatar"), uploadRouter);
 app.use("/", uploadRouter);
@@ -98,61 +100,6 @@ app.post("/signin", signin.handleSignin(db, bcrypt));
 app.post("/register", (req, res) => {
 	console.log("Request body:", req.body);
 	register.handleRegister(req, res, db, bcrypt);
-});
-
-app.get("/debug-session", debugSessionRouter);
-
-app.post("/profile/:profileId/skills", async (req, res) => {
-	const { profileId } = req.params;
-	const { skill } = req.body;
-	try {
-		const userExists = await db("profile").where({ id: profileId }).first();
-		if (!userExists) {
-			return res.status(404).json({ error: "User not found" });
-		}
-
-		const [newSkill] = await db("skills")
-			.insert({ profile_id: profileId, skill })
-			.returning("*");
-		res.status(201).json(newSkill);
-	} catch (err) {
-		res.status(500).send(err.message);
-	}
-});
-
-app.get("/profile/:profileId/skills", async (req, res) => {
-	const { profileId } = req.params;
-	console.log(profileId);
-	try {
-		const userExists = await db("profile").where({ id: profileId }).first();
-		console.log(userExists);
-		if (!userExists) {
-			return res.status(404).json({ error: "User not found" });
-		}
-
-		const skills = await db("skills")
-			.where({ profile_id: profileId })
-			.select("*");
-		res.status(200).json(skills);
-	} catch (err) {
-		res.status(500).send(err.message);
-	}
-});
-
-app.delete("/profile/:profileId/skills/:skillId", async (req, res) => {
-	const { profileId, skillId } = req.params;
-	try {
-		const [deletedSkill] = await db("skills")
-			.where({ id: skillId, profile_id: profileId })
-			.del()
-			.returning("*");
-		if (!deletedSkill) {
-			return res.status(404).send("Skill not found");
-		}
-		res.status(200).json({ message: "Skill deleted" });
-	} catch (err) {
-		res.status(500).send(err.message);
-	}
 });
 
 // Start server

@@ -1,14 +1,33 @@
 const express = require("express");
-const profile = require("../controllers/profile.controller");
+const {
+	getProfile,
+	updateProfile,
+	postProfileSkills,
+	getProfileSkillsModel,
+	deleteProfileSkills,
+} = require("../controllers/profile.controller");
 const db = require("../config/db");
 const profileRouter = express.Router();
 
 profileRouter.get("/", (req, res) => {
-	profile.getProfile(req, res, db);
+	getProfile(req, res, db);
 });
 
 profileRouter.put("/:id", (req, res) => {
 	console.log("Session:", req.session);
-	profile.updateProfile(req, res, db);
+	updateProfile(req, res, db);
 });
+
+profileRouter.get("/:profileId/skills", (req, res) => {
+	getProfileSkillsModel(req, res, db);
+});
+
+profileRouter.post("/:profileId/skills", (req, res) => {
+	postProfileSkills(req, res, db);
+});
+
+profileRouter.delete("/:profileId/skills/:skillId", (req, res) => {
+	deleteProfileSkills(req, res, db);
+});
+
 module.exports = profileRouter;

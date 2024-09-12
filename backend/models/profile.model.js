@@ -27,7 +27,17 @@ const updateUserProfileModel = (email, name, passion) => {
 		});
 };
 
+const postProfileSkillsModel = (profileId) => {
+	return db("profile").where({ id: profileId }).first();
+};
+
+const getProfileSkillsModel = (profileId) => {
+	return db("profile").where({ id: profileId }).first();
+};
+
 module.exports = {
 	getUserProfileModel,
 	updateUserProfileModel,
+	postProfileSkillsModel,
+	getProfileSkillsModel,
 };
