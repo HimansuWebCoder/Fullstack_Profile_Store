@@ -99,7 +99,7 @@ const postProfileSkills = async (req, res) => {
     const { skill } = req.body;
     try {
         const userExists = await postProfileSkillsModel(profileId);
-        console.log(userExists);
+        console.log("user is Exist:"userExists);
         if (!userExists) {
             return res.status(404).json({ error: "User not found" });
         }
