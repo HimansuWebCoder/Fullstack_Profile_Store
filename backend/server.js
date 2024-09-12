@@ -17,7 +17,6 @@ const usersRouter = require("./routes/users.router");
 const addSectionRouter = require("./routes/add-section.router");
 const uploadRouter = require("./routes/upload.router");
 const debugSessionRouter = require("./routes/debug-session.router");
-const { profileSkillsRouter } = require("./routes/profile-skills.router");
 
 // Frontend sending files routes
 const indexRouter = require("./routes/frontend-pages/index.router");
