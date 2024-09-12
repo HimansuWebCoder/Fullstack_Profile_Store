@@ -29,7 +29,7 @@ const skillEditRouter = require("./routes/frontend-pages/skill-edit.router");
 const registerRouter = require("./routes/frontend-pages/register.router");
 const loginRouter = require("./routes/frontend-pages/login.router");
 
-const { updateUserProfileModel } = require("./models/profile.model");
+// const { updateUserProfileModel } = require("./models/profile.model");
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));

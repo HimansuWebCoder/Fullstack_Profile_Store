@@ -5,6 +5,14 @@ const getUserProfileModel = (userEmail) => {
 };
 
 const updateUserProfileModel = (profileId, name, passion) => {
+	console.log(
+		"Updating profile with ID",
+		profileId,
+		"Name:",
+		name,
+		"Passion:",
+		passion,
+	);
 	return db("profile")
 		.where({ id: profileId })
 		.update({ name, passion })
