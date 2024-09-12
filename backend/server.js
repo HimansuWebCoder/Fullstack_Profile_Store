@@ -130,7 +130,7 @@ app.post("/profile/:profileId/skills", async (req, res) => {
 
 app.get("/profile/:profileId/skills", async (req, res) => {
 	const { profileId } = req.params;
-	console.log(userId);
+	console.log(profileId);
 	try {
 		const userExists = await db("profile").where({ id: profileId }).first();
 		console.log(userExists);
