@@ -3,7 +3,7 @@ const {
 	getProfile,
 	updateProfile,
 	postProfileSkills,
-	getProfileSkillsModel,
+	getProfileSkills,
 	deleteProfileSkills,
 } = require("../controllers/profile.controller");
 const db = require("../config/db");
@@ -19,7 +19,7 @@ profileRouter.put("/:id", (req, res) => {
 });
 
 profileRouter.get("/:profileId/skills", (req, res) => {
-	getProfileSkillsModel(req, res, db);
+	getProfileSkills(req, res, db);
 });
 
 profileRouter.post("/:profileId/skills", (req, res) => {
