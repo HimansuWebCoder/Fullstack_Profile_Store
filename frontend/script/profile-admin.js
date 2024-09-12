@@ -12,12 +12,12 @@ const loader = document.querySelector(".loader");
 const uploadProfilePhoto = document.querySelector("#upload-profile-photo");
 // By Default name, passion/profession is there you can edit this according to your name and passion/profession
 
-function showProfile() {
+// function showProfile() {
   // console.log("Loading...");
   // profileContainer.style.display = "none";
   // loader.style.display = "block";
 
-  let isLoaded = false;
+  // let isLoaded = false;
 
   fetch("https://fullstack-profile-store-2.onrender.com/profile")
     .then((res) => res.json())
@@ -81,9 +81,9 @@ function showProfile() {
   //         loader.style.display = "none";
   //       }
   //     });
-}
+// }
 
-showProfile();
+// showProfile();
 
 // fetch("https://fullstack-profile-store-2.onrender.com/users")
 //   .then((res) => res.json())
