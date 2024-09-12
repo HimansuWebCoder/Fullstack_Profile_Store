@@ -1,57 +1,60 @@
 const skillsEditContainer = document.querySelector("#skills-edit-container");
-    	const redirectBtn = document.querySelector("#redirect-arrow-icon");
+const redirectBtn = document.querySelector("#redirect-arrow-icon");
 
-         fetch("https://fullstack-profile-store-2.onrender.com/users")
-         .then(res => res.json())
-         .then((users, i) => {
-            users.forEach((user, j) => { 
-                 const delContainer = document.createElement("div");
-                 skillsEditContainer.appendChild(delContainer);
-                 delContainer.classList.add("del-container-style")
-        
-                 const skillName = document.createElement("h3");
-                 delContainer.appendChild(skillName);
-                 skillName.textContent = user.name;
-                 skillName.classList.add("skills-name");
+fetch("https://fullstack-profile-store-2.onrender.com/users")
+    .then((res) => res.json())
+    .then((users, i) => {
+        users.forEach((user, j) => {
+            const delContainer = document.createElement("div");
+            skillsEditContainer.appendChild(delContainer);
+            delContainer.classList.add("del-container-style");
 
-                 const inputContainer = document.createElement("input");
-                 delContainer.appendChild(inputContainer);
-                 inputContainer.classList.add("input-container-style");
+            const skillName = document.createElement("h3");
+            delContainer.appendChild(skillName);
+            skillName.textContent = user.name;
+            skillName.classList.add("skills-name");
 
+            const inputContainer = document.createElement("input");
+            delContainer.appendChild(inputContainer);
+            inputContainer.classList.add("input-container-style");
 
-                 const updateBtn = document.createElement("button");
-                 delContainer.appendChild(updateBtn);
-                 updateBtn.textContent = "Update";
-                 updateBtn.style.display = "inline-block"
+            const updateBtn = document.createElement("button");
+            delContainer.appendChild(updateBtn);
+            updateBtn.textContent = "Update";
+            updateBtn.style.display = "inline-block";
 
+            updateBtn.addEventListener("click", () => {
+                if (inputContainer.value !== "") {
+                    fetch(
+                        `https://fullstack-profile-store-2.onrender.com/users/${user.id}`,
+                        {
+                            method: "put",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                name: inputContainer.value,
+                            }),
+                        },
+                    );
+                    window.location.reload();
+                }
+            });
 
-                 updateBtn.addEventListener("click", () => {
-                    if (inputContainer.value !== "") {  
-                    fetch(`https://fullstack-profile-store-2.onrender.com/users/${user.id}`, {
-                        method: "put",
-                        headers: {"Content-Type": "application/json"},
-                        body: JSON.stringify({name: inputContainer.value})
-                    })
-                        window.location.reload()
-                    }
-                 })
+            const delBtn = document.createElement("button");
+            delContainer.appendChild(delBtn);
+            delBtn.textContent = "Delete";
+            delBtn.addEventListener("click", () => {
+                console.log(user.id);
+                fetch(
+                    `https://fullstack-profile-store-2.onrender.com/users/${user.id}`,
+                    {
+                        method: "delete",
+                    },
+                );
+                window.location.reload();
+            });
+        });
+    });
 
-                        const delBtn = document.createElement("button");
-                        delContainer.appendChild(delBtn);
-                        delBtn.textContent = "Delete";
-                    delBtn.addEventListener("click", () => {
-                        console.log(user.id)
-                        fetch(`https://fullstack-profile-store-2.onrender.com/users/${user.id}`, {
-                            method: "delete"
-                        })
-                        window.location.reload()
-                    })
-                })
-            
-
-         })
-
-
-        redirectBtn.addEventListener("click", () => {
-            window.location = "/";
-        })
+redirectBtn.addEventListener("click", () => {
+    window.location = "/";
+});

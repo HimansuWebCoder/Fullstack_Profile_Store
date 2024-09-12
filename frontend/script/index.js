@@ -11,8 +11,8 @@ const loader = document.querySelector(".loader");
 
 function showProfile() {
   // console.log("Loading...");
-  // profileContainer.style.display = "none";
-  // loader.style.display = "block";
+  profileContainer.style.display = "none";
+  loader.style.display = "block";
 
   let isLoaded = false;
 
@@ -30,35 +30,6 @@ function showProfile() {
         loader.style.display = "none";
       }
     });
-
-  // fetch("https://fullstack-profile-store-2.onrender.com/view")
-  //   .then((res) => res.json())
-  //   .then((users) => {
-  //     // console.log(users[users.length - 1].image);
-  //     // profileImg.src = users[users.length-1].image;
-  //     // profileImg.src = '/' + users[users.length-1].image;
-  //     profileImg.src = users[users.length - 1].image;
-  //     console.log(users[users.length - 1].image);
-  //     console.log(users[users.length - 1]); // Logs the last user object
-
-  //     // users.forEach((img, i) => {
-  //     //   console.log(users[users.length-1].image);
-  //     // })
-  //     // if (users.length) {
-  //     //   users.forEach((user, i) => {
-  //     //     // profileHeader.textContent = user.name;
-  //     //     // profileIntro.textContent = user.passion;
-  //     //     profileImg.src = users[users.length-1].image;
-  //     //     isLoaded = true; // Data loaded successfully
-  //     //   });
-  //     // }
-  //   })
-  //   .finally(() => {
-  //     if (isLoaded) {
-  //       profileContainer.style.display = "block";
-  //       loader.style.display = "none";
-  //     }
-  //   });
 }
 
 showProfile();
@@ -80,5 +51,3 @@ fetch("https://fullstack-profile-store-2.onrender.com/users")
       skillContainer.classList.add("skills-container");
     });
   });
-
-// fetch('https://fullstack-profile-store-2.onrender.com/view')
