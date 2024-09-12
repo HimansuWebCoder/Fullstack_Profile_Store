@@ -110,18 +110,36 @@ app.get("/debug-session", (req, res) => {
 	}
 });
 
-app.get("/profile/:userId/skills", async (req, res) => {
-	const { userId } = req.params;
+app.post("/profile/:profileId/skills", async (req, res) => {
+	const { profileId } = req.params;
+	const { skill } = req.body;
+	try {
+		const userExists = await db("users").where({ id: profileId }).first();
+		if (!userExists) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		const [newSkill] = await db("skills")
+			.insert({ profile_id: profileId, skill })
+			.returning("*");
+		res.status(201).json(newSkill);
+	} catch (err) {
+		res.status(500).send(err.message);
+	}
+});
+
+app.get("/profile/:profileId/skills", async (req, res) => {
+	const { profileId } = req.params;
 	console.log(userId);
 	try {
-		const userExists = await db("profile").where({ id: userId }).first();
+		const userExists = await db("profile").where({ id: profileId }).first();
 		console.log(userExists);
 		if (!userExists) {
 			return res.status(404).json({ error: "User not found" });
 		}
 
 		const skills = await db("skills")
-			.where({ profile_id: userId })
+			.where({ profile_id: profileId })
 			.select("*");
 		res.status(200).json(skills);
 	} catch (err) {
@@ -129,11 +147,11 @@ app.get("/profile/:userId/skills", async (req, res) => {
 	}
 });
 
-app.delete("/profile/:userId/skills/:skillId", async (req, res) => {
-	const { userId, skillId } = req.params;
+app.delete("/profile/:profileId/skills/:skillId", async (req, res) => {
+	const { profileId, skillId } = req.params;
 	try {
 		const [deletedSkill] = await db("skills")
-			.where({ id: skillId, profile_id: userId })
+			.where({ id: skillId, profile_id: profileId })
 			.del()
 			.returning("*");
 		if (!deletedSkill) {
