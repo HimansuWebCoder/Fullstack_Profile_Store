@@ -86,6 +86,7 @@ const postProfileSkills = async (req, res) => {
         }
 
         const [newSkill] = await postSkillsModel(profileId, skill);
+        console.log(newSkill);
         res.status(201).json(newSkill);
     } catch (err) {
         res.status(500).send(err.message);

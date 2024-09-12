@@ -1,5 +1,10 @@
 const postSkillsModel = (profileId, skill) => {
-    return db("skills").insert({ profile_id: profileId, skill }).returning("*");
+    return db("skills")
+        .insert({ profile_id: profileId, skill })
+        .returning("*")
+        .then((result) => {
+            console.log(result);
+        });
 };
 
 const getSkillsModel = (profileId) => {
