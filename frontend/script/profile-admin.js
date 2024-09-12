@@ -48,6 +48,10 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
           delSkillBtn.textContent = "Delete";
           delSkillBtn.classList.add("edit-skills-btn-style");
           delSkillBtn.classList.add("del-btns");
+
+          delSkillBtn.addEventListener("click", () =>
+            console.log("skill", skill, "profile", profile),
+          );
         });
       });
   });
