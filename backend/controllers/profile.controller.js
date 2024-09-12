@@ -1,5 +1,6 @@
 const upload = require("../config/multerConfig");
 const path = require("path");
+const db = require("../config/db");
 
 const {
     getUserProfileModel,
@@ -93,6 +94,25 @@ const updateProfile = (req, res) => {
 //     }
 // };
 
+const postProfileSkills = async (req, res) => {
+    const { profileId } = req.params;
+    const { skill } = req.body;
+    try {
+        const userExists = await db("profile").where({ id: profileId }).first();
+        if (!userExists) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        const [newSkill] = await db("skills")
+            .insert({ profile_id: profileId, skill })
+            .returning("*");
+        console.log(newSkill);
+        res.status(201).json(newSkill);
+    } catch (err) {
+        res.status(500).send(err.message);
+    }
+};
+
 const getProfileSkills = async (req, res) => {
     const { profileId } = req.params;
     console.log(profileId);
@@ -128,6 +148,5 @@ module.exports = {
     updateProfile,
     getProfileSkills,
     deleteProfileSkills,
+    postProfileSkills,
 };
-
-// postProfileSkills,
