@@ -17,7 +17,7 @@ const getProfile = (req, res) => {
     getUserProfileModel(userEmail)
         .then((users) => {
             if (users.length > 0) {
-                res.json(users[0]);
+                // res.json(users[0]);
                 res.sendFile(
                     path.join(
                         __dirname,
@@ -39,12 +39,12 @@ const getProfile = (req, res) => {
 
 // update user profile
 const updateProfile = (req, res) => {
-    if (!req.session.userId) {
+    if (!req.session.profileId) {
         return res.status(401).json("Unauthorized");
     }
 
-    const userId = req.session.userId;
-    console.log("User ID:", userId);
+    const userProfileId = req.session.profileId;
+    console.log("User ID:", userProfileId);
 
     const { name, passion } = req.body;
     console.log("Request Body:", { name, passion });
@@ -53,7 +53,7 @@ const updateProfile = (req, res) => {
         return res.status(400).json("incorrect form submission");
     }
 
-    updateUserProfileModel(userId, name, passion)
+    updateUserProfileModel(profileId, name, passion)
         .then((updatedProfile) => {
             if (updatedProfile.length > 0) {
                 console.log("Updated Profile:", updatedProfile[0]);

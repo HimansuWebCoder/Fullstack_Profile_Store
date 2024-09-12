@@ -4,9 +4,9 @@ const getUserProfileModel = (userEmail) => {
 	return db.select("*").from("profile").where("email", "=", userEmail);
 };
 
-const updateUserProfileModel = (userId, name, passion) => {
+const updateUserProfileModel = (profileId, name, passion) => {
 	return db("profile")
-		.where({ id: userId })
+		.where({ id: profileId })
 		.update({ name, passion })
 		.returning("*");
 };

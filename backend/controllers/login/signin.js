@@ -20,7 +20,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
           .where("email", "=", email)
           .then((profile) => {
             // Store the user's profile in the session
-            req.session.userId = data[0].id;
+            req.session.profileId = data[0].id;
             req.session.user = {
               name: profile[0].name,
               passion: profile[0].passion,
@@ -61,8 +61,6 @@ const handleSignin = (db, bcrypt) => (req, res) => {
       }
     });
 };
-
-handleSignin();
 
 module.exports = {
   handleSignin,
