@@ -27,31 +27,6 @@ const updateUserProfileModel = (email, name, passion) => {
 		});
 };
 
-// const postProfileSkillsModel = (profileId) => {
-// 	return db("profile")
-// 		.where({ id: profileId })
-// 		.first()
-// 		.then((result) => {
-// 			console.log(result);
-// 		});
-// };
-
-// const postProfileSkillsModel = (profileId) => {
-// 	return db("profile")
-// 		.where({ id: profileId })
-// 		.first()
-// 		.then((result) => {
-// 			if (result) {
-// 				console.log(result);
-// 			} else {
-// 				console.log(`No profile found with id ${profileId}`);
-// 			}
-// 		})
-// 		.catch((error) => {
-// 			console.error("Error querying the database:", error);
-// 		});
-// };
-
 const postProfileSkillsModel = async (profileId) => {
 	try {
 		const result = await db("profile").where({ id: profileId }).first();
