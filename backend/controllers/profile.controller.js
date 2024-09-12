@@ -53,7 +53,7 @@ const updateProfile = (req, res) => {
         return res.status(400).json("incorrect form submission");
     }
 
-    updateUserProfileModel(profileId, name, passion)
+    updateUserProfileModel(userProfileId, name, passion)
         .then((updatedProfile) => {
             if (updatedProfile.length > 0) {
                 console.log("Updated Profile:", updatedProfile[0]);
