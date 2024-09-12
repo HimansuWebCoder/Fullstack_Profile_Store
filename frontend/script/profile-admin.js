@@ -12,49 +12,52 @@ const loader = document.querySelector(".loader");
 const uploadProfilePhoto = document.querySelector("#upload-profile-photo");
 
 fetch("https://fullstack-profile-store-2.onrender.com/profile")
-  .then((res) => res.json())
-  .then((profile) => {
+  .then(res => res.json())
+  .then(profile => {
     console.log(profile); // Log user data
     profileHeader.textContent = profile.name;
     profileIntro.textContent = profile.passion;
     profileImg.src = profile.image;
 
-    fetch(
-      `https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills`,
-    )
-      .then((res) => res.json())
-      .then((skills) => {
+    fetch(`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills`)
+     .then(res => res.json())
+     .then(skills => {
         console.log(skills);
         const skillDiv = document.createElement("div");
-        profileContainer.appendChild(skillDiv);
-        skillDiv.textContent = "Skills";
-        skillDiv.classList.add("skills-intro-style");
+          profileContainer.appendChild(skillDiv);
+          skillDiv.textContent = "Skills";
+          skillDiv.classList.add("skills-intro-style");
 
-        skills.map((skill) => {
-          console.log(skill);
-          const skillContainer = document.createElement("div");
-          profileContainer.appendChild(skillContainer);
-          skillContainer.textContent = skill.skill;
-          skillContainer.classList.add("skills-container");
+          skills.map(skill => {
+            console.log(skill);
+              const skillContainer = document.createElement("div");
+                profileContainer.appendChild(skillContainer);
+                skillContainer.textContent = skill.skill;
+                skillContainer.classList.add("skills-container");
 
-          const editSkillBtn = document.createElement("button");
-          skillContainer.appendChild(editSkillBtn);
-          editSkillBtn.textContent = "Edit";
-          editSkillBtn.classList.add("edit-skills-btn-style");
-          editSkillBtn.classList.add("edit-btns");
+                const editSkillBtn = document.createElement("button");
+                skillContainer.appendChild(editSkillBtn);
+                editSkillBtn.textContent = "Edit";
+                editSkillBtn.classList.add("edit-skills-btn-style");
+                editSkillBtn.classList.add("edit-btns");
 
-          const delSkillBtn = document.createElement("button");
-          skillContainer.appendChild(delSkillBtn);
-          delSkillBtn.textContent = "Delete";
-          delSkillBtn.classList.add("edit-skills-btn-style");
-          delSkillBtn.classList.add("del-btns");
+                const delSkillBtn = document.createElement("button");
+                skillContainer.appendChild(delSkillBtn);
+                delSkillBtn.textContent = "Delete";
+                delSkillBtn.classList.add("edit-skills-btn-style");
+                delSkillBtn.classList.add("del-btns");
 
-          delSkillBtn.addEventListener("click", () =>
-            console.log("skill", skill, "profile", profile),
-          );
-        });
-      });
-  });
+                console.log("skill", skill, "profile", profile)
+                delSkillBtn.addEventListener("click", () => {
+                  console.log(skill, profile)
+                  fetch(`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills/${skill.id}`, {
+                    method: "delete"
+                  })
+                }
+
+          })
+     })
+ })
 
 // fetch("https://fullstack-profile-store-2.onrender.com/profile")
 //   .then((profile) => {
@@ -73,7 +76,7 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
 //           skillDiv.classList.add("skills-intro-style");
 
 //           skills.map(skill => {
-//
+//               
 
 //                 delSkillBtn.addEventListener("click", () => {
 //                   fetch(`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}/skills/${skill.id}`, {
@@ -81,7 +84,11 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
 //                   })
 //                 })
 //           })
-//      })
+//      }) 
+
+
+
+
 
 // By Default name, passion/profession is there you can edit this according to your name and passion/profession
 
