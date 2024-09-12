@@ -28,6 +28,16 @@ function showProfile() {
       profileHeader.textContent = users.name;
       profileIntro.textContent = users.passion;
       profileImg.src = users.image;
+
+      fetch(
+        `https://fullstack-profile-store-2.onrender.com/profile/${users.id}/skills`,
+      )
+        .then((res) => res.json())
+        .then((skills) => {
+          skills.map((skill) => {
+            console.log(skill);
+          });
+        });
     });
   // .finally(() => {
   //   if (isLoaded) {
@@ -54,43 +64,43 @@ function showProfile() {
 
 showProfile();
 
-fetch("https://fullstack-profile-store-2.onrender.com/users")
-  .then((res) => res.json())
-  .then((users, i) => {
-    // All skills container box
-    const skillDiv = document.createElement("div");
-    profileContainer.appendChild(skillDiv);
-    skillDiv.textContent = "Skills";
-    skillDiv.classList.add("skills-intro-style");
+// fetch("https://fullstack-profile-store-2.onrender.com/users")
+//   .then((res) => res.json())
+//   .then((users, i) => {
+//     // All skills container box
+//     const skillDiv = document.createElement("div");
+//     profileContainer.appendChild(skillDiv);
+//     skillDiv.textContent = "Skills";
+//     skillDiv.classList.add("skills-intro-style");
 
-    users.forEach((user, i) => {
-      // One skill container box
-      const skillContainer = document.createElement("div");
-      profileContainer.appendChild(skillContainer);
-      skillContainer.textContent = users[i].name;
-      skillContainer.classList.add("skills-container");
+//     users.forEach((user, i) => {
+//       // One skill container box
+//       const skillContainer = document.createElement("div");
+//       profileContainer.appendChild(skillContainer);
+//       skillContainer.textContent = users[i].name;
+//       skillContainer.classList.add("skills-container");
 
-      const editSkillBtn = document.createElement("button");
-      skillContainer.appendChild(editSkillBtn);
-      editSkillBtn.textContent = "Edit";
-      editSkillBtn.classList.add("edit-skills-btn-style");
-      editSkillBtn.setAttribute("class", "edit-btns");
+//       const editSkillBtn = document.createElement("button");
+//       skillContainer.appendChild(editSkillBtn);
+//       editSkillBtn.textContent = "Edit";
+//       editSkillBtn.classList.add("edit-skills-btn-style");
+//       editSkillBtn.setAttribute("class", "edit-btns");
 
-      const delSkillBtn = document.createElement("button");
-      skillContainer.appendChild(delSkillBtn);
-      delSkillBtn.textContent = "Delete";
-      delSkillBtn.classList.add("edit-skills-btn-style");
-      delSkillBtn.setAttribute("class", "del-btns");
+//       const delSkillBtn = document.createElement("button");
+//       skillContainer.appendChild(delSkillBtn);
+//       delSkillBtn.textContent = "Delete";
+//       delSkillBtn.classList.add("edit-skills-btn-style");
+//       delSkillBtn.setAttribute("class", "del-btns");
 
-      editSkillBtn.addEventListener("click", () => {
-        window.location.href = `skill_edit/${user.id}/edit`;
-      });
+//       editSkillBtn.addEventListener("click", () => {
+//         window.location.href = `skill_edit/${user.id}/edit`;
+//       });
 
-      delSkillBtn.addEventListener("click", () => {
-        window.location.href = `skill_delete/${user.id}/delete`;
-      });
-    });
-  });
+//       delSkillBtn.addEventListener("click", () => {
+//         window.location.href = `skill_delete/${user.id}/delete`;
+//       });
+//     });
+//   });
 
 profileEditBtn.addEventListener("click", () => {
   window.location = "/edit-profile";

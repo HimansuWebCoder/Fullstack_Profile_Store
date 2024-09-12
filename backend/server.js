@@ -112,8 +112,10 @@ app.get("/debug-session", (req, res) => {
 
 app.get("/profile/:userId/skills", async (req, res) => {
 	const { userId } = req.params;
+	console.log(userId);
 	try {
 		const userExists = await db("profile").where({ id: userId }).first();
+		console.log(userExists);
 		if (!userExists) {
 			return res.status(404).json({ error: "User not found" });
 		}
