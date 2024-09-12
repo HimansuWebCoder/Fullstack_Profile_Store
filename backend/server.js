@@ -29,6 +29,8 @@ const skillEditRouter = require("./routes/frontend-pages/skill-edit.router");
 const registerRouter = require("./routes/frontend-pages/register.router");
 const loginRouter = require("./routes/frontend-pages/login.router");
 
+const { updateUserProfileModel } = require("./models/profile.model");
+
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -179,36 +181,38 @@ app.delete("/profile/:profileId/skills/:skillId", async (req, res) => {
 //     }
 
 // })
+app.put("/profile/:id", (req, res) => {
+	if (!req.session.profileId) {
+		return res.status(401).json("Unauthorized");
+	}
 
-// app.put((req, res) => {
-//     if (!req.session.profileId) {
-//         return res.status(401).json("Unauthorized");
-//     }
+	const profileId = req.params.id; // Extract profileId from request parameters
+	console.log(profileId);
+	const { name, passion } = req.body;
 
-//     const userProfileId = req.session.profileId;
-//     console.log("User ID:", userProfileId);
+	if (!name && !passion) {
+		return res
+			.status(400)
+			.json("At least one field (name or passion) is required");
+	}
 
-//     const { name, passion } = req.body;
-//     console.log("Request Body:", { name, passion });
+	if (req.session.profileId !== parseInt(profileId, 10)) {
+		return res.status(403).json("Forbidden");
+	}
 
-//     if (!name || !passion) {
-//         return res.status(400).json("incorrect form submission");
-//     }
-
-//     updateUserProfileModel(userProfileId, name, passion)
-//         .then((updatedProfile) => {
-//             if (updatedProfile.length > 0) {
-//                 console.log("Updated Profile:", updatedProfile[0]);
-//                 res.json(updatedProfile[0]);
-//             } else {
-//                 res.status(404).json({ error: "Profile not found" });
-//             }
-//         })
-//         .catch((err) => {
-//             console.log("Error Updating Profile:", err);
-//             res.status(400).json({ error: "unable to update profile" });
-//         });
-// };
+	updateUserProfileModel(profileId, name, passion)
+		.then((updatedProfile) => {
+			if (updatedProfile.length > 0) {
+				res.json(updatedProfile[0]);
+			} else {
+				res.status(404).json({ error: "Profile not found" });
+			}
+		})
+		.catch((err) => {
+			console.log("Error Updating Profile:", err);
+			res.status(500).json({ error: "Unable to update profile" });
+		});
+});
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {

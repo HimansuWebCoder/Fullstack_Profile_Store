@@ -21,8 +21,10 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
 
     profileEditBtn.addEventListener("click", () => {
       const editPassionInput = document.createElement("input");
+      const editNameInput = document.createElement("input");
       const updateBtn = document.createElement("button");
       profileContentContainer.appendChild(editPassionInput);
+      profileContentContainer.appendChild(editNameInput);
       profileContentContainer.appendChild(updateBtn);
       updateBtn.textContent = "update";
 
@@ -33,6 +35,7 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              name: editNameInput.value,
               passion: editPassionInput.value,
             }),
           },
