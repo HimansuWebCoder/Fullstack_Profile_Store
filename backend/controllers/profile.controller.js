@@ -132,3 +132,7 @@ module.exports = {
     deleteProfileSkills,
     postProfileSkills,
 };
+
+// Remember whatever you will do or doing one this error handling is must debugging ok himansu always become friend with error ,
+// error should be your best friend and try catch and error handling is must whatever you can build otherwise you cannot catch the
+// error and it will be overwhelming ok himansu
