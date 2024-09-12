@@ -91,7 +91,9 @@ const postProfileSkills = async (req, res) => {
         console.log(newSkill);
         res.status(201).json(newSkill);
     } catch (err) {
-        res.status(500).send(err.message);
+        // res.status(500).send(err.message);
+        console.error("Error in postProfileSkills:", err.stack || err); // Log full error
+        res.status(500).json({ error: err.message });
     }
 };
 
