@@ -35,8 +35,29 @@ function showProfile() {
         .then((res) => res.json())
         .then((skills) => {
           skills.map((skill) => {
-            console.log(skill);
-          });
+            // console.log(skill);
+             const skillDiv = document.createElement("div");
+            profileContainer.appendChild(skillDiv);
+            skillDiv.textContent = "Skills";
+            skillDiv.classList.add("skills-intro-style");
+
+              // One skill container box
+              const skillContainer = document.createElement("div");
+              profileContainer.appendChild(skillContainer);
+              skillContainer.textContent = skill.skill;
+              skillContainer.classList.add("skills-container");
+
+              const editSkillBtn = document.createElement("button");
+              skillContainer.appendChild(editSkillBtn);
+              editSkillBtn.textContent = "Edit";
+              editSkillBtn.classList.add("edit-skills-btn-style");
+              editSkillBtn.setAttribute("class", "edit-btns");
+
+              const delSkillBtn = document.createElement("button");
+              skillContainer.appendChild(delSkillBtn);
+              delSkillBtn.textContent = "Delete";
+              delSkillBtn.classList.add("edit-skills-btn-style");
+              delSkillBtn.setAttribute("class", "del-btns");
         });
     });
   // .finally(() => {
