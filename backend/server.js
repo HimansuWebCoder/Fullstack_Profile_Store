@@ -114,7 +114,7 @@ app.post("/profile/:profileId/skills", async (req, res) => {
 	const { profileId } = req.params;
 	const { skill } = req.body;
 	try {
-		const userExists = await db("users").where({ id: profileId }).first();
+		const userExists = await db("profile").where({ id: profileId }).first();
 		if (!userExists) {
 			return res.status(404).json({ error: "User not found" });
 		}
