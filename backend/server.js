@@ -37,7 +37,7 @@ app.use(cors());
 
 app.use(
 	session({
-		secret: process.env.SESSION_SECRET, // Replace with a secure secret
+		secret: process.env.SESSION_SECRET || "Himansu!@9861!$%#@",
 		resave: false,
 		saveUninitialized: true,
 		cookie: { secure: false }, // Set to true if using HTTPS
