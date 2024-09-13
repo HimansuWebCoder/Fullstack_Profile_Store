@@ -1,9 +1,11 @@
 const db = require("../config/db");
 
+// GET User_Profile_Model
 const getUserProfileModel = (userEmail) => {
 	return db.select("*").from("profile").where("email", "=", userEmail);
 };
 
+// PUT User_Profile_Model
 const updateUserProfileModel = (email, name, passion) => {
 	console.log(
 		"Updating profile with ID",
@@ -40,6 +42,7 @@ const updateUserProfileModel = (email, name, passion) => {
 // };
 
 // Sync way
+// POST Profile_Skills_Model
 const postProfileSkillsModel = (profileId) => {
 	return db("profile")
 		.where({ id: profileId })
@@ -57,6 +60,7 @@ const postProfileSkillsModel = (profileId) => {
 		});
 };
 
+// GET Profile_Skills_Model
 const getProfileSkillsModel = (profileId) => {
 	return db("profile").where({ id: profileId }).first();
 };

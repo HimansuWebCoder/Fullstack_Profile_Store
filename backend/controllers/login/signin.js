@@ -21,7 +21,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
           .from("profile")
           .where("email", "=", email)
           .then((profile) => {
-            // Store the user's profile in the session
+            // Storing profile in session
             req.session.profileId = data[0].id;
             req.session.user = {
               name: profile[0].name,
@@ -37,8 +37,12 @@ const handleSignin = (db, bcrypt) => (req, res) => {
             console.log("Session data set:", req.session);
             // res.redirect("/profile-admin");
             // Redirect after setting session
+
             if (!res.headersSent) {
-              res.json({ success: true, redirectTo: "/profile-admin" });
+              res.json({
+                success: true,
+                redirectTo: "/profile-admin",
+              });
             } else {
               console.error("Headers already sent, cannot redirect.");
             }
@@ -57,7 +61,6 @@ const handleSignin = (db, bcrypt) => (req, res) => {
     })
     .catch((err) => {
       console.error("Error querying login table:", err);
-      // Respond with error and prevent further responses
       if (!res.headersSent) {
         res.status(400).json("error querying login table");
       }

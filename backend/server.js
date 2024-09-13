@@ -31,20 +31,10 @@ const skillEditRouter = require("./routes/frontend-pages/skill-edit.router");
 const registerRouter = require("./routes/frontend-pages/register.router");
 const loginRouter = require("./routes/frontend-pages/login.router");
 
-// const { updateUserProfileModel } = require("./models/profile.model");
-
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(
-	session({
-		secret: process.env.SESSION_SECRET || "default_secret", // Move secret to .env
-		resave: false,
-		saveUninitialized: false, // Only create a session if something is stored
-		cookie: { secure: process.env.NODE_ENV === "production" }, // Ensure cookies are secure in production
-	}),
-);
 
 app.use((req, res, next) => {
 	console.log("Session:", req.session);
@@ -60,26 +50,8 @@ app.use((req, res, next) => {
 		`${req.method} ${req.baseUrl} ${req.params} ${req.url} ${delta}ms`,
 	);
 });
-// app.use(
-// 	cors({
-// 		origin: [
-// 			"http://localhost:3000",
-// 			"https://fullstack-profile-store-2.onrender.com/",
-// 		],
-// 	}),
-// );
 
 app.use("/uploads", express.static("uploads"));
-
-// Setting up session middleware
-// app.use(
-// 	session({
-// 		secret: "Himansu@9861", // Change this to a secure key
-// 		resave: false,
-// 		saveUninitialized: true,
-// 		cookie: { secure: false }, // Set to true if using HTTPS
-// 	}),
-// );
 
 // Static files
 app.use("/script", express.static(path.join(__dirname, "../frontend/script")));

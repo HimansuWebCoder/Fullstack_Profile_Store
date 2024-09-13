@@ -1,6 +1,6 @@
 const { postUserSectionModel } = require("../models/users.model");
 
-// post skill section
+// POST skill section
 function postSkillSection(req, res) {
 	const { id, name } = req.body;
 	postUserSectionModel(id, name).then((response) => {

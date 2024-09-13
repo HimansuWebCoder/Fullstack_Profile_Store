@@ -1,14 +1,5 @@
 const db = require("../config/db");
 
-// const postSkillsModel = (profileId, skill) => {
-//     return db("skills")
-//         .insert({ profile_id: profileId, skill: skill })
-//         .returning("*")
-//         .then((result) => {
-//             console.log(result);
-//         });
-// };
-
 // async way
 // const postSkillsModel = async (profileId, skill) => {
 //     try {
@@ -23,6 +14,7 @@ const db = require("../config/db");
 // };
 
 // sync way
+// POST Skills_Model
 const postSkillsModel = (profileId, skill) => {
     return db("skills")
         .insert({ profile_id: profileId, skill: skill })
@@ -36,10 +28,13 @@ const postSkillsModel = (profileId, skill) => {
             throw err;
         });
 };
+
+// GET Skills_Model
 const getSkillsModel = (profileId) => {
     return db("skills").where({ profile_id: profileId }).select("*");
 };
 
+// DELETE Skills_Model
 const deleteSkillsModel = (skillId, profileId) => {
     return db("skills")
         .where({ id: skillId, profile_id: profileId })

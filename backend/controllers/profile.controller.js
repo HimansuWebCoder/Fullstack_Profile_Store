@@ -1,6 +1,5 @@
 const upload = require("../config/multerConfig");
 const path = require("path");
-const db = require("../config/db");
 
 const {
     getUserProfileModel,
@@ -15,7 +14,7 @@ const {
     deleteSkillsModel,
 } = require("../models/skills.model");
 
-// get user profile
+// GET user profile
 const getProfile = (req, res) => {
     if (!req.session.user || !req.session.user.email) {
         return res.status(401).json("Please log in to view your profile");
@@ -46,7 +45,7 @@ const getProfile = (req, res) => {
         });
 };
 
-// update user profile
+// PUT user profile
 const updateProfile = (req, res) => {
     if (!req.session.profileId) {
         return res.status(401).json("Unauthorized");
@@ -100,6 +99,7 @@ const updateProfile = (req, res) => {
 // };
 
 // sync method
+// POST profile-skills
 const postProfileSkills = (req, res) => {
     const { profileId } = req.params;
     const { skill } = req.body;
@@ -122,6 +122,7 @@ const postProfileSkills = (req, res) => {
         });
 };
 
+// GET profile-skills
 const getProfileSkills = async (req, res) => {
     const { profileId } = req.params;
     console.log(profileId);
@@ -139,6 +140,7 @@ const getProfileSkills = async (req, res) => {
     }
 };
 
+// DELETE profile-skills
 const deleteProfileSkills = async (req, res) => {
     const { profileId, skillId } = req.params;
     try {

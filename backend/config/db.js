@@ -1,25 +1,5 @@
-// const knex = require("knex");
-// const env = require("./env.js");
-
-// const db = knex({
-//   client: "pg",
-//   connection: {
-//     connectionString: env.databaseUrl,
-//     ssl: { rejectUnauthorized: false },
-//     host: env.databaseHost,
-//     port: 5432,
-//     user: env.databaseUser,
-//     password: env.databasePassword,
-//     database: env.databaseDb,
-//   },
-// });
-
-// module.exports = db;
-
 const knex = require("knex");
-require("dotenv").config();
-
-// console.log(process.env.DATABASE_URL);
+require("dotenv").config(); // taking environmentabl variable from .env fil
 
 const db = knex({
   client: "pg",
@@ -27,9 +7,9 @@ const db = knex({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false },
     host: process.env.DATABASE_HOST,
-    port: 5432,
+    port: process.env.DATABASE_PORT,
     user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PW,
+    password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_DB,
   },
 });

@@ -6,7 +6,7 @@ const {
     getUserSkillsModel,
 } = require("../models/users.model");
 
-// get userSkills
+// GET userSkills
 function getUserSkills(req, res) {
     getUsersModel()
         .then((users) => {
@@ -18,7 +18,7 @@ function getUserSkills(req, res) {
         });
 }
 
-// get usersSkill Id
+// GET usersSkill Id
 function getUserSkillId(req, res) {
     const { id } = req.params;
     getUsersIdModel(id).then((user) => {
@@ -26,7 +26,7 @@ function getUserSkillId(req, res) {
     });
 }
 
-// update userSkill
+// PUT userSkill
 function updateUserSkill(req, res) {
     const { id } = req.params;
     const { name } = req.body;
@@ -35,7 +35,7 @@ function updateUserSkill(req, res) {
     });
 }
 
-// delete userSkill
+// DELETE userSkill
 function deleteUserSkill(req, res) {
     const id = req.params.id;
     deleteUsersModel(id)
@@ -43,7 +43,7 @@ function deleteUserSkill(req, res) {
         .catch((error) => res.status(500).json({ error }));
 }
 
-// get user skill
+// GET user skill
 function getUserSkill(req, res) {
     const { id } = req.params;
     getUserSkillsModel(id).then((user) => {

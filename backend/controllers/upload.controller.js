@@ -3,10 +3,6 @@ const cloudinary = require("cloudinary").v2;
 const { uploadImageModel, viewImageModel } = require("../models/images.model");
 const db = require("../models/db");
 
-// cloudinary.config({
-//   secure: true,
-// });
-
 cloudinary.config({
   cloud_name: "dtiasevyl",
   api_key: "411418114532979",

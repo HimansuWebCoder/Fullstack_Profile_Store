@@ -1,4 +1,5 @@
-const db = require("../../models/db");
+// const db = require("../../models/db");
+const db = require("../../config/db");
 
 const handleRegister = (req, res, db, bcrypt) => {
   const { email, name, password } = req.body;
@@ -26,11 +27,9 @@ const handleRegister = (req, res, db, bcrypt) => {
             passion: passion,
           })
           .then((user) => {
-            // Store profileId in session after successful registration
-            req.session.profileId = user[0].id; // Assuming 'id' is the primary key for the profile
-            console.log("Session profileId:", req.session.profileId); // Debugging
-
-            // Send back the newly created user
+            // Storing session profileId
+            req.session.profileId = user[0].id;
+            console.log("Session profileId:", req.session.profileId);
             res.json(user[0]);
           });
       })

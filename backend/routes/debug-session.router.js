@@ -1,6 +1,7 @@
 const express = require("express");
 const debugSessionRouter = express.Router();
 
+// GET DEBUG_SESSION ROUTE and MONITORING
 debugSessionRouter.get("/", (req, res) => {
 	if (req.session.profileId) {
 		console.log("Session ID:", req.sessionID);
