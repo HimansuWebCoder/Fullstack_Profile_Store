@@ -1,13 +1,14 @@
-require("dotenv").config(); // load .env file
+// require("dotenv").config(); // load .env file
 
-module.exports = {
-	databaseUrl: process.env.DATABASE_URL,
-	databaseHost: process.env.DATABASE_HOST,
-	databaseUser: process.env.DATABASE_USER,
-	databasePassword: process.env.DATABASE_PW,
-	databaseDb: process.env.DATABASE_DB,
-};
+// module.exports = {
+// 	databaseUrl: process.env.DATABASE_URL,
+// 	databaseHost: process.env.DATABASE_HOST,
+// 	databaseUser: process.env.DATABASE_USER,
+// 	databasePassword: process.env.DATABASE_PW,
+// 	databaseDb: process.env.DATABASE_DB,
+// };
 
+// console.log(process.env.DATABASE_PW);
 // require('dotenv').config(); // Load environment variables from .env file
 
 // const isProduction = process.env.NODE_ENV === 'production';

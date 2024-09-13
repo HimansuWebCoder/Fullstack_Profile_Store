@@ -1,8 +1,10 @@
-const db = require("../../models/db");
+// const db = require("../../models/db");
+const db = require("../../config/db");
 
 const handleSignin = (db, bcrypt) => (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+  console.log("Request Body:", req.body);
+  console.log("Session:", req.session);
   if (!email || !password) {
     return res.status(400).json("incorrect form submission");
   }

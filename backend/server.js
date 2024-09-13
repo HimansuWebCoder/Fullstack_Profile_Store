@@ -3,10 +3,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const db = require("./models/db");
 const upload = require("./config/multerConfig");
 const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
+require("dotenv").config(); // Load .env file
+const db = require("./config/db");
 
 const register = require("./controllers/login/register");
 const signin = require("./controllers/login/signin");
@@ -35,27 +36,20 @@ const loginRouter = require("./routes/frontend-pages/login.router");
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(cors());
-app.use(
-	cors({
-		origin: [
-			"http://localhost:3000",
-			"https://fullstack-profile-store-2.onrender.com/",
-		],
-	}),
-);
-
-app.use("/uploads", express.static("uploads"));
-
-// Setting up session middleware
+app.use(cors());
 app.use(
 	session({
-		secret: "Himansu@9861", // Change this to a secure key
+		secret: process.env.SESSION_SECRET || "default_secret", // Move secret to .env
 		resave: false,
-		saveUninitialized: true,
-		cookie: { secure: false }, // Set to true if using HTTPS
+		saveUninitialized: false, // Only create a session if something is stored
+		cookie: { secure: process.env.NODE_ENV === "production" }, // Ensure cookies are secure in production
 	}),
 );
+
+app.use((req, res, next) => {
+	console.log("Session:", req.session);
+	next();
+});
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -66,6 +60,26 @@ app.use((req, res, next) => {
 		`${req.method} ${req.baseUrl} ${req.params} ${req.url} ${delta}ms`,
 	);
 });
+// app.use(
+// 	cors({
+// 		origin: [
+// 			"http://localhost:3000",
+// 			"https://fullstack-profile-store-2.onrender.com/",
+// 		],
+// 	}),
+// );
+
+app.use("/uploads", express.static("uploads"));
+
+// Setting up session middleware
+// app.use(
+// 	session({
+// 		secret: "Himansu@9861", // Change this to a secure key
+// 		resave: false,
+// 		saveUninitialized: true,
+// 		cookie: { secure: false }, // Set to true if using HTTPS
+// 	}),
+// );
 
 // Static files
 app.use("/script", express.static(path.join(__dirname, "../frontend/script")));
