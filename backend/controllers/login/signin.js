@@ -1,4 +1,3 @@
-// const db = require("../../models/db");
 const db = require("../../config/db");
 
 const handleSignin = (db, bcrypt) => (req, res) => {
@@ -23,12 +22,15 @@ const handleSignin = (db, bcrypt) => (req, res) => {
           .then((profile) => {
             // Storing profile in session
             req.session.profileId = data[0].id;
+            console.log(req.session.profileId);
             req.session.user = {
               name: profile[0].name,
               passion: profile[0].passion,
               email: profile[0].email,
               image: profile[0].image,
             };
+
+            console.log(req.session.user);
             // res.json(profile[0]);
             // res.json({
             //   message: "Login successfully",
