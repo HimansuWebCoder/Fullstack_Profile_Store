@@ -20,12 +20,15 @@ const userRegisterModel = (email, hash, name, passion, trx) => {
 
 // User_Login_Model
 const userLoginModel = (email) => {
-	db.select("id", "email", "hash").from("login").where("email", "=", email);
+	db.select("id", "email", "hash")
+		.from("login")
+		.where("email", "=", email)
+		.first();
 };
 
 // User_Login_Model2
 const userLoginModel2 = (email) => {
-	db.select("*").from("profile").where("email", "=", email);
+	db.select("*").from("profile").where("email", "=", email).first();
 };
 
 module.exports = {
