@@ -21,8 +21,9 @@ const handleSignin = (db, bcrypt) => (req, res) => {
           .where("email", "=", email)
           .then((profile) => {
             // Storing profile in session
-            req.session.profileId = data[0].id;
-            console.log(req.session.profileId);
+            // req.session.profileId = data[0].id;
+            // console.log(req.session.profileId);
+            console.log("My profile Id", profileId);
             req.session.user = {
               name: profile[0].name,
               passion: profile[0].passion,
