@@ -1,27 +1,29 @@
 const db = require("../../config/db");
-const { userLoginModel, userLoginModel2 } = require("../../models/login.model");
 
 const handleSignin = (db, bcrypt) => (req, res) => {
   const { email, password } = req.body;
   console.log("Request Body:", req.body);
-  console.log("Request Session:", req.session);
-
+  console.log("Login Session:", req.session);
   if (!email || !password) {
-    return res.status(400).json("Incorrect form submission");
+    return res.status(400).json("incorrect form submission");
   }
-  userLoginModel(email)
+  db.select("id", "email", "hash")
+    .from("login")
+    .where("email", "=", email)
     .then((data) => {
-      console.log("Login Data:", data);
-
+      console.log("Login data:", data); // Debugging statement
+      console.log("User ID:", data[0].id);
       const isValid = bcrypt.compareSync(password, data[0].hash);
-
       if (isValid) {
-        return userLoginModel2(email)
+        return db
+          .select("*")
+          .from("profile")
+          .where("email", "=", email)
           .then((profile) => {
             // Storing profile in session
             req.session.profileId = data[0].id;
             // console.log(req.session.profileId);
-            console.log("req.session profile Id:", req.session.profileId);
+            console.log("My profile Id", req.session.profileId);
             req.session.user = {
               name: profile[0].name,
               passion: profile[0].passion,
@@ -35,7 +37,6 @@ const handleSignin = (db, bcrypt) => (req, res) => {
             //   message: "Login successfully",
             //   profile: profile[0],
             // });
-
             console.log("Session data set:", req.session);
             // res.redirect("/profile-admin");
             // Redirect after setting session
@@ -46,25 +47,25 @@ const handleSignin = (db, bcrypt) => (req, res) => {
                 redirectTo: "/profile-admin",
               });
             } else {
-              console.error("Headers already sent, can't redirect.");
+              console.error("Headers already sent, cannot redirect.");
             }
           })
           .catch((err) => {
             console.error("Error fetching profile:", err);
             if (!res.headersSent) {
-              res.status(400).json("Unable to get profile");
+              res.status(400).json("unable to get user");
             }
           });
       } else {
         if (!res.headersSent) {
-          res.status(400).json("Wrong credentials");
+          res.status(400).json("wrong credentials");
         }
       }
     })
     .catch((err) => {
       console.error("Error querying login table:", err);
       if (!res.headersSent) {
-        res.status(400).json("Error querying login table");
+        res.status(400).json("error querying login table");
       }
     });
 };
