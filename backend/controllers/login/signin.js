@@ -1,4 +1,5 @@
 const db = require("../../config/db");
+const { userLoginModel, userLoginModel2 } = require("../../models/login.model");
 
 const handleSignin = (db, bcrypt) => (req, res) => {
   const { email, password } = req.body;
@@ -7,23 +8,18 @@ const handleSignin = (db, bcrypt) => (req, res) => {
   if (!email || !password) {
     return res.status(400).json("incorrect form submission");
   }
-  db.select("id", "email", "hash")
-    .from("login")
-    .where("email", "=", email)
+  userLoginModel(email)
     .then((data) => {
       console.log("Login data:", data); // Debugging statement
       console.log("User ID:", data[0].id);
       const isValid = bcrypt.compareSync(password, data[0].hash);
       if (isValid) {
-        return db
-          .select("*")
-          .from("profile")
-          .where("email", "=", email)
+        return userLoginModel2(email)
           .then((profile) => {
             // Storing profile in session
             req.session.profileId = data[0].id;
             // console.log(req.session.profileId);
-            console.log("My profile Id", req.session.profileId);
+            console.log("req.session profile Id", req.session.profileId);
             req.session.user = {
               name: profile[0].name,
               passion: profile[0].passion,

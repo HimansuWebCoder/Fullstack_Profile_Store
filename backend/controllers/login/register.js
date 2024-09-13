@@ -1,5 +1,5 @@
-// const db = require("../../models/db");
 const db = require("../../config/db");
+const { userRegisterModel } = require("../../models/login.model");
 
 const handleRegister = (req, res, db, bcrypt) => {
   const { email, name, password } = req.body;
@@ -11,27 +11,12 @@ const handleRegister = (req, res, db, bcrypt) => {
   const hash = bcrypt.hashSync(password);
   console.log(hash);
   db.transaction((trx) => {
-    trx
-      .insert({
-        hash: hash,
-        email: email,
-      })
-      .into("login")
-      .returning("email")
-      .then((loginEmail) => {
-        return trx("profile")
-          .returning("*")
-          .insert({
-            email: loginEmail[0].email,
-            name: name,
-            passion: passion,
-          })
-          .then((user) => {
-            // Storing session profileId
-            req.session.profileId = user[0].id;
-            console.log("Session profileId:", req.session.profileId);
-            res.json(user[0]);
-          });
+    userRegisterModel(email, hash, name, passion, trx)
+      .then((user) => {
+        // Storing session profileId
+        req.session.profileId = user[0].id;
+        console.log("Session profileId:", req.session.profileId);
+        res.json(user[0]);
       })
       .then(trx.commit)
       .catch((err) => {

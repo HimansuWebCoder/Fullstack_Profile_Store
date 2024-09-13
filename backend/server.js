@@ -6,11 +6,8 @@ const app = express();
 const upload = require("./config/multerConfig");
 const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
-require("dotenv").config(); // Load .env file
-const db = require("./config/db");
-
-const register = require("./controllers/login/register");
-const signin = require("./controllers/login/signin");
+require("dotenv").config();
+// const db = require("./config/db");
 
 // Backend API Routes
 const profileRouter = require("./routes/profile.router");
@@ -18,6 +15,8 @@ const usersRouter = require("./routes/users.router");
 const addSectionRouter = require("./routes/add-section.router");
 const uploadRouter = require("./routes/upload.router");
 const debugSessionRouter = require("./routes/debug-session.router");
+const userRegisterRouter = require("./routes/register.router");
+const userSigninRouter = require("./routes/signin.router");
 
 // Frontend sending files routes
 const indexRouter = require("./routes/frontend-pages/index.router");
@@ -31,14 +30,14 @@ const skillEditRouter = require("./routes/frontend-pages/skill-edit.router");
 const registerRouter = require("./routes/frontend-pages/register.router");
 const loginRouter = require("./routes/frontend-pages/login.router");
 
-// Middleware
+// Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
 app.use(
 	session({
-		secret: "your-secret-key", // Replace with a secure secret
+		secret: process.env.SESSION_SECRET, // Replace with a secure secret
 		resave: false,
 		saveUninitialized: true,
 		cookie: { secure: false }, // Set to true if using HTTPS
@@ -83,21 +82,16 @@ app.use("/login", loginRouter);
 app.use("/profile", profileRouter);
 app.use("/users", usersRouter);
 app.use("/add-section", addSectionRouter);
-
+app.use("/debug-session", debugSessionRouter);
+app.use("/register", userRegisterRouter);
+app.use("/register", userRegisterRouter);
+app.use("/signin", userSigninRouter);
 app.use("/submit-file", upload.single("avatar"), uploadRouter);
 app.use("/", uploadRouter);
-
-app.post("/signin", signin.handleSignin(db, bcrypt));
-app.post("/register", (req, res) => {
-	console.log("Request body:", req.body);
-	register.handleRegister(req, res, db, bcrypt);
-});
 
 app.get("/get-session", (req, res) => {
 	res.json(req.session);
 });
-
-app.get("/debug-session", debugSessionRouter);
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {

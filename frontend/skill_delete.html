@@ -1,43 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete User</title>
-    <style>
-        #skill-name {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-    <h1>Delete Skill</h1>
-    <p>Are you sure you want to delete this <span id="skill-name"></span>?</p>
-    <button id="confirm-delete">Yes, Delete</button>
-    <button onclick="window.location.href = '/profile-admin';">Cancel</button>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Delete User</title>
+        <style>
+            #skill-name {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Delete Skill</h1>
+        <p>
+            Are you sure you want to delete this <span id="skill-name"></span>?
+        </p>
+        <button id="confirm-delete">Yes, Delete</button>
+        <button onclick="window.location.href = '/profile-admin';">
+            Cancel
+        </button>
 
-    <script>
-        const userId = window.location.pathname.split('/')[2];
-        const delBtn = document.querySelector("#confirm-delete");
-        const skillName = document.querySelector("#skill-name");
+        <script>
+            const userId = window.location.pathname.split("/")[2];
+            const delBtn = document.querySelector("#confirm-delete");
+            const skillName = document.querySelector("#skill-name");
 
-        fetch(`https://fullstack-profile-store-2.onrender.com/users/${userId}`)
-          .then(res => res.json())
-          .then(skill => {
-            // console.log(skill[0].name);
-            skillName.textContent = skill[0].name;
-          })
+            fetch(
+                `https://fullstack-profile-store-2.onrender.com/users/${userId}`,
+            )
+                .then((res) => res.json())
+                .then((skill) => {
+                    // console.log(skill[0].name);
+                    skillName.textContent = skill[0].name;
+                });
 
-        delBtn.addEventListener("click", () => {
-            fetch(`https://fullstack-profile-store-2.onrender.com/users/${userId}`, {
-                method: 'DELETE'
-            })
-            .then(() => {
-                window.location.href = '/profile-admin';
-            })
-        })
+            delBtn.addEventListener("click", () => {
+                fetch(
+                    `https://fullstack-profile-store-2.onrender.com/users/${userId}`,
+                    {
+                        method: "DELETE",
+                    },
+                ).then(() => {
+                    window.location.href = "/profile-admin";
+                });
+            });
 
-        console.log(location.href)
-    </script>
-</body>
+            console.log(location.href);
+        </script>
+    </body>
 </html>
