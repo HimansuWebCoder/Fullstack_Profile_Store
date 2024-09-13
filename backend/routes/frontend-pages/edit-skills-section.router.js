@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const editSkillsSectionRouter = express.Router();
 
-// Serve the edit-skills-section.html file
+// GET edit-skills-section.html
 editSkillsSectionRouter.get("/", (req, res) => {
   const filePath = path.join(
     __dirname,

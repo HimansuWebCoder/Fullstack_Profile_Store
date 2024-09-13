@@ -23,12 +23,19 @@ const userLoginModel = (email) => {
 	db.select("id", "email", "hash")
 		.from("login")
 		.where("email", "=", email)
-		.first();
+		.then((result) => {
+			console.log("userLogin data:", result);
+		});
 };
 
 // User_Login_Model2
 const userLoginModel2 = (email) => {
-	db.select("*").from("profile").where("email", "=", email).first();
+	db.select("*")
+		.from("profile")
+		.where("email", "=", email)
+		.then((result) => {
+			console.log("userLoginModel2 data:", result);
+		});
 };
 
 module.exports = {

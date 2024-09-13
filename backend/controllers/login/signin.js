@@ -10,6 +10,10 @@ const handleSignin = (db, bcrypt) => (req, res) => {
   }
   userLoginModel(email)
     .then((data) => {
+      if (!data) {
+        return res.status(400).json("User not found");
+      }
+
       console.log("Login data:", data); // Debugging statement
       console.log("User ID:", data[0].id);
       const isValid = bcrypt.compareSync(password, data[0].hash);

@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const profileAdminRouter = express.Router();
 
+// GET profile-admin.html
 profileAdminRouter.get("/", (req, res) => {
   console.log("Profile Admin Route Hit");
   console.log("Session data:", req.session.userId);
