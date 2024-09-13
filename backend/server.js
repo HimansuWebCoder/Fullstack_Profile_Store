@@ -36,8 +36,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(
+	session({
+		secret: "your-secret-key", // Replace with a secure secret
+		resave: false,
+		saveUninitialized: true,
+		cookie: { secure: false }, // Set to true if using HTTPS
+	}),
+);
+
 app.use((req, res, next) => {
-	console.log("Session:", req.session);
+	console.log("Middleware Session:", req.session);
 	next();
 });
 
@@ -50,8 +59,6 @@ app.use((req, res, next) => {
 		`${req.method} ${req.baseUrl} ${req.params} ${req.url} ${delta}ms`,
 	);
 });
-
-app.use("/uploads", express.static("uploads"));
 
 // Static files
 app.use("/script", express.static(path.join(__dirname, "../frontend/script")));
@@ -84,6 +91,10 @@ app.post("/signin", signin.handleSignin(db, bcrypt));
 app.post("/register", (req, res) => {
 	console.log("Request body:", req.body);
 	register.handleRegister(req, res, db, bcrypt);
+});
+
+app.get("/get-session", (req, res) => {
+	res.json(req.session);
 });
 
 app.get("/debug-session", debugSessionRouter);

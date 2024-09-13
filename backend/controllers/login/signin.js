@@ -3,7 +3,7 @@ const db = require("../../config/db");
 const handleSignin = (db, bcrypt) => (req, res) => {
   const { email, password } = req.body;
   console.log("Request Body:", req.body);
-  console.log("Session:", req.session);
+  console.log("Login Session:", req.session);
   if (!email || !password) {
     return res.status(400).json("incorrect form submission");
   }
