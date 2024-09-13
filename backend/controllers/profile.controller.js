@@ -77,24 +77,49 @@ const updateProfile = (req, res) => {
         });
 };
 
-const postProfileSkills = async (req, res) => {
+// POST skills
+// Async method
+// const postProfileSkills = async (req, res) => {
+//     const { profileId } = req.params;
+//     const { skill } = req.body;
+//     try {
+//         const userExists = await postProfileSkillsModel(profileId);
+//         console.log("user is Exist:", userExists);
+//         if (!userExists) {
+//             return res.status(404).json({ error: "User not found" });
+//         }
+
+//         const [newSkill] = await postSkillsModel(profileId, skill);
+//         console.log(newSkill);
+//         res.status(201).json(newSkill);
+//     } catch (err) {
+//         // res.status(500).send(err.message);
+//         console.error("Error in postProfileSkills:", err.stack || err); // Log full error
+//         res.status(500).json({ error: err.message });
+//     }
+// };
+
+// sync method
+const postProfileSkills = (req, res) => {
     const { profileId } = req.params;
     const { skill } = req.body;
-    try {
-        const userExists = await postProfileSkillsModel(profileId);
-        console.log("user is Exist:", userExists);
-        if (!userExists) {
-            return res.status(404).json({ error: "User not found" });
-        }
 
-        const [newSkill] = await postSkillsModel(profileId, skill);
-        console.log(newSkill);
-        res.status(201).json(newSkill);
-    } catch (err) {
-        // res.status(500).send(err.message);
-        console.error("Error in postProfileSkills:", err.stack || err); // Log full error
-        res.status(500).json({ error: err.message });
-    }
+    postProfileSkillsModel(profileId)
+        .then((userExists) => {
+            console.log("user is Exist:", userExists);
+            if (!userExists) {
+                return res.status(404).json({ error: "User not found" });
+            }
+            return postSkillsModel(profileId, skill);
+        })
+        .then((newSkill) => {
+            console.log(newSkill);
+            res.status(201).json(newSkill);
+        })
+        .catch((err) => {
+            console.error("Error in postProfileSkills:", err.message || err);
+            res.status(500).json({ error: err.message });
+        });
 };
 
 const getProfileSkills = async (req, res) => {
@@ -134,7 +159,3 @@ module.exports = {
     deleteProfileSkills,
     postProfileSkills,
 };
-
-// Remember whatever you will do or doing one this error handling is must debugging ok himansu always become friend with error ,
-// error should be your best friend and try catch and error handling is must whatever you can build otherwise you cannot catch the
-// error and it will be overwhelming ok himansu

@@ -27,15 +27,34 @@ const updateUserProfileModel = (email, name, passion) => {
 		});
 };
 
-const postProfileSkillsModel = async (profileId) => {
-	try {
-		const result = await db("profile").where({ id: profileId }).first();
-		console.log("Result from postProfileSkillsModel:", result);
-		return result; // Ensure this is returning the correct value
-	} catch (error) {
-		console.error("Error in postProfileSkillsModel:", error);
-		throw error; // Ensure errors are propagated
-	}
+// Async way
+// const postProfileSkillsModel = async (profileId) => {
+// 	try {
+// 		const result = await db("profile").where({ id: profileId }).first();
+// 		console.log("Result from postProfileSkillsModel:", result);
+// 		return result; // Ensure this is returning the correct value
+// 	} catch (error) {
+// 		console.error("Error in postProfileSkillsModel:", error);
+// 		throw error; // Ensure errors are propagated
+// 	}
+// };
+
+// Sync way
+const postProfileSkillsModel = (profileId) => {
+	return db("profile")
+		.where({ id: profileId })
+		.first()
+		.then((result) => {
+			console.log("Result from postProfileSkillsModel:", result);
+			return result;
+		})
+		.catch((error) => {
+			console.error(
+				"Error in postProfileSkillsModel:",
+				error.message || error,
+			);
+			throw error;
+		});
 };
 
 const getProfileSkillsModel = (profileId) => {

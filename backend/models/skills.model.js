@@ -8,18 +8,34 @@ const db = require("../config/db");
 //             console.log(result);
 //         });
 // };
-const postSkillsModel = async (profileId, skill) => {
-    try {
-        const result = await db("skills")
-            .insert({ profile_id: profileId, skill: skill })
-            .returning("*");
-        console.log("postSkillsModel result:", result);
-    } catch (err) {
-        console.error("Error in postSkillsModel:", err);
-        throw err;
-    }
-};
 
+// async way
+// const postSkillsModel = async (profileId, skill) => {
+//     try {
+//         const result = await db("skills")
+//             .insert({ profile_id: profileId, skill: skill })
+//             .returning("*");
+//         console.log("postSkillsModel result:", result);
+//     } catch (err) {
+//         console.error("Error in postSkillsModel:", err);
+//         throw err;
+//     }
+// };
+
+// sync way
+const postSkillsModel = (profileId, skill) => {
+    return db("skills")
+        .insert({ profile_id: profileId, skill: skill })
+        .returning("*")
+        .then((result) => {
+            console.log("postSkillsModel result:", result);
+            return result;
+        })
+        .catch((err) => {
+            console.error("Error in postSkillsModel:", err.message || err);
+            throw err;
+        });
+};
 const getSkillsModel = (profileId) => {
     return db("skills").where({ profile_id: profileId }).select("*");
 };
