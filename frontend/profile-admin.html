@@ -76,8 +76,11 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
     profileHeader.textContent = profile.name;
     profileIntro.textContent = profile.passion;
     profileImg.src = profile.image;
-
+    
+    let isLoaded = true;
     profileEditBtn.addEventListener("click", () => {
+    	if (isLoaded) {
+
       const inputProfileContainer = document.createElement("div");
       const editNameInput = document.createElement("input");
       const editPassionInput = document.createElement("input");
@@ -101,6 +104,9 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
       editPassionInput.setAttribute('placeholder', 'Update your Passion here');
 
       updateBtn.textContent = "update";
+
+         isLoaded = false;
+    	}
 
       updateBtn.addEventListener("click", () => {
         fetch(

@@ -49,8 +49,6 @@
 						profileContentContainer.appendChild(profileImage);
 						profileContentContainer.appendChild(profileUserName);
 						profileContentContainer.appendChild(profileUserPassion);
-						profileImage.src =
-							"https://t3.ftcdn.net/jpg/03/35/34/80/360_F_335348056_yY8QyHP966KePjyutnns1Puwt2bnngZc.jpg";
 						profileImage.setAttribute("class", "profiles-images");
 						profileContentContainer.setAttribute(
 							"class",
@@ -60,8 +58,9 @@
 						profileContentContainer.classList.add(
 							"profile-content-container",
 						);
-						profileUserName.textContent = "Himansu Naik";
-						profileUserPassion.textContent = "Web Developer";
+						profileImage.src = profile.image;
+						profileUserName.textContent =  profile.name;
+						profileUserPassion.textContent = profile.passion;
 					});
 				});
 		</script>
