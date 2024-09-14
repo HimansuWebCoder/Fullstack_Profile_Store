@@ -3,11 +3,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const app = express();
-const upload = require("./config/multerConfig");
+// const upload = require("./config/multerConfig");
 const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
 require("dotenv").config();
-const db = require("./config/db");
+// const db = require("./config/db");
 
 // Backend API Routes
 const profileRouter = require("./routes/profile.router");
