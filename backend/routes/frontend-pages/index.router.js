@@ -9,4 +9,10 @@ indexRouter.get("/", (req, res) => {
   );
 });
 
+indexRouter.get("/all-profiles", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "..", "..", "frontend", "profile-feeds.html"),
+  );
+});
+
 module.exports = indexRouter;

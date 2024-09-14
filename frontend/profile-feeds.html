@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Profile-feed</title>
+	</head>
+	<body>
+		 <a href="/register-profile">Logout</a>
+		 <a href="/profile-admin">Admin-View</a>
+		 <div class="profile-feed-container"></div>
+		<script>
+			const profileFeedContainer = document.querySelector(".profile-feed-container");
+
+			fetch("https://fullstack-profile-store-2.onrender.com/all-profiles")
+			  .then(res => res.json())
+			  .then(profiles => {
+			  	console.log(profiles);
+                  profiles.map(profile => {
+                     const profileImage = document.createElement("img");
+					 const profileUserName = document.createElement("h3");
+					 const profileUserPassion = document.createElement("p");
+					 profileFeedContainer.appendChild(profileImage);
+					 profileFeedContainer.appendChild(profileUserName);
+					 profileFeedContainer.appendChild(profileUserPassion);
+					 profileImage.src = profile.image;
+					 profileUserName.textContent = profile.name;
+					 profileUserPassion.textContent = profile.passion;
+                  })
+			  })
+
+		</script>
+	</body>
+</html>
