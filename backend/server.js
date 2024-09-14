@@ -63,6 +63,7 @@ app.use((req, res, next) => {
 app.use("/script", express.static(path.join(__dirname, "../frontend/script")));
 app.use("/styles", express.static(path.join(__dirname, "../frontend/styles")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 // Frontend Serve Routes
 // app.use("/", indexRouter);
