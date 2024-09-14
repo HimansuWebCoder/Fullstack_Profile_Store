@@ -15,18 +15,35 @@ const updateUserProfileModel = (email, name, passion) => {
 		"Passion:",
 		passion,
 	);
-	return db("profile")
-		.where({ email: email })
-		.update({ name, passion })
-		.returning("*")
-		.then((result) => {
-			console.log("Update result:", result);
-			return result;
-		})
-		.catch((err) => {
-			console.error("Database query error:", err);
-			throw err;
-		});
+
+	const updateFields = {};
+	if (name) {
+		updateFields.name = name;
+	}
+
+	if (passion) {
+		updateFields.passion = passion;
+	}
+
+	if (Object.keys(updateFields).length === 0) {
+		console.error("No fields to update");
+	}
+
+	return (
+		db("profile")
+			.where({ email: email })
+			// .update({ name, passion })
+			.update(updateFields)
+			.returning("*")
+			.then((result) => {
+				console.log("Update result:", result);
+				return result;
+			})
+			.catch((err) => {
+				console.error("Database query error:", err);
+				throw err;
+			})
+	);
 };
 
 // Async way
