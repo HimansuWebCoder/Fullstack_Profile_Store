@@ -106,7 +106,9 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
       updateBtn.textContent = "update";
 
          isLoaded = false;
-          updateBtn.addEventListener("click", () => {
+    	}
+
+      updateBtn.addEventListener("click", () => {
         fetch(
           `https://fullstack-profile-store-2.onrender.com/profile/${profile.id}`,
           {
@@ -118,11 +120,10 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
             }),
           },
         ).then((data) => {
-          console.lo("Profile:", data);
+          console.log("Profile:", data);
           window.location.reload();
         });
-       });
-      }
+      });
     });
 
     fetch(
