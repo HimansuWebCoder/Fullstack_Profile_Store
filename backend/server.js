@@ -7,7 +7,7 @@ const app = express();
 const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
 require("dotenv").config();
-// const db = require("./config/db");
+const db = require("./config/db");
 
 // Backend API Routes
 const profileRouter = require("./routes/profile.router");
