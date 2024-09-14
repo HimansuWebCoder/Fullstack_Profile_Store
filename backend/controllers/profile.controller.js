@@ -61,9 +61,9 @@ const updateProfile = (req, res) => {
     console.log("Request Body:", { name, passion });
     console.log(req.session.profileId);
 
-    if (!name || !passion) {
-        return res.status(400).json("incorrect form submission");
-    }
+    // if (!name || !passion) {
+    //     return res.status(400).json("incorrect form submission");
+    // }
 
     updateUserProfileModel(userEmail, name, passion)
         .then((updatedProfile) => {
