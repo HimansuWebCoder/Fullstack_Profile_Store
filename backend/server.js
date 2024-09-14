@@ -59,6 +59,13 @@ app.use((req, res, next) => {
 	);
 });
 
+const isAuthenticated = (req, res, next) => {
+	if (req.session.user) {
+		return next();
+	}
+	res.status(401).json("Unauthorized");
+};
+
 // Static files
 app.use("/script", express.static(path.join(__dirname, "../frontend/script")));
 app.use("/styles", express.static(path.join(__dirname, "../frontend/styles")));
@@ -92,6 +99,17 @@ app.use("/", uploadRouter);
 
 app.get("/get-session", (req, res) => {
 	res.json(req.session);
+});
+
+// Fetch profiles for the feed
+app.get("/profile-feed", isAuthenticated, (req, res) => {
+	db.select("*")
+		.from("profile")
+		.then((profiles) => {
+			console.log(profiles);
+			res.json(profiles);
+		})
+		.catch((err) => res.status(500).json("Error fetching profiles"));
 });
 
 // Start server
