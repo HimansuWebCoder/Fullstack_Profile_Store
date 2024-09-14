@@ -114,9 +114,10 @@ app.get("/profile-feed", isAuthenticated, (req, res) => {
 });
 
 app.get("/all-profiles", isAuthenticated, (req, res) => {
-	db.select("id", "name", "passion")
+	db.select("id", "name", "passion", "image")
 		.from("profile")
 		.then((profiles) => {
+			console.log(profiles);
 			res.json(profiles);
 		})
 		.catch((err) => res.status(500).json("Error fetching profiles"));
