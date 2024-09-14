@@ -45,7 +45,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
             if (!res.headersSent) {
               res.json({
                 success: true,
-                redirectTo: "/profile-admin",
+                redirectTo: "/all-profiles-feeds",
               });
             } else {
               console.error("Headers already sent, cannot redirect.");
