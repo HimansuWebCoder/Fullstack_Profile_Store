@@ -75,7 +75,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 // Frontend Serve Routes
 // app.use("/", indexRouter);
 app.use("/profile-feed", indexRouter);
-app.use("/profile-feeds", indexRouter);
+app.use("/all-profiles-feeds", indexRouter);
 app.use("/", registerRouter);
 app.use("/profile-admin", profileAdminRouter);
 app.use("/edit-profile", editProfileRouter);

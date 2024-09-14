@@ -9,7 +9,7 @@ indexRouter.get("/", (req, res) => {
   );
 });
 
-indexRouter.get("/all-profiles-feeds", (req, res) => {
+indexRouter.get("/", (req, res) => {
   res.sendFile(
     path.join(__dirname, "..", "..", "..", "frontend", "profile-feeds.html"),
   );
