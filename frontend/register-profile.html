@@ -82,6 +82,40 @@
 			const passwordInput = document.querySelector(".input-password");
 			const registerBtn = document.querySelector("#register-btn");
 
+			passwordInput.addEventListener("keydown", (e) => {
+				if (e.target.value !== "" && e.key === "Enter") {
+					fetch(
+					"https://fullstack-profile-store-2.onrender.com/register",
+					{
+						method: "post",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							name: nameInput.value,
+							email: emailInput.value,
+							password: passwordInput.value,
+						}),
+					},
+				)
+					.then((response) => {
+						if (response.ok) {
+							// Redirect to profile-admin on successful registration
+							window.location = "/login";
+							console.log(response);
+						} else {
+							// Handle errors if the registration was not successful
+							console.error("Registration failed");
+						}
+					})
+					.catch((error) => {
+						// Handle network errors
+						console.error(
+							"There was a problem with the fetch operation:",
+							error,
+						);
+					});
+				}
+			})
+
 			registerBtn.addEventListener("click", () => {
 				fetch(
 					"https://fullstack-profile-store-2.onrender.com/register",
