@@ -7,7 +7,7 @@ const upload = require("./config/multerConfig");
 const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
 require("dotenv").config();
-// const db = require("./config/db");
+const db = require("./config/db");
 
 // Backend API Routes
 const profileRouter = require("./routes/profile.router");
@@ -92,10 +92,9 @@ app.use("/users", usersRouter);
 app.use("/add-section", addSectionRouter);
 app.use("/debug-session", debugSessionRouter);
 app.use("/register", userRegisterRouter);
-app.use("/register", userRegisterRouter);
 app.use("/signin", userSigninRouter);
-app.use("/submit-file", upload.single("avatar"), uploadRouter);
-app.use("/", uploadRouter);
+app.use("/submit-file", uploadRouter);
+// app.use("/", uploadRouter);
 
 app.get("/get-session", (req, res) => {
 	res.json(req.session);

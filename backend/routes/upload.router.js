@@ -4,7 +4,7 @@ const db = require("../config/db");
 const uploadRouter = express.Router();
 
 // UPLOAD POST
-uploadRouter.post("/", (req, res) => {
+uploadRouter.post("/", upload.single("avatar"), (req, res) => {
 	uploadPost(req, res, db);
 });
 
