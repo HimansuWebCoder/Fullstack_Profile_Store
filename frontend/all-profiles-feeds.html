@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Profile-feed</title>
+		<style>
+			.profile-content-container {
+				max-width: 200px;
+				height: auto;
+				margin: auto;
+				border: 1px solid black;
+				padding: 10px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.profiles-images {
+				max-width: 80%;
+				height: 100%;
+				border-radius: 50%;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="/register-profile">Logout</a>
+		<a href="/profile-admin">Admin-View</a>
+		<div class="profile-feed-container"></div>
+		<script>
+			const profileFeedContainer = document.querySelector(
+				".profile-feed-container",
+			);
+
+			fetch("https://fullstack-profile-store-2.onrender.com/all-profiles")
+				.then((res) => res.json())
+				.then((profiles) => {
+					console.log(profiles);
+					profiles.map((profile) => {
+						const profileContentContainer =
+							document.createElement("div");
+						const profileImage = document.createElement("img");
+						const profileUserName = document.createElement("h3");
+						const profileUserPassion = document.createElement("p");
+
+						profileFeedContainer.appendChild(
+							profileContentContainer,
+						);
+						profileContentContainer.appendChild(profileImage);
+						profileContentContainer.appendChild(profileUserName);
+						profileContentContainer.appendChild(profileUserPassion);
+						profileImage.src =
+							"https://t3.ftcdn.net/jpg/03/35/34/80/360_F_335348056_yY8QyHP966KePjyutnns1Puwt2bnngZc.jpg";
+						profileImage.setAttribute("class", "profiles-images");
+						profileContentContainer.setAttribute(
+							"class",
+							"profile-content-container",
+						);
+						profileImage.classList.add("profiles-images");
+						profileContentContainer.classList.add(
+							"profile-content-container",
+						);
+						profileUserName.textContent = "Himansu Naik";
+						profileUserPassion.textContent = "Web Developer";
+					});
+				});
+		</script>
+	</body>
+</html>
