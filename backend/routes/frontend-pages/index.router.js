@@ -5,7 +5,14 @@ const indexRouter = express.Router();
 // GET index.html
 indexRouter.get("/", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "..", "..", "..", "frontend", "profile-feeds.html"),
+    path.join(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "frontend",
+      "all-profiles-feeds.html",
+    ),
   );
 });
 

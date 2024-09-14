@@ -97,6 +97,9 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
       editPassionInput.classList.add("edit-input");
       updateBtn.classList.add("update-btn");
 
+      editNameInput.setAttribute('placeholder', 'Update your name here');
+      editPassionInput.setAttribute('placeholder', 'Update your Passion here');
+
       updateBtn.textContent = "update";
 
       updateBtn.addEventListener("click", () => {
