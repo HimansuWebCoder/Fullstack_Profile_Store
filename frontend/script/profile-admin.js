@@ -39,7 +39,8 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
               passion: editPassionInput.value,
             }),
           },
-        ).then(() => {
+        ).then((data) => {
+          console.lo("Profile:", data);
           window.location.reload();
         });
       });
@@ -88,6 +89,12 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
           });
         });
       });
+  });
+
+fetch("https://fullstack-profile-store-2.onrender.com/profile")
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("all profile:", data);
   });
 
 // profileEditBtn.addEventListener("click", () => {
