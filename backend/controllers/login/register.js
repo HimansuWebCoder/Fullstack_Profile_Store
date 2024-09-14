@@ -4,6 +4,7 @@ const { userRegisterModel } = require("../../models/login.model");
 const handleRegister = (req, res, db, bcrypt) => {
   const { email, name, password } = req.body;
   const passion = "Add your passion here";
+  const image = "../../public/profile-upload.png";
   console.log(req.body);
   if (!email || !name || !password) {
     return res.status(400).json("incorrect form submission");
@@ -11,7 +12,7 @@ const handleRegister = (req, res, db, bcrypt) => {
   const hash = bcrypt.hashSync(password);
   console.log(hash);
   db.transaction((trx) => {
-    userRegisterModel(email, hash, name, passion, trx)
+    userRegisterModel(email, hash, name, passion, image, trx)
       .then((user) => {
         // Storing session profileId
         req.session.profileId = user[0].id;

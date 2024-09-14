@@ -1,7 +1,7 @@
 const db = require("../config/db");
 
 // User_Register_Model
-const userRegisterModel = (email, hash, name, passion, trx) => {
+const userRegisterModel = (email, hash, name, passion, image, trx) => {
 	return trx
 		.insert({
 			hash: hash,
@@ -14,6 +14,7 @@ const userRegisterModel = (email, hash, name, passion, trx) => {
 				email: loginEmail[0].email,
 				name: name,
 				passion: passion,
+				image: image,
 			});
 		});
 };
