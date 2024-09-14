@@ -6,31 +6,93 @@
 		<title>Profile-feed</title>
 		<style>
 			.profile-content-container {
-				max-width: 200px;
+				max-width: 300px;
 				height: auto;
 				margin: auto;
-				border: 1px solid black;
 				padding: 10px;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				font-size: 1.8em;
+				text-align: center;
+				border-radius: 5%;
+				border: none;
+				box-shadow: 1px 2px 30px 2px grey;
+				margin-top: 20px;
 			}
 
 			.profiles-images {
-				max-width: 80%;
+				max-width: 100%;
 				height: 100%;
 				border-radius: 50%;
+			}
+
+			#profile-view {
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: rgb(10, 20, 150);
+				color: white;
+				box-shadow: 1px 1px 5px 1px grey;
+				margin-top: 10px;
+			}
+
+			#profile-view > a {
+				color: white;
+				text-decoration: none;
+			}
+
+			#logout-link {
+				text-decoration: none;
+			}
+
+			#logout-link > button {
+				border: none;
+				font-size: 1.8rem;
+				padding: 5px;
+				border-radius: 10px;
+			}
+
+			#logout-link > button:active {
+				color: white;
+				background: blue;
 			}
 		</style>
 	</head>
 	<body>
-		<a href="/register-profile">Logout</a>
-		<a href="/profile-admin">Admin-View</a>
+		<a id="logout-link" href="/register-profile"><button>Logout</button></a>
+		<div id="profile-view">
+			<a href="/profile-admin"><h1>P</h1></a>
+		</div>
 		<div class="profile-feed-container"></div>
 		<script>
 			const profileFeedContainer = document.querySelector(
 				".profile-feed-container",
 			);
+
+			// const profileContentContainer = document.createElement("div");
+			// const profileImage = document.createElement("img");
+			// const profileUserName = document.createElement("h3");
+			// const profileUserPassion = document.createElement("p");
+
+			// profileFeedContainer.appendChild(profileContentContainer);
+			// profileContentContainer.appendChild(profileImage);
+			// profileContentContainer.appendChild(profileUserName);
+			// profileContentContainer.appendChild(profileUserPassion);
+			// profileImage.setAttribute("class", "profiles-images");
+			// profileContentContainer.setAttribute(
+			// 	"class",
+			// 	"profile-content-container",
+			// );
+			// profileImage.classList.add("profiles-images");
+			// profileContentContainer.classList.add("profile-content-container");
+			// profileImage.src = "./uploads/Prashant-Kumar.png";
+			// profileUserName.textContent = "Prashant Kumar";
+			// profileUserPassion.textContent = "Frontend Developer";
 
 			fetch("https://fullstack-profile-store-2.onrender.com/all-profiles")
 				.then((res) => res.json())
@@ -59,7 +121,7 @@
 							"profile-content-container",
 						);
 						profileImage.src = profile.image;
-						profileUserName.textContent =  profile.name;
+						profileUserName.textContent = profile.name;
 						profileUserPassion.textContent = profile.passion;
 					});
 				});
