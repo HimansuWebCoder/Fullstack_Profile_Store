@@ -127,9 +127,7 @@
 							updateBtn.textContent = "update";
 
 							isLoaded = false;
-						}
-
-						updateBtn.addEventListener("click", () => {
+							updateBtn.addEventListener("click", () => {
 							fetch(
 								`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}`,
 								{
@@ -147,6 +145,7 @@
 								window.location.reload();
 							});
 						});
+						}
 					});
 
 					fetch(

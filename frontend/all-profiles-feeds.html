@@ -9,16 +9,27 @@
 				max-width: 300px;
 				height: auto;
 				margin: auto;
-				padding: 10px;
+				padding: 5px;
 				display: flex;
-				flex-direction: column;
+/*				flex-direction: column;*/
 				align-items: center;
-				font-size: 1.8em;
+/*				font-size: 1.8em;*/
 				text-align: center;
 				border-radius: 5%;
 				border: none;
 				box-shadow: 1px 2px 30px 2px grey;
-				margin-top: 20px;
+				margin-top: 20px; 
+				word-wrap: word-space;
+				transition: all linear  0.1s;
+			}
+
+			.profile-content-container:hover {
+			    transform: scale(0.9, 0.9);
+			}
+
+			.profile-img-container {
+				width: 300px;
+				height: 100px;
 			}
 
 			.profiles-images {
@@ -44,6 +55,7 @@
 			#profile-view > a {
 				color: white;
 				text-decoration: none;
+				font-size: 1.8rem;
 			}
 
 			#logout-link {
@@ -66,7 +78,7 @@
 	<body>
 		<a id="logout-link" href="/register-profile"><button>Logout</button></a>
 		<div id="profile-view">
-			<a href="/profile-admin"><h1>P</h1></a>
+			<a href="/profile-admin">P</a>
 		</div>
 		<div class="profile-feed-container"></div>
 		<script>
@@ -74,25 +86,30 @@
 				".profile-feed-container",
 			);
 
-			// const profileContentContainer = document.createElement("div");
-			// const profileImage = document.createElement("img");
-			// const profileUserName = document.createElement("h3");
-			// const profileUserPassion = document.createElement("p");
+			const profileContentContainer = document.createElement("div");
+			const profileImgContainer = document.createElement("div");
+			const profileTextContainer = document.createElement("div");
+			const profileImage = document.createElement("img");
+			const profileUserName = document.createElement("h3");
+			const profileUserPassion = document.createElement("p");
 
-			// profileFeedContainer.appendChild(profileContentContainer);
-			// profileContentContainer.appendChild(profileImage);
-			// profileContentContainer.appendChild(profileUserName);
-			// profileContentContainer.appendChild(profileUserPassion);
-			// profileImage.setAttribute("class", "profiles-images");
-			// profileContentContainer.setAttribute(
-			// 	"class",
-			// 	"profile-content-container",
-			// );
-			// profileImage.classList.add("profiles-images");
-			// profileContentContainer.classList.add("profile-content-container");
-			// profileImage.src = "./uploads/Prashant-Kumar.png";
-			// profileUserName.textContent = "Prashant Kumar";
-			// profileUserPassion.textContent = "Frontend Developer";
+			profileFeedContainer.appendChild(profileContentContainer);
+			profileContentContainer.appendChild(profileImgContainer);
+			profileContentContainer.appendChild(profileTextContainer);
+			profileImgContainer.appendChild(profileImage);
+			profileTextContainer.appendChild(profileUserName);
+			profileTextContainer.appendChild(profileUserPassion);
+			profileImgContainer.classList.add("profile-img-container");
+			profileImage.setAttribute("class", "profiles-images");
+			profileContentContainer.setAttribute(
+				"class",
+				"profile-content-container",
+			);
+			profileImage.classList.add("profiles-images");
+			profileContentContainer.classList.add("profile-content-container");
+			profileImage.src = "./uploads/Prashant-Kumar.png";
+			profileUserName.textContent = "Prashant Kumar";
+			profileUserPassion.textContent = "Frontend Developer";
 
 			fetch("https://fullstack-profile-store-2.onrender.com/all-profiles")
 				.then((res) => res.json())
