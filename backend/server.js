@@ -101,25 +101,26 @@ app.get("/get-session", (req, res) => {
 });
 
 // Fetch profiles for the feed
-app.get("/profile-feed", isAuthenticated, (req, res) => {
-	const userId = req.session.user.id;
-	const userName = req.session.user.name;
-	db.select("*")
-		.from("profile")
-		.where("user_id", userId)
-		.then((profiles) => {
-			console.log(profiles);
-			res.json({ profiles, userName });
-		})
-		.catch((err) => res.status(500).json("Error fetching profiles"));
-});
+// app.get("/profile-feed", isAuthenticated, (req, res) => {
+// 	const userId = req.session.user.id;
+// 	const userName = req.session.user.name;
+// 	db.select("*")
+// 		.from("profile")
+// 		.where("user_id", userId)
+// 		.then((profiles) => {
+// 			console.log(profiles);
+// 			res.json({ profiles, userName });
+// 		})
+// 		.catch((err) => res.status(500).json("Error fetching profiles"));
+// });
 
 app.get("/all-profiles", isAuthenticated, (req, res) => {
+	const userName = req.session.user.name;
 	db.select("id", "name", "passion", "image")
 		.from("profile")
 		.then((profiles) => {
 			console.log(profiles);
-			res.json(profiles);
+			res.json({ profiles, userName });
 		})
 		.catch((err) => res.status(500).json("Error fetching profiles"));
 });
