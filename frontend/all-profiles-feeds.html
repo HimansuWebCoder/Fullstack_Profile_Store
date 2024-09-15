@@ -156,7 +156,10 @@
 						profileImage.src = profile.image;
 						profileUserName.textContent = profile.name;
 						profileUserPassion.textContent = profile.passion;
-						profileNameLink.textContent = profile.name[0];
+						// profileNameLink.textContent = profile.name[0];
+						if (profile.name) {
+                		profileNameLink.textContent = profile.name[0];
+                         }
 					});
 				});
 		</script>
