@@ -116,18 +116,20 @@
 				.then((profiles) => {
 					console.log(profiles);
 					profiles.map((profile) => {
-						const profileContentContainer =
-							document.createElement("div");
-						const profileImage = document.createElement("img");
-						const profileUserName = document.createElement("h3");
-						const profileUserPassion = document.createElement("p");
+							const profileContentContainer = document.createElement("div");
+							const profileImgContainer = document.createElement("div");
+							const profileTextContainer = document.createElement("div");
+							const profileImage = document.createElement("img");
+							const profileUserName = document.createElement("h3");
+							const profileUserPassion = document.createElement("p");
 
-						profileFeedContainer.appendChild(
-							profileContentContainer,
-						);
-						profileContentContainer.appendChild(profileImage);
-						profileContentContainer.appendChild(profileUserName);
-						profileContentContainer.appendChild(profileUserPassion);
+							profileFeedContainer.appendChild(profileContentContainer);
+							profileContentContainer.appendChild(profileImgContainer);
+							profileContentContainer.appendChild(profileTextContainer);
+							profileImgContainer.appendChild(profileImage);
+							profileTextContainer.appendChild(profileUserName);
+							profileTextContainer.appendChild(profileUserPassion);
+							profileImgContainer.classList.add("profile-img-container");
 						profileImage.setAttribute("class", "profiles-images");
 						profileContentContainer.setAttribute(
 							"class",
