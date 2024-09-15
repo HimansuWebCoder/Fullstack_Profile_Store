@@ -116,9 +116,15 @@
 
 			fetch("https://fullstack-profile-store-2.onrender.com/all-profiles")
 				.then((res) => res.json())
-				.then((profiles) => {
-					console.log(profiles);
-					profiles.map((profile) => {
+				.then((data) => {
+					console.log(data);
+					console.log(data.profiles);
+					console.log(data.userName);
+					console.log(data.userName[0])
+
+					profileNameLink.textContent = data.userName[0];
+
+					data.map((profile) => {
 						const profileContentContainer =
 							document.createElement("div");
 						const profileImgContainer =
@@ -156,11 +162,7 @@
 						profileImage.src = profile.image;
 						profileUserName.textContent = profile.name;
 						profileUserPassion.textContent = profile.passion;
-						// profileNameLink.textContent = profile.name[0];
-						if (profile.name) {
-                		profileNameLink.textContent = profile.name[0];
-                		console.log(profile.name[0]);
-                         }
+
 					});
 				});
 		</script>
