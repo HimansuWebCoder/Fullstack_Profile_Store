@@ -11,20 +11,20 @@
 				margin: auto;
 				padding: 5px;
 				display: flex;
-/*				flex-direction: column;*/
+				/*				flex-direction: column;*/
 				align-items: center;
-/*				font-size: 1.8em;*/
+				/*				font-size: 1.8em;*/
 				text-align: center;
 				border-radius: 5%;
 				border: none;
 				box-shadow: 1px 2px 30px 2px grey;
-				margin-top: 20px; 
+				margin-top: 20px;
 				word-wrap: word-space;
-				transition: all linear  0.1s;
+				transition: all linear 0.1s;
 			}
 
 			.profile-content-container:hover {
-			    transform: scale(0.9, 0.9);
+				transform: scale(0.9, 0.9);
 			}
 
 			.profile-img-container {
@@ -78,13 +78,16 @@
 	<body>
 		<a id="logout-link" href="/register-profile"><button>Logout</button></a>
 		<div id="profile-view">
-			<a href="/profile-admin">P</a>
+			<a id="profile-name-link" href="/profile-admin"></a>
 		</div>
 		<div class="profile-feed-container"></div>
 		<script>
 			const profileFeedContainer = document.querySelector(
 				".profile-feed-container",
 			);
+
+			const profileNameLink =
+				document.querySelector("#profile-name-link");
 
 			// const profileContentContainer = document.createElement("div");
 			// const profileImgContainer = document.createElement("div");
@@ -116,20 +119,31 @@
 				.then((profiles) => {
 					console.log(profiles);
 					profiles.map((profile) => {
-							const profileContentContainer = document.createElement("div");
-							const profileImgContainer = document.createElement("div");
-							const profileTextContainer = document.createElement("div");
-							const profileImage = document.createElement("img");
-							const profileUserName = document.createElement("h3");
-							const profileUserPassion = document.createElement("p");
+						const profileContentContainer =
+							document.createElement("div");
+						const profileImgContainer =
+							document.createElement("div");
+						const profileTextContainer =
+							document.createElement("div");
+						const profileImage = document.createElement("img");
+						const profileUserName = document.createElement("h3");
+						const profileUserPassion = document.createElement("p");
 
-							profileFeedContainer.appendChild(profileContentContainer);
-							profileContentContainer.appendChild(profileImgContainer);
-							profileContentContainer.appendChild(profileTextContainer);
-							profileImgContainer.appendChild(profileImage);
-							profileTextContainer.appendChild(profileUserName);
-							profileTextContainer.appendChild(profileUserPassion);
-							profileImgContainer.classList.add("profile-img-container");
+						profileFeedContainer.appendChild(
+							profileContentContainer,
+						);
+						profileContentContainer.appendChild(
+							profileImgContainer,
+						);
+						profileContentContainer.appendChild(
+							profileTextContainer,
+						);
+						profileImgContainer.appendChild(profileImage);
+						profileTextContainer.appendChild(profileUserName);
+						profileTextContainer.appendChild(profileUserPassion);
+						profileImgContainer.classList.add(
+							"profile-img-container",
+						);
 						profileImage.setAttribute("class", "profiles-images");
 						profileContentContainer.setAttribute(
 							"class",
@@ -142,6 +156,7 @@
 						profileImage.src = profile.image;
 						profileUserName.textContent = profile.name;
 						profileUserPassion.textContent = profile.passion;
+						profileNameLink.textContent = profile.name[0];
 					});
 				});
 		</script>
