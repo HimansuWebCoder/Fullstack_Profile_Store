@@ -84,6 +84,9 @@
 	<body>
 		<a id="logout-link" href="/register-profile"><button>Logout</button></a>
 		<a href="/user-chat"><button>Chat with Users</button></a>
+		<button id="mode-btn">Change Mode</button>
+		<button id="share-url-btn">Share</button>
+		<p id="share-URL-text"></p>
 		<div id="profile-view">
 			<a id="profile-name-link" href="/profile-admin"
 				><img id="profile-name-link-img" src=""
@@ -91,9 +94,51 @@
 		</div>
 		<div class="profile-feed-container"></div>
 		<script>
+			let shareData = {
+				title: "Profile-Store",
+				url: "https://fullstack-profile-store-2.onrender.com",
+			};
+
 			const profileFeedContainer = document.querySelector(
 				".profile-feed-container",
 			);
+
+			const changeModeBtn = document.querySelector("#mode-btn");
+			const shareUrlBtn = document.querySelector("#share-url-btn");
+			const shareUrlText = document.querySelector("#share-URL-text");
+
+			shareUrlBtn.addEventListener("click", () => {
+				if (!navigator.canShare) {
+					shareUrlText.textContent = "Web Share API not available";
+					return;
+				}
+
+				if (!navigator.canShare(shareData)) {
+					shareUrlText.textContent =
+						"Share data unsupported, disallowed, or invalid";
+					return;
+				}
+
+				navigator
+					.share(shareData)
+					.then(
+						() =>
+							(shareUrlText.textContent =
+								"Profile-Store shared successfully!"),
+					)
+					.catch((e) => (shareUrlText.textContent = `Error: ` + e));
+			});
+
+			let isDark = true;
+			changeModeBtn.addEventListener("click", () => {
+				if (isDark) {
+					document.body.style.backgroundColor = "black";
+					document.body.style.color = "white";
+				} else {
+					document.body.style.backgroundColor = "white";
+				}
+				isDark = !isDark;
+			});
 
 			const profileNameLink =
 				document.querySelector("#profile-name-link");
