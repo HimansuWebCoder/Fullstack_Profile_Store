@@ -12,6 +12,7 @@ const session = require("express-session");
 require("dotenv").config();
 const db = require("./config/db");
 
+const server = createServer(app);
 const io = new Server(server);
 
 // Backend API Routes
