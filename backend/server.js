@@ -1,5 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const { createServer } = require("node:http");
+const { join } = require("node:path");
+const { Server } = require("socket.io");
 const cors = require("cors");
 const path = require("path");
 const app = express();
@@ -8,6 +11,8 @@ const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
 require("dotenv").config();
 const db = require("./config/db");
+
+const io = new Server(server);
 
 // Backend API Routes
 const profileRouter = require("./routes/profile.router");
@@ -126,8 +131,19 @@ app.get("/all-profiles", isAuthenticated, (req, res) => {
 		.catch((err) => res.status(500).json("Error fetching profiles"));
 });
 
+app.get("/chat-feeds", (req, res) => {
+	res.sendFile(join(__dirname, "../frontend/user-chat.html"));
+});
+
+io.on("connection", (socket) => {
+	console.log("A user connected");
+
+	socket.on("chat message", (msg) => {
+		io.emit("chat message", msg);
+	});
+});
 // Start server
-app.listen(process.env.PORT || 3000, () => {
+server.listen(process.env.PORT || 3000, () => {
 	console.log(
 		`Your website hosted at http://localhost:${process.env.PORT || 3000}`,
 	);
