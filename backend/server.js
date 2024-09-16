@@ -136,11 +136,32 @@ app.get("/user-chat", (req, res) => {
 	res.sendFile(join(__dirname, "../frontend/user-chat.html"));
 });
 
+// Without using DB
+// io.on("connection", (socket) => {
+// 	console.log("A user connected");
+
+// 	socket.on("chat message", (msg) => {
+// 		io.emit("chat message", msg);
+// 	});
+// });
+
+// Using DB
 io.on("connection", (socket) => {
 	console.log("A user connected");
 
-	socket.on("chat message", (msg) => {
-		io.emit("chat message", msg);
+	socket.on("chat message", async (msg) => {
+		try {
+			const result = await db("chat_messages").insert({
+				message: msg,
+				created_at: new Date(),
+			});
+
+			console.log("Messages:", result);
+
+			io.emit("chat message", msg);
+		} catch (err) {
+			console.error("Error inserting chat msg into db:", err);
+		}
 	});
 });
 // Start server

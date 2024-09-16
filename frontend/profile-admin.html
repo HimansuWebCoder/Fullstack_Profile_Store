@@ -128,23 +128,23 @@
 
 							isLoaded = false;
 							updateBtn.addEventListener("click", () => {
-							fetch(
-								`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}`,
-								{
-									method: "put",
-									headers: {
-										"Content-Type": "application/json",
+								fetch(
+									`https://fullstack-profile-store-2.onrender.com/profile/${profile.id}`,
+									{
+										method: "put",
+										headers: {
+											"Content-Type": "application/json",
+										},
+										body: JSON.stringify({
+											name: editNameInput.value,
+											passion: editPassionInput.value,
+										}),
 									},
-									body: JSON.stringify({
-										name: editNameInput.value,
-										passion: editPassionInput.value,
-									}),
-								},
-							).then((data) => {
-								console.log("Profile:", data);
-								window.location.reload();
+								).then((data) => {
+									console.log("Profile:", data);
+									window.location.reload();
+								});
 							});
-						});
 						}
 					});
 

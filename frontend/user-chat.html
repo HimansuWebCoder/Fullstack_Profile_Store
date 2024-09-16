@@ -54,13 +54,24 @@
       #messages > li:nth-child(odd) {
         background: #efefef;
       }
+
+      #msg-container {
+        max-width: 400px;
+        height: 500px;
+        border: 1px solid black;
+        margin: 5px;
+        overflow: auto;
+        background-color: cornflowerblue;
+      }
     </style>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
+    <div id="msg-container">
+      <ul id="messages"></ul>
+      <form id="form" action="">
+        <input id="input" autocomplete="off" /><button>Send</button>
+      </form>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
@@ -74,13 +85,17 @@
         if (input.value) {
           socket.emit("chat message", input.value);
           input.value = "";
+          input.focus();
         }
       });
 
       socket.on("chat message", (msg) => {
         const item = document.createElement("li");
+        // const date = document.createElement("li");
         item.textContent = msg;
+        // date.textContent = msg;
         messages.appendChild(item);
+        console.log(msg);
         window.scrollTo(0, document.body.scrollHeight);
       });
     </script>
