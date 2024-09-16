@@ -128,15 +128,15 @@
 				.then((res) => res.json())
 				.then((data) => {
 					console.log(data);
-					console.log(data.profiles);
-					console.log(data.userName);
-					console.log(data.userName[0])
-					// const { profiles, userName } = data; // use this destructuring
+					// console.log(data.profiles);
+					// console.log(data.userName);
+					// console.log(data.userName[0])
+					const { profiles, userName, userImage } = data; // use this destructuring
 
 					// profileNameLink.textContent = data.userName[0];
 					// profileNameLink.textContent = profiles.image[0];
-					// profileCircleCoverImg.src = data.profiles.image[0];
-					console.log(data.profiles.image);
+					profileCircleCoverImg.src = userImage;
+
 
 					data.profiles.map((profile) => {
 						const profileContentContainer =

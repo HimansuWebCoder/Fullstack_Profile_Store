@@ -116,11 +116,12 @@ app.get("/get-session", (req, res) => {
 
 app.get("/all-profiles", isAuthenticated, (req, res) => {
 	const userName = req.session.user.name;
+	const userImage = req.session.user.image;
 	db.select("id", "name", "passion", "image")
 		.from("profile")
 		.then((profiles) => {
 			console.log(profiles);
-			res.json({ profiles, userName });
+			res.json({ profiles, userName, userImage });
 		})
 		.catch((err) => res.status(500).json("Error fetching profiles"));
 });
