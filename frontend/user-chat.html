@@ -118,11 +118,11 @@
 
       // Adjust scroll when the window is resized or on mobile keyboard open
       window.addEventListener("resize", adjustScroll);
-      // input.addEventListener("focus", adjustScroll); // Trigger scroll when input is focused (keyboard opens on mobile)
+      input.addEventListener("focus", adjustScroll); // Trigger scroll when input is focused (keyboard opens on mobile)
 
-      input.addEventListener("focus", () => {
-        setTimeout(adjustScroll, 300);
-      });
+      // input.addEventListener("focus", () => {
+      //   setTimeout(adjustScroll, 300);
+      // });
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
