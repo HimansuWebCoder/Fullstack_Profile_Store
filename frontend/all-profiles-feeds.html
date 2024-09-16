@@ -134,8 +134,9 @@
 					// const { profiles, userName } = data; // use this destructuring
 
 					// profileNameLink.textContent = data.userName[0];
-					// profileNameLink.textContent = profiles.[0];
-					profileCircleCoverImg.src = data.profiles.image[0];
+					// profileNameLink.textContent = profiles.image[0];
+					// profileCircleCoverImg.src = data.profiles.image[0];
+					console.log(data.profiles.image);
 
 					data.profiles.map((profile) => {
 						const profileContentContainer =
