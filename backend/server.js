@@ -132,7 +132,7 @@ app.get("/all-profiles", isAuthenticated, (req, res) => {
 		.catch((err) => res.status(500).json("Error fetching profiles"));
 });
 
-app.get("/chat-feeds", (req, res) => {
+app.get("/user-chat", (req, res) => {
 	res.sendFile(join(__dirname, "../frontend/user-chat.html"));
 });
 
