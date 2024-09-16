@@ -52,7 +52,7 @@
         padding: 0.5rem 1rem;
       }
       #messages > li:nth-child(odd) {
-        background: #efefef;
+        background: black;
       }
 
       #msg-container {
@@ -92,7 +92,7 @@
         }
       });
 
-      socket.on("preves msgs", (messages) => {
+      socket.on("previous messages", (messages) => {
         messages.forEach(msg => {
           displayMessage(msg.message);
         });
