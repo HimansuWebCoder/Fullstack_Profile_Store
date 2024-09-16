@@ -152,7 +152,7 @@ io.on("connection", async (socket) => {
 	try {
 		const chatMsgs = await db("chat_messages")
 			.select("*")
-			.orderBy("created_at", "asc");
+			.orderBy("created_at", "desc");
 		socket.emit("previous messages", chatMsgs);
 	} catch (err) {
 		console.error("Error fetching chat data from DB:", err);

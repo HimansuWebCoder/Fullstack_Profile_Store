@@ -4,11 +4,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Socket.IO chat</title>
     <style>
-      body {
+      /*body {
         margin: 0;
-        padding-bottom: 3rem;
+        padding: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Helvetica, Arial, sans-serif;
+      }*/
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
       }
 
       #form {
@@ -23,6 +33,7 @@
         box-sizing: border-box;
         backdrop-filter: blur(10px);
       }
+
       #input {
         border: none;
         padding: 0 1rem;
@@ -30,9 +41,11 @@
         border-radius: 2rem;
         margin: 0.25rem;
       }
+
       #input:focus {
         outline: none;
       }
+
       #form > button {
         background: #333;
         border: none;
@@ -43,38 +56,54 @@
         color: #fff;
       }
 
+      #msg-container {
+        max-width: 100%;
+        /*        height: calc(150vh - 3rem);*/
+        height: auto;
+        margin: auto;
+        overflow: hidden;
+        background-color: cornflowerblue;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column-reverse;
+        box-sizing: border-box;
+        padding-bottom: 6rem;
+      }
+
       #messages {
         list-style-type: none;
         margin: 0;
         padding: 0;
+        flex-grow: 1;
+        /*        overflow-y: auto;*/
+        background-color: cornflowerblue;
+        color: white;
+        font-weight: bold;
       }
+
       #messages > li {
         padding: 0.5rem 1rem;
       }
+
       #messages > li:nth-child(odd) {
         background: black;
       }
 
-      #msg-container {
-        max-width: 100%;
-        height: 700px;
-        border: 1px solid black;
-        margin: auto;
-/*        margin: 5px;*/
-        overflow: auto;
-        background-color: cornflowerblue;
-        color: white;
-        font-weight: bold;
+      @media (max-width: 600px) {
+        #form {
+          height: 4rem;
+        }
       }
     </style>
   </head>
   <body>
     <div id="msg-container">
       <ul id="messages"></ul>
-      <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
-      </form>
     </div>
+    <form id="form" action="">
+      <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
@@ -82,6 +111,20 @@
       const form = document.getElementById("form");
       const input = document.getElementById("input");
       const messages = document.getElementById("messages");
+      const msgContainer = document.getElementById("msg-container");
+
+      // Scroll to the latest message
+      function adjustScroll() {
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+      }
+
+      // Adjust scroll when the window is resized or on mobile keyboard open
+      window.addEventListener("resize", adjustScroll);
+      // input.addEventListener("focus", adjustScroll); // Trigger scroll when input is focused (keyboard opens on mobile)
+
+      input.addEventListener("focus", () => {
+        setTimeout(adjustScroll, 300);
+      });
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -89,44 +132,29 @@
           socket.emit("chat message", input.value);
           input.value = "";
           input.focus();
+          adjustScroll();
         }
       });
 
       socket.on("previous messages", (messages) => {
-        messages.forEach(msg => {
+        messages.reverse().forEach((msg) => {
+          // Reverse to display older messages at the top
           displayMessage(msg.message);
         });
+        adjustScroll(); // Scroll after loading previous messages
       });
 
       socket.on("chat message", (msg) => {
         displayMessage(msg);
-      })
-
-      function sendMsg(msg) {
-        socket.emit("chat message", msg);
-      }
+        adjustScroll(); // Scroll to the latest message
+      });
 
       function displayMessage(msg) {
         const msgElement = document.createElement("li");
         msgElement.textContent = msg;
-        messages.appendChild(msgElement);
+        messages.appendChild(msgElement); // Add new messages at the top
         console.log(msg);
-        window.scrollTo(0, document.body.scrollHeight);
       }
-
-      // socket.on("chat message", (msgs) => {
-      //   msgs.forEach(msg => {
-      //     displayMessage(msg.message);
-      //   });
-
-      //   const item = document.createElement("li");
-      //   // const date = document.createElement("li");
-      //   item.textContent = msg;
-      //   // date.textContent = msg;
-      //   messages.appendChild(item);
-      //   console.log(msg);
-      //   window.scrollTo(0, document.body.scrollHeight);
-      // });
     </script>
   </body>
 </html>
