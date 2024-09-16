@@ -4,13 +4,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Socket.IO chat</title>
     <style>
-      /*body {
-        margin: 0;
-        padding: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
-      }*/
-
       body {
         margin: 0;
         padding: 0;
@@ -116,13 +109,9 @@
         msgContainer.scrollTop = msgContainer.scrollHeight;
       }
 
-      // Adjust scroll when the window is resized or on mobile keyboard open
-      window.addEventListener("resize", adjustScroll);
-      input.addEventListener("focus", adjustScroll); // Trigger scroll when input is focused (keyboard opens on mobile)
 
-      // input.addEventListener("focus", () => {
-      //   setTimeout(adjustScroll, 300);
-      // });
+      window.addEventListener("resize", adjustScroll);
+      input.addEventListener("focus", adjustScroll); 
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -136,15 +125,14 @@
 
       socket.on("previous messages", (messages) => {
         messages.reverse().forEach((msg) => {
-          // Reverse to display older messages at the top
           displayMessage(msg.message);
         });
-        adjustScroll(); // Scroll after loading previous messages
+        adjustScroll(); 
       });
 
       socket.on("chat message", (msg) => {
         displayMessage(msg);
-        adjustScroll(); // Scroll to the latest message
+        adjustScroll(); 
       });
 
       function displayMessage(msg) {
