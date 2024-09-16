@@ -46,7 +46,7 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				background: rgb(10, 20, 150);
+				background: powderblue;
 				color: white;
 				box-shadow: 1px 1px 5px 1px grey;
 				margin-top: 10px;
@@ -73,12 +73,20 @@
 				color: white;
 				background: blue;
 			}
+
+			#profile-name-link-img {
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+			}
 		</style>
 	</head>
 	<body>
 		<a id="logout-link" href="/register-profile"><button>Logout</button></a>
 		<div id="profile-view">
-			<a id="profile-name-link" href="/profile-admin"></a>
+			<a id="profile-name-link" href="/profile-admin"
+				><img id="profile-name-link-img" src=""
+			/></a>
 		</div>
 		<div class="profile-feed-container"></div>
 		<script>
@@ -88,6 +96,8 @@
 
 			const profileNameLink =
 				document.querySelector("#profile-name-link");
+			const profileCircleCoverImg=
+				document.querySelector("#profile-name-link-img");
 
 			// const profileContentContainer = document.createElement("div");
 			// const profileImgContainer = document.createElement("div");
@@ -123,7 +133,9 @@
 					console.log(data.userName[0])
 					// const { profiles, userName } = data; // use this destructuring
 
-					profileNameLink.textContent = data.userName[0];
+					// profileNameLink.textContent = data.userName[0];
+					// profileNameLink.textContent = profiles.[0];
+					profileCircleCoverImg.src = profiles.image[0];
 
 					data.profiles.map((profile) => {
 						const profileContentContainer =
