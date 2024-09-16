@@ -146,8 +146,17 @@ app.get("/user-chat", (req, res) => {
 // });
 
 // Using DB
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
 	console.log("A user connected");
+	// Fetching all chat messages from db and send to client
+	try {
+		const chatMsgs = await db("chat_messages")
+			.select("*")
+			.orderBy("created_at", "asc");
+		socket.emit("previous messages", chatMsgs);
+	} catch (err) {
+		console.error("Error fetching chat data from DB:", err);
+	}
 
 	socket.on("chat message", async (msg) => {
 		try {

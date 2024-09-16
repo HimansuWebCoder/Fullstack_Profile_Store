@@ -56,12 +56,15 @@
       }
 
       #msg-container {
-        max-width: 400px;
-        height: 500px;
+        max-width: 100%;
+        height: 700px;
         border: 1px solid black;
-        margin: 5px;
+        margin: auto;
+/*        margin: 5px;*/
         overflow: auto;
         background-color: cornflowerblue;
+        color: white;
+        font-weight: bold;
       }
     </style>
   </head>
@@ -89,15 +92,41 @@
         }
       });
 
+      socket.on("preves msgs", (messages) => {
+        messages.forEach(msg => {
+          displayMessage(msg.message);
+        });
+      });
+
       socket.on("chat message", (msg) => {
-        const item = document.createElement("li");
-        // const date = document.createElement("li");
-        item.textContent = msg;
-        // date.textContent = msg;
-        messages.appendChild(item);
+        displayMessage(msg);
+      })
+
+      function sendMsg(msg) {
+        socket.emit("chat message", msg);
+      }
+
+      function displayMessage(msg) {
+        const msgElement = document.createElement("li");
+        msgElement.textContent = msg;
+        messages.appendChild(msgElement);
         console.log(msg);
         window.scrollTo(0, document.body.scrollHeight);
-      });
+      }
+
+      // socket.on("chat message", (msgs) => {
+      //   msgs.forEach(msg => {
+      //     displayMessage(msg.message);
+      //   });
+
+      //   const item = document.createElement("li");
+      //   // const date = document.createElement("li");
+      //   item.textContent = msg;
+      //   // date.textContent = msg;
+      //   messages.appendChild(item);
+      //   console.log(msg);
+      //   window.scrollTo(0, document.body.scrollHeight);
+      // });
     </script>
   </body>
 </html>
