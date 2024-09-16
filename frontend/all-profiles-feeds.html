@@ -83,6 +83,7 @@
 	</head>
 	<body>
 		<a id="logout-link" href="/register-profile"><button>Logout</button></a>
+		<a href="/all-profiles-feeds"><button>Chat with Users</button></a>
 		<div id="profile-view">
 			<a id="profile-name-link" href="/profile-admin"
 				><img id="profile-name-link-img" src=""
@@ -96,8 +97,9 @@
 
 			const profileNameLink =
 				document.querySelector("#profile-name-link");
-			const profileCircleCoverImg=
-				document.querySelector("#profile-name-link-img");
+			const profileCircleCoverImg = document.querySelector(
+				"#profile-name-link-img",
+			);
 
 			// const profileContentContainer = document.createElement("div");
 			// const profileImgContainer = document.createElement("div");
@@ -137,7 +139,6 @@
 					// profileNameLink.textContent = profiles.image[0];
 					profileCircleCoverImg.src = userImage;
 
-
 					data.profiles.map((profile) => {
 						const profileContentContainer =
 							document.createElement("div");
@@ -176,7 +177,6 @@
 						profileImage.src = profile.image;
 						profileUserName.textContent = profile.name;
 						profileUserPassion.textContent = profile.passion;
-
 					});
 				});
 		</script>
