@@ -80,6 +80,19 @@
 				"#upload-profile-photo",
 			);
 
+			// profileEditBtn.addEventListener("click", () => {
+			//   const editPassionInput = document.createElement("input");
+			//   const editNameInput = document.createElement("input");
+			//   const updateBtn = document.createElement("button");
+			//   const closeUpdateBtn = document.createElement("button");
+			//   profileContentContainer.appendChild(editNameInput);
+			//   profileContentContainer.appendChild(editPassionInput);
+			//   profileContentContainer.appendChild(updateBtn);
+			//   profileContentContainer.appendChild(closeUpdateBtn);
+			//   updateBtn.textContent = "update";
+			//   closeUpdateBtn.textContent = "Close";
+			// });
+
 			fetch("https://fullstack-profile-store-2.onrender.com/profile")
 				.then((res) => res.json())
 				.then((profile) => {
@@ -98,7 +111,8 @@
 							const editPassionInput =
 								document.createElement("input");
 							const updateBtn = document.createElement("button");
-							const closeUpdateBtn = document.createElement("button");
+							const closeUpdateBtn =
+								document.createElement("button");
 							profileContentContainer.appendChild(
 								inputProfileContainer,
 							);
@@ -106,7 +120,6 @@
 							inputProfileContainer.appendChild(editPassionInput);
 							inputProfileContainer.appendChild(updateBtn);
 							inputProfileContainer.appendChild(closeUpdateBtn);
-
 
 							inputProfileContainer.setAttribute(
 								"class",
@@ -122,12 +135,12 @@
 
 							closeUpdateBtn.addEventListener("click", () => {
 								inputProfileContainer.style.display = "none";
-							})
+							});
 
 							// e.target.style.display = "block";
 							e.target.addEventListener("click", () => {
 								inputProfileContainer.style.display = "block";
-							})
+							});
 
 							inputProfileContainer.classList.add(
 								"input-profile-container",
