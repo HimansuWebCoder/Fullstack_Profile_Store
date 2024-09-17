@@ -10,6 +10,7 @@ const app = express();
 const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
 const pgSession = require("connect-pg-simple")(session);
+const { Pool } = require("pg");
 require("dotenv").config();
 const db = require("./config/db");
 
@@ -42,10 +43,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+const sessionPool = new Pool({
+	connectionString: process.env.DATABASE_URL,
+	ssl: { rejectUnauthorized: false },
+});
+
 app.use(
 	session({
 		store: new pgSession({
-			pool: db.client.pool,
+			pool: sessionPool,
 			tableName: "session",
 		}),
 		secret: process.env.SESSION_SECRET || "Himansu!@9861!$%#@",
