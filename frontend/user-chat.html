@@ -109,9 +109,8 @@
         msgContainer.scrollTop = msgContainer.scrollHeight;
       }
 
-
       window.addEventListener("resize", adjustScroll);
-      input.addEventListener("focus", adjustScroll); 
+      input.addEventListener("focus", adjustScroll);
 
       form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -124,20 +123,30 @@
       });
 
       socket.on("previous messages", (messages) => {
+        console.log(messages);
         messages.reverse().forEach((msg) => {
-          displayMessage(msg.message);
+          displayMessage(msg);
+          console.log(msg);
         });
-        adjustScroll(); 
+        adjustScroll();
       });
 
+      // socket.on("chat message", (msg) => {
+      //   displayMessage(msg);
+      //   console.log(msg)
+      //   adjustScroll();
+      // });
+
       socket.on("chat message", (msg) => {
-        displayMessage(msg);
-        adjustScroll(); 
+        console.log("Received message:", msg.message);
+        console.log("Created at:", msg.created_at);
+        adjustScroll();
       });
 
       function displayMessage(msg) {
         const msgElement = document.createElement("li");
-        msgElement.textContent = msg;
+          msgElement.textContent = `${msg.message}            :Date & Time:-${new Date(msg.created_at).toLocaleString()}`
+          console.log(msg)
         messages.appendChild(msgElement); // Add new messages at the top
         console.log(msg);
       }

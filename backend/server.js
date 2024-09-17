@@ -158,16 +158,34 @@ io.on("connection", async (socket) => {
 		console.error("Error fetching chat data from DB:", err);
 	}
 
+	// socket.on("chat message", async (msg) => {
+	// 	try {
+	// 		const result = await db("chat_messages")
+	// 			.insert({
+	// 				message: msg,
+	// 				created_at: new Date(),
+	// 			})
+	// 			.returning("*");
+
+	// 		console.log("Messages:", result);
+
+	// 		io.emit("chat message", msg, result);
+	// 	} catch (err) {
+	// 		console.error("Error inserting chat msg into db:", err);
+	// 	}
+	// });
 	socket.on("chat message", async (msg) => {
 		try {
-			const result = await db("chat_messages").insert({
-				message: msg,
-				created_at: new Date(),
-			});
+			const [insertedMessage] = await db("chat_messages")
+				.insert({
+					message: msg,
+					created_at: new Date(),
+				})
+				.returning(["message", "created_at"]); // Return specific fields
 
-			console.log("Messages:", result);
+			console.log("Messages:", insertedMessage.created_at);
 
-			io.emit("chat message", msg);
+			io.emit("chat message", insertedMessage);
 		} catch (err) {
 			console.error("Error inserting chat msg into db:", err);
 		}
