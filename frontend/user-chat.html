@@ -140,13 +140,14 @@
       socket.on("chat message", (msg) => {
         console.log("Received message:", msg.message);
         console.log("Created at:", msg.created_at);
+        displayMessage(msg);
         adjustScroll();
       });
 
       function displayMessage(msg) {
         const msgElement = document.createElement("li");
-          msgElement.textContent = `${msg.message}            :Date & Time:-${new Date(msg.created_at).toLocaleString()}`
-          console.log(msg)
+        msgElement.textContent = `${msg.message}            :Date & Time:-${new Date(msg.created_at).toLocaleString()}`;
+        console.log(msg);
         messages.appendChild(msgElement); // Add new messages at the top
         console.log(msg);
       }
