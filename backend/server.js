@@ -9,8 +9,8 @@ const app = express();
 // const upload = require("./config/multerConfig");
 const bcrypt = require("bcrypt-nodejs");
 const session = require("express-session");
-const pgSession = require("connect-pg-simple")(session);
-const { Pool } = require("pg");
+// const pgSession = require("connect-pg-simple")(session);
+// const { Pool } = require("pg");
 require("dotenv").config();
 const db = require("./config/db");
 
@@ -43,17 +43,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const sessionPool = new Pool({
-	connectionString: process.env.DATABASE_URL,
-	ssl: { rejectUnauthorized: false },
-});
+// const sessionPool = new Pool({
+// 	connectionString: process.env.DATABASE_URL,
+// 	ssl: { rejectUnauthorized: false },
+// });
 
 app.use(
 	session({
-		store: new pgSession({
-			pool: sessionPool,
-			tableName: "session",
-		}),
+		// store: new pgSession({
+		// 	pool: sessionPool,
+		// 	tableName: "session",
+		// }),
 		secret: process.env.SESSION_SECRET || "Himansu!@9861!$%#@",
 		resave: false,
 		saveUninitialized: true,
