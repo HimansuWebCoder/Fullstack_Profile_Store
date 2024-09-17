@@ -15,10 +15,13 @@ const uploadProfilePhoto = document.querySelector("#upload-profile-photo");
 //   const editPassionInput = document.createElement("input");
 //   const editNameInput = document.createElement("input");
 //   const updateBtn = document.createElement("button");
+//   const closeUpdateBtn = document.createElement("button");
 //   profileContentContainer.appendChild(editNameInput);
 //   profileContentContainer.appendChild(editPassionInput);
 //   profileContentContainer.appendChild(updateBtn);
+//   profileContentContainer.appendChild(closeUpdateBtn);
 //   updateBtn.textContent = "update";
+//   closeUpdateBtn.textContent = "Close";
 // });
 
 fetch("https://fullstack-profile-store-2.onrender.com/profile")
@@ -33,10 +36,13 @@ fetch("https://fullstack-profile-store-2.onrender.com/profile")
       const editPassionInput = document.createElement("input");
       const editNameInput = document.createElement("input");
       const updateBtn = document.createElement("button");
+      const closeUpdateBtn = document.createElement("button");
       profileContentContainer.appendChild(editNameInput);
       profileContentContainer.appendChild(editPassionInput);
       profileContentContainer.appendChild(updateBtn);
+      profileContentContainer.appendChild(closeUpdateBtn);
       updateBtn.textContent = "update";
+      closeUpdateBtn.textContent = "Close";
 
       updateBtn.addEventListener("click", () => {
         fetch(

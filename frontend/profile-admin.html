@@ -17,12 +17,20 @@
 			}
 
 			.edit-input {
+				max-width: 90%;
 				margin: 2px;
 			}
 
 			.update-btn {
-				width: 60px;
-				margin: auto;
+				max-width: 60px;
+				margin-left: 5px;
+				display: inline-block;
+			}
+
+			.close-btn {
+				max-width: 60px;
+				margin-left: 5px;
+				display: inline-block;
 			}
 		</style>
 	</head>
@@ -81,7 +89,7 @@
 					profileImg.src = profile.image;
 
 					let isLoaded = true;
-					profileEditBtn.addEventListener("click", () => {
+					profileEditBtn.addEventListener("click", (e) => {
 						if (isLoaded) {
 							const inputProfileContainer =
 								document.createElement("div");
@@ -90,12 +98,15 @@
 							const editPassionInput =
 								document.createElement("input");
 							const updateBtn = document.createElement("button");
+							const closeUpdateBtn = document.createElement("button");
 							profileContentContainer.appendChild(
 								inputProfileContainer,
 							);
 							inputProfileContainer.appendChild(editNameInput);
 							inputProfileContainer.appendChild(editPassionInput);
 							inputProfileContainer.appendChild(updateBtn);
+							inputProfileContainer.appendChild(closeUpdateBtn);
+
 
 							inputProfileContainer.setAttribute(
 								"class",
@@ -107,6 +118,16 @@
 								"edit-input",
 							);
 							updateBtn.setAttribute("class", "update-btn");
+							closeUpdateBtn.setAttribute("class", "close-btn");
+
+							closeUpdateBtn.addEventListener("click", () => {
+								inputProfileContainer.style.display = "none";
+							})
+
+							// e.target.style.display = "block";
+							e.target.addEventListener("click", () => {
+								inputProfileContainer.style.display = "block";
+							})
 
 							inputProfileContainer.classList.add(
 								"input-profile-container",
@@ -114,6 +135,7 @@
 							editNameInput.classList.add("edit-input");
 							editPassionInput.classList.add("edit-input");
 							updateBtn.classList.add("update-btn");
+							closeUpdateBtn.classList.add("close-btn");
 
 							editNameInput.setAttribute(
 								"placeholder",
@@ -125,6 +147,7 @@
 							);
 
 							updateBtn.textContent = "update";
+							closeUpdateBtn.textContent = "Close";
 
 							isLoaded = false;
 							updateBtn.addEventListener("click", () => {
