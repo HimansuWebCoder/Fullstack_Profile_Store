@@ -46,8 +46,8 @@ app.use(
 	session({
 		store: new pgSession({
 			pool: db.client.pool,
-			tableName: 'session',
-		})
+			tableName: "session",
+		}),
 		secret: process.env.SESSION_SECRET || "Himansu!@9861!$%#@",
 		resave: false,
 		saveUninitialized: true,
