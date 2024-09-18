@@ -8,9 +8,9 @@ that is unique for this project. Now This project is improving and more feature 
 
 ## Table of Contents
 
-1. [About the Project] (#about-the-project)
-2. [Demo] (#demo)
-3. [Features] (#features)
+1. [About the Project](#about-the-project)
+2. [Demo](#demo)
+3. [Features](#features)
 4. [Tech Stack](#tech-stack)
 5. [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
