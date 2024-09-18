@@ -6,10 +6,25 @@
         <title>File Upload</title>
     </head>
     <body>
-        <h1>Upload Your Avatar</h1>
-        <form action="/submit-file" method="post" enctype="multipart/form-data">
+        <h1>Upload Your Profile Pic</h1>
+        <!--  <form action="/submit-file" method="post" enctype="multipart/form-data">
             <input type="file" name="avatar" />
             <button type="submit">Upload</button>
+        </form> -->
+
+        <form action="/submit-file" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="profile_pic">Choose file to upload</label>
+                <input
+                    type="file"
+                    id="profile_pic"
+                    name="profile_pic"
+                    accept=".jpg, .jpeg, .png"
+                />
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
         </form>
     </body>
 </html>
