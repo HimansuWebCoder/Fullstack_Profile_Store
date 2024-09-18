@@ -40,7 +40,7 @@ Provide an extended description of your project. Explain the problem it solves o
 ## Demo
 
 Include a link to the live version of your project or a demo video.  
-**Live Demo:** [Your Project Live Link](https://fullstack-profile-store-2.onrender.com)
+**Live Demo:** [Project Live Link](https://fullstack-profile-store-2.onrender.com)
 
 **Video Demo:** [Watch the Demo](https://youtube.com/example)
 
@@ -86,8 +86,5 @@ Step-by-step guide on how to install and set up the project.
     npm install
 
     npm start
+
     ```
-
-```
-
-```
