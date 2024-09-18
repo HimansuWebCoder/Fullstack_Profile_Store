@@ -136,6 +136,11 @@ app.get("/get-session", (req, res) => {
 app.get("/all-profiles", isAuthenticated, (req, res) => {
 	const userName = req.session.user.name;
 	const userImage = req.session.user.image;
+
+	if (!userName || !userImage) {
+		return res.status(401).json("Please log in to view all-profiles-feeds");
+	}
+
 	db.select("id", "name", "passion", "image")
 		.from("profile")
 		.then((profiles) => {
