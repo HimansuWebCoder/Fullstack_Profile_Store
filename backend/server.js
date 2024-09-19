@@ -140,7 +140,6 @@ app.get("/all-profiles", isAuthenticated, (req, res) => {
 	if (!userName || !userImage) {
 		return res.status(401).json("Please log in to view all-profiles-feeds");
 	}
-
 	db.select("id", "name", "passion", "image")
 		.from("profile")
 		.then((profiles) => {
@@ -153,6 +152,36 @@ app.get("/all-profiles", isAuthenticated, (req, res) => {
 app.get("/user-chat", (req, res) => {
 	res.sendFile(join(__dirname, "../frontend/user-chat.html"));
 });
+
+const getProfile = (req, res) => {
+	if (!req.session.user || !req.session.user.email) {
+		return res.status(401).json("Please log in to view your profile");
+	}
+
+	const userEmail = req.session.user.email;
+
+	getUserProfileModel(userEmail)
+		.then((users) => {
+			if (users.length > 0) {
+				res.json(users[0]);
+				res.sendFile(
+					path.join(
+						__dirname,
+						"..",
+						"..",
+						"frontend",
+						"profile-admin.html",
+					),
+				);
+			} else {
+				res.status(404).json("Profile not found");
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+			res.status(500).json({ error: "Internal Server Error" });
+		});
+};
 
 // Without using DB
 // io.on("connection", (socket) => {
