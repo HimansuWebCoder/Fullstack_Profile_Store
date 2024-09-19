@@ -41,16 +41,15 @@ const handleSignin = (db, bcrypt) => (req, res) => {
             console.log("Session data set:", req.session);
             // res.redirect("/profile-admin");
             // Redirect after setting session
-            res.redirect("/all-profiles");
 
-            // if (!res.headersSent) {
-            //   // res.json({
-            //   //   success: true,
-            //   //   redirectTo: "/all-profiles-feeds",
-            //   // });
-            // } else {
-            //   console.error("Headers already sent, cannot redirect.");
-            // }
+            if (!res.headersSent) {
+              res.json({
+                success: true,
+                redirectTo: "/all-profiles-feeds",
+              });
+            } else {
+              console.error("Headers already sent, cannot redirect.");
+            }
           })
           .catch((err) => {
             console.error("Error fetching profile:", err);

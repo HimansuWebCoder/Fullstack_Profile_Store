@@ -109,6 +109,7 @@
 							console.log("Login successful:", data);
 							// Redirect only if login is successful
 							// window.location = `/all-profiles-feeds`;
+							window.location.href = data.url;
 						} else {
 							console.error("Unexpected response:", data);
 						}
