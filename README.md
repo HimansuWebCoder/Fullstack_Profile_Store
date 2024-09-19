@@ -34,7 +34,6 @@ Provide an extended description of your project. Explain the problem it solves o
 -   [Node.js](https://nodejs.org/)
 -   [React.js](https://reactjs.org/)
 -   [PostgreSQL](https://www.postgresql.org/)
--   [MongoDB](https://www.mongodb.com/)
 -   [Cloudinary](https://cloudinary.com/)
 
 ## Demo
@@ -54,9 +53,9 @@ Include a link to the live version of your project or a demo video.
 
 ## Tech Stack
 
--   **Frontend:** React.js, Material-UI
+-   **Frontend:** React.js
 -   **Backend:** Node.js, Express.js
--   **Database:** PostgreSQL, MongoDB
+-   **Database:** PostgreSQL
 -   **Cloud Services:** Cloudinary
 -   **Authentication:** Bcrypt, express-session
 
@@ -69,7 +68,7 @@ Instructions to set up the project locally.
 List any software and tools required before installing the project.
 
 -   Node.js
--   npm or yarn
+-   npm
 -   PostgreSQL
 
 ### Installation
@@ -79,11 +78,9 @@ Step-by-step guide on how to install and set up the project.
 1. Clone the repository
 
     ```bash
-    git clone https://github.com/yourusername/project-name.git
+    git clone git@github.com:HimansuWebCoder/Fullstack_Profile_Store.git
 
-    cd project-name
-
-    npm install
+    cd Fullstack_Profile_Store
 
     npm start
 
