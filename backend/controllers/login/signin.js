@@ -43,10 +43,11 @@ const handleSignin = (db, bcrypt) => (req, res) => {
             // Redirect after setting session
 
             if (!res.headersSent) {
-              res.json({
-                success: true,
-                redirectTo: "/all-profiles-feeds",
-              });
+              // res.json({
+              //   success: true,
+              //   redirectTo: "/all-profiles-feeds",
+              // });
+              res.redirect("/all-profiles");
             } else {
               console.error("Headers already sent, cannot redirect.");
             }
