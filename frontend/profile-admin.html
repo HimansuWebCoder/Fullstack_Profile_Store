@@ -32,6 +32,10 @@
 				margin-left: 5px;
 				display: inline-block;
 			}
+
+			#profile-pic {
+				visibility: hidden;
+			}
 		</style>
 	</head>
 	<body>
@@ -42,7 +46,20 @@
 		<div id="profile-container">
 			<div id="profile-img-container">
 				<img id="profile-image" src="" alt="image profile" />
-				<button id="upload-profile-photo">Upload Profile Img</button>
+				<!-- <button id="upload-profile-photo">Upload Profile Img</button> -->
+				<form
+					action="/submit-file"
+					method="post"
+					enctype="multipart/form-data"
+				>
+					<button type="button" id="upload-profile-btn">
+						<label id="profile-pic-change" for="profile-pic"
+							>Change Profile-Picture</label
+						>
+					</button>
+					<input id="profile-pic" type="file" name="avatar" />
+					<button type="submit">Save</button>
+				</form>
 			</div>
 			<div id="profile-content-container">
 				<h2 class="profile-content" id="profile-header">Your Name</h2>
@@ -79,7 +96,6 @@
 			const uploadProfilePhoto = document.querySelector(
 				"#upload-profile-photo",
 			);
-
 
 			fetch("https://fullstack-profile-store-2.onrender.com/profile")
 				.then((res) => res.json())
